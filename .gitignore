@@ -1,0 +1,23 @@
+# Visual Studio build folders
+x64/
+Debug/
+Release/
+*.obj
+*.pdb
+*.log
+*.tlog
+*.lastbuildstate
+*.ipdb
+*.iobj
+*.vcxproj.user
+*.suo
+*.cache
+*.VC.db
+*.VC.opendb
+
+# CMake build folder (if you use it)
+build/
+
+# OS-specific
+.DS_Store
+Thumbs.db
