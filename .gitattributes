@@ -1,0 +1,3 @@
+# すべての .cpp, .h ファイルを UTF-8 (LF) として扱う
+*.cpp text eol=lf working-tree-encoding=UTF-8
+*.h   text eol=lf working-tree-encoding=UTF-8

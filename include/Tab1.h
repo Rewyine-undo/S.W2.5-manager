@@ -1,7 +1,3 @@
-#pragma execution_character_set("utf-8")
-
-
-// UTF-8 encoding: ã‚ã„ã†ãˆãŠ
 #ifndef TAB1_H
 #define TAB1_H
 
@@ -10,7 +6,7 @@
 #include <wx/tglbtn.h>
 #include <wx/scrolwin.h>
 
-class Tab2Panel;  // å‰æ–¹å®£è¨€
+class Tab2Panel;  // ‘O•ûéŒ¾
 
 class Tab1Panel : public wxScrolledWindow {
 public:
@@ -28,82 +24,82 @@ public:
     bool SaveToJson(const wxString& filename);
     bool LoadFromJson(const wxString& filename);
 private:
-    wxBoxSizer* sizer; // ãƒ™ãƒ¼ã‚¹
+    wxBoxSizer* sizer; // ƒx[ƒX
 
     wxBoxSizer* freespaceSizer; 
-    wxBoxSizer* placeholderSizer; // ãã®ä»–æŠ€èƒ½ã®è¿½åŠ 1
-    wxBoxSizer* otherskillSizer; // ãã®ä»–æŠ€èƒ½ã®è¿½åŠ 1
+    wxBoxSizer* placeholderSizer; // ‚»‚Ì‘¼‹Z”\‚Ì’Ç‰Á1
+    wxBoxSizer* otherskillSizer; // ‚»‚Ì‘¼‹Z”\‚Ì’Ç‰Á1
     wxBoxSizer* trioSizer;
 
-    wxTextCtrl* nameTextBox; // åå‰
-    wxTextCtrl* PLTextBox; // PLå
-    wxTextCtrl* speciesTextBox; // ç¨®æ—
-    wxTextCtrl* ageTextBox; // å¹´é½¢
-    wxTextCtrl* sexTextBox; // æ€§åˆ¥
-    wxTextCtrl* spfeatureTextBox; // ç¨®æ—ç‰¹æ€§
-    wxTextCtrl* ImpurityTextBox; // ç©¢ã‚Œ
-    wxTextCtrl* birthTextBox; // ç”Ÿã¾ã‚Œ
-    wxTextCtrl* faithTextBox; // ä¿¡ä»°
-    wxTextCtrl* rankTextBox; // å†’é™ºè€…ãƒ©ãƒ³ã‚¯
-    wxTextCtrl* bornTextBoxes[3];  // æŠ€, ä½“, å¿ƒ
+    wxTextCtrl* nameTextBox; // –¼‘O
+    wxTextCtrl* PLTextBox; // PL–¼
+    wxTextCtrl* speciesTextBox; // í‘°
+    wxTextCtrl* ageTextBox; // ”N—î
+    wxTextCtrl* sexTextBox; // «•Ê
+    wxTextCtrl* spfeatureTextBox; // í‘°“Á«
+    wxTextCtrl* ImpurityTextBox; // âq‚ê
+    wxTextCtrl* birthTextBox; // ¶‚Ü‚ê
+    wxTextCtrl* faithTextBox; // M‹Â
+    wxTextCtrl* rankTextBox; // –`Œ¯Òƒ‰ƒ“ƒN
+    wxTextCtrl* bornTextBoxes[3];  // ‹Z, ‘Ì, S
     wxTextCtrl* abilityTextBoxes[6];  // A, B, C, D, E, F
-    wxTextCtrl* attributeTextBoxes[6];  // å™¨ç”¨, æ•æ·, ç­‹åŠ›, ç”Ÿå‘½, çŸ¥åŠ›, ç²¾ç¥
-    wxSpinCtrl* growthSpinCtrl[6]; // æˆé•·
-    wxSpinCtrl* increaseSpinCtrl[6]; // å¢—å¼·
-    wxTextCtrl* bonusTextBoxes[6]; // ãƒœãƒ¼ãƒŠã‚¹
-    wxTextCtrl* hpTextBoxes[4]; // HP, MP, æŠµæŠ—åŠ›
-    wxSpinCtrl* hitSpinCtrl[4]; //å‘½ä¸­åŠ›ã€è¿½åŠ D,ã€å›é¿åŠ›ã€é˜²è­·ç‚¹
-    wxSpinCtrl* packSpinCtrl[7]; //åˆ¤å®šãƒ‘ãƒƒã‚±ãƒ¼ã‚¸
-    wxTextCtrl* moveTextBox; // ç§»å‹•åŠ›
-    wxTextCtrl* fullmoveTextBox; // å…¨åŠ›ç§»å‹•
-    wxTextCtrl* restmoveTextBox; // åˆ¶é™ç§»å‹•
+    wxTextCtrl* attributeTextBoxes[6];  // Ší—p, •q·, ‹Ø—Í, ¶–½, ’m—Í, ¸_
+    wxSpinCtrl* growthSpinCtrl[6]; // ¬’·
+    wxSpinCtrl* increaseSpinCtrl[6]; // ‘‹­
+    wxTextCtrl* bonusTextBoxes[6]; // ƒ{[ƒiƒX
+    wxTextCtrl* hpTextBoxes[4]; // HP, MP, ’ïR—Í
+    wxSpinCtrl* hitSpinCtrl[4]; //–½’†—ÍA’Ç‰ÁD,A‰ñ”ğ—ÍA–hŒì“_
+    wxSpinCtrl* packSpinCtrl[7]; //”»’èƒpƒbƒP[ƒW
+    wxTextCtrl* moveTextBox; // ˆÚ“®—Í
+    wxTextCtrl* fullmoveTextBox; // ‘S—ÍˆÚ“®
+    wxTextCtrl* restmoveTextBox; // §ŒÀˆÚ“®
 
-    wxTextCtrl* techTextBoxes[6]; // æŠ€èƒ½
-    wxRadioButton* tableradioA[6]; //æŠ€èƒ½ãƒ†ãƒ¼ãƒ–ãƒ«A,B
+    wxTextCtrl* techTextBoxes[6]; // ‹Z”\
+    wxRadioButton* tableradioA[6]; //‹Z”\ƒe[ƒuƒ‹A,B
     wxRadioButton* tableradioB[6];
-    wxSpinCtrl* techlevelSpinCtrl[6]; // æŠ€èƒ½ãƒ¬ãƒ™ãƒ«
-    wxTextCtrl* expTextBoxes[6]; // ä½¿ç”¨çµŒé¨“å€¤
-    wxTextCtrl* levelTextBox; // å†’é™ºè€…ãƒ¬ãƒ™ãƒ«
-    wxSpinCtrl* getexpSpinCtrl; // å–å¾—çµŒé¨“å€¤
-    wxTextCtrl* allexpTextBox; // åˆè¨ˆä½¿ç”¨çµŒé¨“å€¤
-    wxStaticText* warningText; // çµŒé¨“å€¤è­¦å‘Š
+    wxSpinCtrl* techlevelSpinCtrl[6]; // ‹Z”\ƒŒƒxƒ‹
+    wxTextCtrl* expTextBoxes[6]; // g—pŒoŒ±’l
+    wxTextCtrl* levelTextBox; // –`Œ¯ÒƒŒƒxƒ‹
+    wxSpinCtrl* getexpSpinCtrl; // æ“¾ŒoŒ±’l
+    wxTextCtrl* allexpTextBox; // ‡Œvg—pŒoŒ±’l
+    wxStaticText* warningText; // ŒoŒ±’lŒx
 
-    wxTextCtrl* talentTextBoxes[8]; // æˆ¦é—˜ç‰¹æŠ€
-    wxTextCtrl* abstTextBoxes[8]; // åŠ¹æœæ¦‚è¦
-    wxTextCtrl* freetalentTextBox; // è‡ªå‹•ç¿’å¾—ç‰¹æŠ€
-    wxTextCtrl* freeabstTextBox; // è‡ªå‹•ç¿’å¾—åŠ¹æœ
-    wxTextCtrl* magictalentTextBox; //ã‚ˆãä½¿ã†é­”æ³•ãªã©
-    wxTextCtrl* battleTextBox; //æˆ¦é—˜åŠ¹æœãƒ¡ãƒ¢
-    wxTextCtrl* magicabstTextBox; // MP, åŠ¹æœæ¦‚è¦
-    wxTextCtrl* enhanceskillTextBoxes1[8]; //ç·´æŠ€1
-    wxTextCtrl* enhanceskillTextBoxes2[7]; //ç·´æŠ€2
-    wxTextCtrl* otherTextBox; // çµŒæ­´ã€ãã®ä»–ãƒ¡ãƒ¢ãªã©
-    wxTextCtrl* langTextBoxes[10]; // ä½¿ç”¨è¨€èª
-    wxCheckBox* speakcheckBoxes[10]; //ä¼šè©±
-    wxCheckBox* readcheckBoxes[10]; //èª­æ–‡
+    wxTextCtrl* talentTextBoxes[8]; // í“¬“Á‹Z
+    wxTextCtrl* abstTextBoxes[8]; // Œø‰ÊŠT—v
+    wxTextCtrl* freetalentTextBox; // ©“®K“¾“Á‹Z
+    wxTextCtrl* freeabstTextBox; // ©“®K“¾Œø‰Ê
+    wxTextCtrl* magictalentTextBox; //‚æ‚­g‚¤–‚–@‚È‚Ç
+    wxTextCtrl* battleTextBox; //í“¬Œø‰Êƒƒ‚
+    wxTextCtrl* magicabstTextBox; // MP, Œø‰ÊŠT—v
+    wxTextCtrl* enhanceskillTextBoxes1[8]; //—û‹Z1
+    wxTextCtrl* enhanceskillTextBoxes2[7]; //—û‹Z2
+    wxTextCtrl* otherTextBox; // Œo—ğA‚»‚Ì‘¼ƒƒ‚‚È‚Ç
+    wxTextCtrl* langTextBoxes[10]; // g—pŒ¾Œê
+    wxCheckBox* speakcheckBoxes[10]; //‰ï˜b
+    wxCheckBox* readcheckBoxes[10]; //“Ç•¶
 
-    wxTextCtrl* weaponnameTextBoxes[3]; // æ­¦å™¨å
-    wxTextCtrl* weaponuseTextBoxes[6]; // ç”¨æ³•
-    wxTextCtrl* weaponstrTextBoxes[6]; // å¿…ç­‹
-    wxTextCtrl* weaponhitTextBoxes[6]; // å‘½ä¸­åŠ›
-    wxTextCtrl* weapondmTextBoxes[6]; // å¨åŠ›
-    wxTextCtrl* weaponcritTextBoxes[6]; // Cå€¤
-    wxTextCtrl* weaponaddTextBoxes[6]; // è¿½åŠ D
-    wxTextCtrl* weaponotherTextBoxes[3]; // å‚™è€ƒ
+    wxTextCtrl* weaponnameTextBoxes[3]; // •Ší–¼
+    wxTextCtrl* weaponuseTextBoxes[6]; // —p–@
+    wxTextCtrl* weaponstrTextBoxes[6]; // •K‹Ø
+    wxTextCtrl* weaponhitTextBoxes[6]; // –½’†—Í
+    wxTextCtrl* weapondmTextBoxes[6]; // ˆĞ—Í
+    wxTextCtrl* weaponcritTextBoxes[6]; // C’l
+    wxTextCtrl* weaponaddTextBoxes[6]; // ’Ç‰ÁD
+    wxTextCtrl* weaponotherTextBoxes[3]; // ”õl
 
 
-    wxTextCtrl* armornameTextBoxes[3]; // é˜²å…·å
-    wxTextCtrl* armorstrTextBoxes[3]; // å¿…ç­‹
-    wxTextCtrl* armorevadeTextBoxes[3]; // å›é¿ä¿®æ­£
-    wxTextCtrl* armorblockTextBoxes[3]; // é˜²è­·ç‚¹
-    wxTextCtrl* armorotherTextBoxes[3]; // å‚™è€ƒ
+    wxTextCtrl* armornameTextBoxes[3]; // –h‹ï–¼
+    wxTextCtrl* armorstrTextBoxes[3]; // •K‹Ø
+    wxTextCtrl* armorevadeTextBoxes[3]; // ‰ñ”ğC³
+    wxTextCtrl* armorblockTextBoxes[3]; // –hŒì“_
+    wxTextCtrl* armorotherTextBoxes[3]; // ”õl
 
-    wxSpinCtrl* poketSpinCtrl; // æ‰€æŒé‡‘
-    wxTextCtrl* debtTextBox; // é é‡‘/å€Ÿé‡‘
-    wxSpinCtrl* glorySpinCtrl; // åèª‰ç‚¹
-    wxTextCtrl* acesTextBoxes[12]; // å„éƒ¨ã®è£…é£¾å“
-    wxTextCtrl* acesTextBoxes2[12]; // å„éƒ¨ã®è£…é£¾å“ã®åŠ¹æœèª¬æ˜
-    wxTextCtrl* bagTextBox; // æ‰€æŒã‚¢ã‚¤ãƒ†ãƒ ãªã©
+    wxSpinCtrl* poketSpinCtrl; // Š‹à
+    wxTextCtrl* debtTextBox; // —a‹à/Ø‹à
+    wxSpinCtrl* glorySpinCtrl; // –¼—_“_
+    wxTextCtrl* acesTextBoxes[12]; // Še•”‚Ì‘•ü•i
+    wxTextCtrl* acesTextBoxes2[12]; // Še•”‚Ì‘•ü•i‚ÌŒø‰Êà–¾
+    wxTextCtrl* bagTextBox; // ŠƒAƒCƒeƒ€‚È‚Ç
     
 };
 

@@ -1,11 +1,7 @@
-#pragma execution_character_set("utf-8")
-
-
-// UTF-8 encoding: ã‚ã„ã†ãˆãŠ
 #ifndef TAB2_H
 #define TAB2_H
 
-class Tab1Panel;  // å‰æ–¹å®£è¨€
+class Tab1Panel;  // ‘O•ûéŒ¾
 
 #include <wx/wx.h>
 #include <wx/spinctrl.h>
@@ -17,19 +13,19 @@ class Tab1Panel;  // å‰æ–¹å®£è¨€
 
 struct TrialResult {
     std::string name;
-    std::string species; // ç¨®æ—
-    std::string feature; // ç¨®æ—ç‰¹æ€§
+    std::string species; // í‘°
+    std::string feature; // í‘°“Á«
 
-    int impurity; // ç©¢ã‚Œ
-    int born[3]; // æŠ€ã€ä½“ã€å¿ƒ
+    int impurity; // âq‚ê
+    int born[3]; // ‹ZA‘ÌAS
     int ability[6]; // A~F
-    int attributes[6]; // æŠ€,ä½“,å¿ƒ + A~F ã®èƒ½åŠ›å€¤
-    int bonuses[6]; // èƒ½åŠ›å€¤ãƒœãƒ¼ãƒŠã‚¹
-    int total; // èƒ½åŠ›å€¤åˆè¨ˆ
-    int pretotal; // ãƒ€ã‚¤ã‚¹ç›®åˆè¨ˆ
-    int dicenumber; // ãƒ€ã‚¤ã‚¹æ•°
-    int diceeffect; // å›ºå®šå€¤ã«ã‚ˆã‚‹ãƒ€ã‚¤ã‚¹å¹³å‡ã¸ã®è£œæ­£
-    float average; // èƒ½åŠ›å€¤å¹³å‡
+    int attributes[6]; // ‹Z,‘Ì,S + A~F ‚Ì”\—Í’l
+    int bonuses[6]; // ”\—Í’lƒ{[ƒiƒX
+    int total; // ”\—Í’l‡Œv
+    int pretotal; // ƒ_ƒCƒX–Ú‡Œv
+    int dicenumber; // ƒ_ƒCƒX”
+    int diceeffect; // ŒÅ’è’l‚É‚æ‚éƒ_ƒCƒX•½‹Ï‚Ö‚Ì•â³
+    float average; // ”\—Í’l•½‹Ï
     
 
     TrialResult()
@@ -43,14 +39,14 @@ struct TrialResult {
 
 class Tab2Panel : public wxPanel {
 public:
-    Tab2Panel(wxWindow* parent, wxNotebook* notebook, Tab1Panel* tab1Panel); // ä¿®æ­£æ¸ˆã¿
+    Tab2Panel(wxWindow* parent, wxNotebook* notebook, Tab1Panel* tab1Panel); // C³Ï‚İ
     ~Tab2Panel();
 
 private:
     wxTextCtrl* nameTextBox;
     wxListBox* speciesListBox;
-    std::map<wxString, wxGrid*> speciesTables; //ç”Ÿã¾ã‚Œã®è¡¨
-    std::map<wxString, std::vector<std::vector<wxString>>> speciesData;    // ç”Ÿã¾ã‚Œã®ãƒ‡ãƒ¼ã‚¿
+    std::map<wxString, wxGrid*> speciesTables; //¶‚Ü‚ê‚Ì•\
+    std::map<wxString, std::vector<std::vector<wxString>>> speciesData;    // ¶‚Ü‚ê‚Ìƒf[ƒ^
 
     wxStaticText* nameErrorText;
     wxSpinCtrl* skillSpinCtrl;

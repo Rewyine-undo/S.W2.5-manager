@@ -1,6 +1,3 @@
-#pragma execution_character_set("utf-8")
-
-// UTF-8 encoding: ã‚ã„ã†ãˆãŠ
 #define WXJSON_USE_EXTERNAL
 #include "Tab1.h"
 #include "Tab2.h"
@@ -20,59 +17,59 @@ using json = nlohmann::json;
 Tab1Panel::Tab1Panel(wxWindow* parent)
     : wxScrolledWindow(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxVSCROLL)
     {
-    SetScrollRate(5, 5);  // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã®é€Ÿåº¦ã‚’è¨­å®š
+    SetScrollRate(5, 5);  // ƒXƒNƒ[ƒ‹‚Ì‘¬“x‚ğİ’è
 
     sizer = new wxBoxSizer(wxVERTICAL);
 
-    // JSONãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ç”¨ã®UI
-    wxStaticText* instruction = new wxStaticText(this, wxID_ANY, "JSONãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã¿ã€ãƒ‡ãƒ¼ã‚¿ã‚’è¡¨ç¤ºã—ã¾ã™ã€‚");
+    // JSONƒtƒ@ƒCƒ‹“Ç‚İ‚İ—p‚ÌUI
+    wxStaticText* instruction = new wxStaticText(this, wxID_ANY, "JSONƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚İAƒf[ƒ^‚ğ•\¦‚µ‚Ü‚·B");
     //wxTextCtrl* displayArea = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(550, 300), wxTE_MULTILINE | wxTE_READONLY);
     sizer->Add(instruction, 0, wxALL, 10);
     //sizer->Add(displayArea, 1, wxEXPAND | wxALL, 10);
 
     
-    // åå‰ã®ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹
+    // –¼‘O‚ÌƒeƒLƒXƒgƒ{ƒbƒNƒX
     wxBoxSizer* nameSizer = new wxBoxSizer(wxHORIZONTAL);
-    nameSizer->Add(new wxStaticText(this, wxID_ANY, "åå‰: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 3);
+    nameSizer->Add(new wxStaticText(this, wxID_ANY, "–¼‘O: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 3);
     nameTextBox = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(150, -1));
     nameSizer->Add(nameTextBox, 0, wxALIGN_CENTER| wxRIGHT, 3);
     nameSizer->Add(new wxStaticText(this, wxID_ANY, "PL: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 3);
     PLTextBox = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(150, -1));
     nameSizer->Add(PLTextBox, 0, wxALIGN_CENTER);
 
-    // ç¨®æ—ã®ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹
+    // í‘°‚ÌƒeƒLƒXƒgƒ{ƒbƒNƒX
     wxBoxSizer* speciesSizer = new wxBoxSizer(wxHORIZONTAL);
-    speciesSizer->Add(new wxStaticText(this, wxID_ANY, "ç¨®æ—: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 3);
+    speciesSizer->Add(new wxStaticText(this, wxID_ANY, "í‘°: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 3);
     speciesTextBox = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(100, -1));
     speciesTextBox->Bind(wxEVT_TEXT, &Tab1Panel::Updatehp, this);
     speciesSizer->Add(speciesTextBox, 0, wxALIGN_CENTER | wxRIGHT, 3);
-    speciesSizer->Add(new wxStaticText(this, wxID_ANY, "å¹´é½¢: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 3);
+    speciesSizer->Add(new wxStaticText(this, wxID_ANY, "”N—î: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 3);
     ageTextBox = new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(50, -1));
     speciesSizer->Add(ageTextBox, 0, wxALIGN_CENTER | wxRIGHT, 3);
-    speciesSizer->Add(new wxStaticText(this, wxID_ANY, "æ€§åˆ¥: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 3);
+    speciesSizer->Add(new wxStaticText(this, wxID_ANY, "«•Ê: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 3);
     sexTextBox = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(50, -1));
     speciesSizer->Add(sexTextBox, 0, wxALIGN_CENTER | wxRIGHT, 3);
-    speciesSizer->Add(new wxStaticText(this, wxID_ANY, "ç©¢ã‚Œ: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 3);
+    speciesSizer->Add(new wxStaticText(this, wxID_ANY, "âq‚ê: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 3);
     ImpurityTextBox = new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(32, -1));
     speciesSizer->Add(ImpurityTextBox, 0, wxALIGN_CENTER);
 
-    // ç¨®æ—ç‰¹å¾´ã®ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹
+    // í‘°“Á’¥‚ÌƒeƒLƒXƒgƒ{ƒbƒNƒX
     wxBoxSizer* spfeatureSizer = new wxBoxSizer(wxHORIZONTAL);
-    spfeatureSizer->Add(new wxStaticText(this, wxID_ANY, "ç¨®æ—ç‰¹å¾´: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 3);
+    spfeatureSizer->Add(new wxStaticText(this, wxID_ANY, "í‘°“Á’¥: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 3);
     spfeatureTextBox = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(250, -1));
     spfeatureSizer->Add(spfeatureTextBox, 0, wxALIGN_CENTER);
     
 
-    // ä¿¡ä»°ã®ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹
+    // M‹Â‚ÌƒeƒLƒXƒgƒ{ƒbƒNƒX
     wxBoxSizer* faithSizer = new wxBoxSizer(wxHORIZONTAL);
-    faithSizer->Add(new wxStaticText(this, wxID_ANY, "ç”Ÿã¾ã‚Œ: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 3);
+    faithSizer->Add(new wxStaticText(this, wxID_ANY, "¶‚Ü‚ê: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 3);
     birthTextBox = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(65, -1));
     faithSizer->Add(birthTextBox, 0, wxALIGN_CENTER | wxRIGHT, 3);
-    faithSizer->Add(new wxStaticText(this, wxID_ANY, "ä¿¡ä»°: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 3);
+    faithSizer->Add(new wxStaticText(this, wxID_ANY, "M‹Â: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 3);
     faithTextBox = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(120, -1));
     faithSizer->Add(faithTextBox, 0, wxALIGN_CENTER | wxRIGHT, 3);
-    faithSizer->Add(new wxStaticText(this, wxID_ANY, "ãƒ©ãƒ³ã‚¯: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 3);
-    rankTextBox = new wxTextCtrl(this, wxID_ANY, "ãƒ¼", wxDefaultPosition, wxSize(80, -1));
+    faithSizer->Add(new wxStaticText(this, wxID_ANY, "ƒ‰ƒ“ƒN: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 3);
+    rankTextBox = new wxTextCtrl(this, wxID_ANY, "[", wxDefaultPosition, wxSize(80, -1));
     faithSizer->Add(rankTextBox, 0, wxALIGN_CENTER);
 
     sizer->Add(nameSizer, 0, wxEXPAND | wxALL, 3);
@@ -80,146 +77,146 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
     sizer->Add(spfeatureSizer, 0, wxEXPAND | wxALL, 3);
     sizer->Add(faithSizer, 0, wxEXPAND | wxALL, 3);
 
-    wxStaticText* abi = new wxStaticText(this, wxID_ANY, "---èƒ½åŠ›å€¤---");
+    wxStaticText* abi = new wxStaticText(this, wxID_ANY, "---”\—Í’l---");
     sizer->Add(abi, 0, wxALL, 10);
-    wxStaticText* comment = new wxStaticText(this, wxID_ANY, "å‘½ä¸­åŠ›ãªã©ã¯æŠ€èƒ½ã€æ­¦å…·ã®ä¸­ã§æœ€å¤§å€¤ã‚’å‚ç…§");
-    comment->SetForegroundColour(*wxRED); // èµ¤è‰²ã«è¨­å®š
+    wxStaticText* comment = new wxStaticText(this, wxID_ANY, "–½’†—Í‚È‚Ç‚Í‹Z”\A•‹ï‚Ì’†‚ÅÅ‘å’l‚ğQÆ");
+    comment->SetForegroundColour(*wxRED); // ÔF‚Éİ’è
     sizer->Add(comment, 0, wxALIGN_RIGHT | wxBOTTOM, 5);
 
-    // è¦ªSizerã‚’æ¨ªä¸¦ã³ã«è¨­å®š
+    // eSizer‚ğ‰¡•À‚Ñ‚Éİ’è
     wxBoxSizer* mainSizer = new wxBoxSizer(wxHORIZONTAL);
 
     wxBoxSizer* main2Sizer = new wxBoxSizer(wxHORIZONTAL);
 
     wxBoxSizer* main1Sizer = new wxBoxSizer(wxVERTICAL);
-    // bornTextBoxesï¼ˆæŠ€ãƒ»ä½“ãƒ»å¿ƒï¼‰ã®åˆæœŸåŒ–
+    // bornTextBoxesi‹ZE‘ÌESj‚Ì‰Šú‰»
     wxBoxSizer* bornSizer = new wxBoxSizer(wxVERTICAL);
-    const wxString bornLabels[3] = { "(æŠ€", "(ä½“", "(å¿ƒ" };
+    const wxString bornLabels[3] = { "(‹Z", "(‘Ì", "(S" };
     for (int i = 0; i < 3; ++i) {
-        // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
+        // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
         wxStaticText* label = new wxStaticText(this, wxID_ANY, bornLabels[i] + " ");
-        bornSizer->Add(label, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+        bornSizer->Add(label, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
 
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         bornTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(40, 68));
-        bornSizer->Add(bornTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        bornSizer->Add(bornTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
 
-        // ãƒ†ã‚­ã‚¹ãƒˆã‚’ä¸­å¤®æƒãˆã«è¨­å®š
+        // ƒeƒLƒXƒg‚ğ’†‰›‘µ‚¦‚Éİ’è
         bornTextBoxes[i]->SetWindowStyleFlag(wxTE_CENTER);
         bornTextBoxes[i]->Bind(wxEVT_TEXT, &Tab1Panel::UpdateAttribute, this);
     }
 
-    // abilityTextBoxesï¼ˆAï½Fï¼‰ã®åˆæœŸåŒ–
+    // abilityTextBoxesiA`Fj‚Ì‰Šú‰»
     wxBoxSizer* abilitySizer = new wxBoxSizer(wxVERTICAL);
     const wxString abilityLabels[6] = { "+A", "+B", "+C", "+D", "+E", "+F" };
     for (int i = 0; i < 6; ++i) {
-        // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
+        // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
         wxStaticText* label = new wxStaticText(this, wxID_ANY, abilityLabels[i] + " ");
-        abilitySizer->Add(label, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+        abilitySizer->Add(label, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
 
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         abilityTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(40, -1));
-        abilitySizer->Add(abilityTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        abilitySizer->Add(abilityTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         abilityTextBoxes[i]->Bind(wxEVT_TEXT, &Tab1Panel::UpdateAttribute, this);
     }
 
-    //æˆé•·å€¤ã®é …ç›®
+    //¬’·’l‚Ì€–Ú
     wxBoxSizer* growthSizer = new wxBoxSizer(wxVERTICAL);
     for (int i = 0; i < 6; ++i) {
-        // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-        wxStaticText* label = new wxStaticText(this, wxID_ANY, "+æˆé•·)");
-        growthSizer->Add(label, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+        // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+        wxStaticText* label = new wxStaticText(this, wxID_ANY, "+¬’·)");
+        growthSizer->Add(label, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
 
-        // ã‚¹ãƒ”ãƒ³ãƒœã‚¿ãƒ³ã‚’è¿½åŠ 
+        // ƒXƒsƒ“ƒ{ƒ^ƒ“‚ğ’Ç‰Á
         growthSpinCtrl[i] = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(40, -1), wxSP_ARROW_KEYS, 0, 99, 0);
-        growthSizer->Add(growthSpinCtrl[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        growthSizer->Add(growthSpinCtrl[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         growthSpinCtrl[i]->Bind(wxEVT_SPINCTRL, &Tab1Panel::UpdateAttribute, this);
     }
 
-    // attributeTextBoxesï¼ˆå™¨ç”¨ï½ç²¾ç¥ï¼‰ã®åˆæœŸåŒ–
+    // attributeTextBoxesiŠí—p`¸_j‚Ì‰Šú‰»
     wxBoxSizer* attributeSizer = new wxBoxSizer(wxVERTICAL);
-    const wxString attributeLabels[6] = { "=(å™¨ç”¨åº¦", "=(æ•æ·åº¦", "=(ç­‹åŠ›", "=(ç”Ÿå‘½åŠ›", "=(çŸ¥åŠ›", "=(ç²¾ç¥åŠ›" };
+    const wxString attributeLabels[6] = { "=(Ší—p“x", "=(•q·“x", "=(‹Ø—Í", "=(¶–½—Í", "=(’m—Í", "=(¸_—Í" };
     for (int i = 0; i < 6; ++i) {
-        // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
+        // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
         wxStaticText* label = new wxStaticText(this, wxID_ANY, attributeLabels[i] + " ");
-        attributeSizer->Add(label, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+        attributeSizer->Add(label, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
 
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         attributeTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(60, -1));
-        attributeSizer->Add(attributeTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        attributeSizer->Add(attributeTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         attributeTextBoxes[i]->Bind(wxEVT_TEXT, &Tab1Panel::abilityChange, this);
     }
     
-    //å¢—å¼·å€¤ã®é …ç›®
+    //‘‹­’l‚Ì€–Ú
     wxBoxSizer* increaseSizer = new wxBoxSizer(wxVERTICAL);
     for (int i = 0; i < 6; ++i) {
-        // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-        wxStaticText* label = new wxStaticText(this, wxID_ANY, "+å¢—å¼·)");
-        increaseSizer->Add(label, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+        // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+        wxStaticText* label = new wxStaticText(this, wxID_ANY, "+‘‹­)");
+        increaseSizer->Add(label, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
 
-        // ã‚¹ãƒ”ãƒ³ãƒœã‚¿ãƒ³ã‚’è¿½åŠ 
+        // ƒXƒsƒ“ƒ{ƒ^ƒ“‚ğ’Ç‰Á
         increaseSpinCtrl[i] = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(40, -1), wxSP_ARROW_KEYS, 0, 99, 0);
-        increaseSizer->Add(increaseSpinCtrl[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        increaseSizer->Add(increaseSpinCtrl[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         increaseSpinCtrl[i]->Bind(wxEVT_SPINCTRL, &Tab1Panel::Updatebonus, this);
     }
 
-    // bonusTextBoxesï¼ˆå™¨ç”¨ï½ç²¾ç¥ãƒœãƒ¼ãƒŠã‚¹ï¼‰ã®åˆæœŸåŒ–
+    // bonusTextBoxesiŠí—p`¸_ƒ{[ƒiƒXj‚Ì‰Šú‰»
     wxBoxSizer* bonusSizer = new wxBoxSizer(wxVERTICAL);
-    const wxString bonusLabels[6] = { "/6â†’å™¨ç”¨åº¦B", "/6â†’æ•æ·åº¦B", "/6â†’ç­‹åŠ›B", "/6â†’ç”Ÿå‘½åŠ›B", "/6â†’çŸ¥åŠ›B", "/6â†’ç²¾ç¥åŠ›B" };
+    const wxString bonusLabels[6] = { "/6¨Ší—p“xB", "/6¨•q·“xB", "/6¨‹Ø—ÍB", "/6¨¶–½—ÍB", "/6¨’m—ÍB", "/6¨¸_—ÍB" };
     for (int i = 0; i < 6; ++i) {
-        // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
+        // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
         wxStaticText* label = new wxStaticText(this, wxID_ANY, bonusLabels[i] + " ");
-        bonusSizer->Add(label, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+        bonusSizer->Add(label, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
 
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         bonusTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(75, -1));
-        bonusSizer->Add(bonusTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        bonusSizer->Add(bonusTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         bonusTextBoxes[i]->Bind(wxEVT_TEXT, &Tab1Panel::Updatehp, this);
     }
 
     
-    // HP,MP,æŠµæŠ—åŠ›ã®åˆæœŸåŒ–
+    // HP,MP,’ïR—Í‚Ì‰Šú‰»
     wxBoxSizer* hpSizer = new wxBoxSizer(wxVERTICAL);
-    const wxString hpLabels[4] = { "HP", "MP", "ç”Ÿå‘½æŠµæŠ—åŠ›", "ç²¾ç¥æŠµæŠ—åŠ›"};
+    const wxString hpLabels[4] = { "HP", "MP", "¶–½’ïR—Í", "¸_’ïR—Í"};
     for (int i = 0; i < 4; ++i) {
-        // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
+        // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
         wxStaticText* label = new wxStaticText(this, wxID_ANY, hpLabels[i] + " ");
-        hpSizer->Add(label, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+        hpSizer->Add(label, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
 
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         hpTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(60, -1));
-        hpSizer->Add(hpTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        hpSizer->Add(hpTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
      }
-    const wxString hitLabels[4] = {"å‘½ä¸­åŠ›", "è¿½åŠ D", "å›é¿åŠ›", "é˜²è­·ç‚¹" };
+    const wxString hitLabels[4] = {"–½’†—Í", "’Ç‰ÁD", "‰ñ”ğ—Í", "–hŒì“_" };
     for (int i = 0; i < 4; ++i) {
-        // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
+        // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
         wxStaticText* label = new wxStaticText(this, wxID_ANY, hitLabels[i] + " ");
-        hpSizer->Add(label, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+        hpSizer->Add(label, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
 
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         hitSpinCtrl[i] = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(60, -1), wxSP_ARROW_KEYS, 0, 99, 0);
-        hpSizer->Add(hitSpinCtrl[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        hpSizer->Add(hitSpinCtrl[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
     }
 
 
-    // HP,MP,åˆ¤å®šãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®åˆæœŸåŒ–
+    // HP,MP,”»’èƒpƒbƒP[ƒW‚Ì‰Šú‰»
     wxBoxSizer* packSizer = new wxBoxSizer(wxVERTICAL);
-    wxStaticText* packlabel = new wxStaticText(this, wxID_ANY, "åˆ¤å®šãƒ‘ãƒƒã‚±ãƒ¼ã‚¸: ");
-    packSizer->Add(packlabel, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
-    const wxString packLabels[7] = {"æŠ€å·§" , "é‹å‹•" , "è¦³å¯Ÿ" , "çŸ¥è­˜", "é­”ç‰©çŸ¥è­˜", "å…ˆåˆ¶åŠ›", "é­”åŠ›"};
+    wxStaticText* packlabel = new wxStaticText(this, wxID_ANY, "”»’èƒpƒbƒP[ƒW: ");
+    packSizer->Add(packlabel, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
+    const wxString packLabels[7] = {"‹ZI" , "‰^“®" , "ŠÏ@" , "’m¯", "–‚•¨’m¯", "æ§—Í", "–‚—Í"};
     for (int i = 0; i < 7; ++i) {
-        // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
+        // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
         wxStaticText* label = new wxStaticText(this, wxID_ANY, packLabels[i] + " ");
-        packSizer->Add(label, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+        packSizer->Add(label, 0, wxALIGN_LEFT | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
 
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         packSpinCtrl[i] = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(60, -1), wxSP_ARROW_KEYS, 0, 99, 0);
-        packSizer->Add(packSpinCtrl[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        packSizer->Add(packSpinCtrl[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
 
     }
 
 
-    // æ¨ªä¸¦ã³ã«ã™ã‚‹
+    // ‰¡•À‚Ñ‚É‚·‚é
     main2Sizer->Add(bornSizer, 0, wxALIGN_CENTER);   
     main2Sizer->Add(abilitySizer, 0, wxALIGN_CENTER | wxLEFT, 15);
     main2Sizer->Add(growthSizer, 0, wxALIGN_CENTER | wxLEFT, 15);
@@ -227,17 +224,17 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
     main2Sizer->Add(increaseSizer, 0, wxALIGN_CENTER | wxLEFT, 15);
     main2Sizer->Add(bonusSizer, 0, wxALIGN_CENTER | wxLEFT, 15);
 
-    // ç§»å‹•åŠ›
+    // ˆÚ“®—Í
     wxBoxSizer* moveSizer = new wxBoxSizer(wxHORIZONTAL);
-    moveSizer->Add(new wxStaticText(this, wxID_ANY, "ç§»å‹•åŠ›: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
+    moveSizer->Add(new wxStaticText(this, wxID_ANY, "ˆÚ“®—Í: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
     moveTextBox = new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(50, -1));
     moveSizer->Add(moveTextBox, 0, wxALIGN_CENTER | wxRIGHT, 0);
     moveSizer->Add(new wxStaticText(this, wxID_ANY, "m"), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 10);
-    moveSizer->Add(new wxStaticText(this, wxID_ANY, "*3= å…¨åŠ›ç§»å‹•: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
+    moveSizer->Add(new wxStaticText(this, wxID_ANY, "*3= ‘S—ÍˆÚ“®: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
     fullmoveTextBox = new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(50, -1));
     moveSizer->Add(fullmoveTextBox, 0, wxALIGN_CENTER | wxRIGHT, 0);
     moveSizer->Add(new wxStaticText(this, wxID_ANY, "m"), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 10);
-    moveSizer->Add(new wxStaticText(this, wxID_ANY, "åˆ¶é™ç§»å‹•: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
+    moveSizer->Add(new wxStaticText(this, wxID_ANY, "§ŒÀˆÚ“®: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
     restmoveTextBox = new wxTextCtrl(this, wxID_ANY, "3", wxDefaultPosition, wxSize(50, -1));
     moveSizer->Add(restmoveTextBox, 0, wxALIGN_CENTER | wxRIGHT, 0);
     moveSizer->Add(new wxStaticText(this, wxID_ANY, "m"), 0, wxALIGN_CENTER_VERTICAL);
@@ -251,42 +248,42 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
     mainSizer->Add(hpSizer, 0, wxALIGN_TOP | wxLEFT, 30);
     mainSizer->Add(packSizer, 0, wxALIGN_CENTER | wxLEFT, 10);
 
-    // mainSizerã‚’è¦ªSizerã«è¿½åŠ 
+    // mainSizer‚ğeSizer‚É’Ç‰Á
     sizer->Add(mainSizer, 0, wxEXPAND | wxALL, 2);
 
 
 
 
-    wxStaticText* tec = new wxStaticText(this, wxID_ANY, "---æŠ€èƒ½ãƒ»ç‰¹æŠ€---");
+    wxStaticText* tec = new wxStaticText(this, wxID_ANY, "---‹Z”\E“Á‹Z---");
     sizer->Add(tec, 0, wxALL, 10);
 
 
-    // è¦ªSizerã‚’æ¨ªä¸¦ã³ã«è¨­å®š
+    // eSizer‚ğ‰¡•À‚Ñ‚Éİ’è
     wxBoxSizer* subSizer = new wxBoxSizer(wxHORIZONTAL);
 
     wxBoxSizer* ssubSizer = new wxBoxSizer(wxVERTICAL);
 
     wxBoxSizer* sub1Sizer = new wxBoxSizer(wxHORIZONTAL);
 
-    // æŠ€èƒ½ã®åˆæœŸåŒ–
+    // ‹Z”\‚Ì‰Šú‰»
     wxBoxSizer* techSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* techlabel = new wxStaticText(this, wxID_ANY, "æŠ€èƒ½ ");
-    techSizer->Add(techlabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* techlabel = new wxStaticText(this, wxID_ANY, "‹Z”\ ");
+    techSizer->Add(techlabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 6; ++i) {
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         techTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(120, -1));
-        techSizer->Add(techTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        techSizer->Add(techTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         techTextBoxes[i]->Bind(wxEVT_TEXT, &Tab1Panel::Updatehp, this);
      }
 
-    // æŠ€èƒ½ãƒ†ãƒ¼ãƒ–ãƒ«ã®åˆæœŸåŒ–
+    // ‹Z”\ƒe[ƒuƒ‹‚Ì‰Šú‰»
     wxBoxSizer* tableSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* tablelabel = new wxStaticText(this, wxID_ANY, "ãƒ†ãƒ¼ãƒ–ãƒ« ");
-    tableSizer->Add(tablelabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* tablelabel = new wxStaticText(this, wxID_ANY, "ƒe[ƒuƒ‹ ");
+    tableSizer->Add(tablelabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 6; ++i) {
-        // ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³ã‚’è¿½åŠ 
+        // ƒ‰ƒWƒIƒ{ƒ^ƒ“‚ğ’Ç‰Á
         wxBoxSizer* subtableSizer = new wxBoxSizer(wxHORIZONTAL);
         tableradioA[i] = new wxRadioButton(this, wxID_ANY, "A", wxDefaultPosition, wxDefaultSize, wxRB_GROUP);
         tableradioB[i] = new wxRadioButton(this, wxID_ANY, "B");
@@ -294,68 +291,68 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
         subtableSizer->Add(tableradioA[i], 0, wxALIGN_CENTER );
         subtableSizer->Add(tableradioB[i], 0, wxALIGN_CENTER );
         tableSizer->Add(subtableSizer, 0, wxEXPAND | wxTOP | wxBOTTOM, 4.5);
-        // ã‚¤ãƒ™ãƒ³ãƒˆã‚’ç™»éŒ²
+        // ƒCƒxƒ“ƒg‚ğ“o˜^
         tableradioA[i]->Bind(wxEVT_RADIOBUTTON, &Tab1Panel::Updateexp, this);
         tableradioB[i]->Bind(wxEVT_RADIOBUTTON, &Tab1Panel::Updateexp, this);
     }
     
 
-    // æŠ€èƒ½ãƒ¬ãƒ™ãƒ«ã®åˆæœŸåŒ–
+    // ‹Z”\ƒŒƒxƒ‹‚Ì‰Šú‰»
     wxBoxSizer* techlevelSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* techlevellabel = new wxStaticText(this, wxID_ANY, "ãƒ¬ãƒ™ãƒ« ");
-    techlevelSizer->Add(techlevellabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* techlevellabel = new wxStaticText(this, wxID_ANY, "ƒŒƒxƒ‹ ");
+    techlevelSizer->Add(techlevellabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 6; ++i) {
-        // ã‚¹ãƒ”ãƒ³ãƒœã‚¿ãƒ³ã‚’è¿½åŠ 
+        // ƒXƒsƒ“ƒ{ƒ^ƒ“‚ğ’Ç‰Á
         techlevelSpinCtrl[i] = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(40, -1), wxSP_ARROW_KEYS, 0, 15, 0);
-        techlevelSizer->Add(techlevelSpinCtrl[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        techlevelSizer->Add(techlevelSpinCtrl[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         techlevelSpinCtrl[i]->Bind(wxEVT_SPINCTRL, &Tab1Panel::OnSpinCtrlChange, this);
      }
 
-    // å¿…è¦çµŒé¨“å€¤ã®åˆæœŸåŒ–
+    // •K—vŒoŒ±’l‚Ì‰Šú‰»
     wxBoxSizer* expSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* explabel = new wxStaticText(this, wxID_ANY, "ä½¿ç”¨çµŒé¨“å€¤ ");
-    expSizer->Add(explabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* explabel = new wxStaticText(this, wxID_ANY, "g—pŒoŒ±’l ");
+    expSizer->Add(explabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 6; ++i) {
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         expTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(60, -1));
-        expSizer->Add(expTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        expSizer->Add(expTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         expTextBoxes[i]->Bind(wxEVT_TEXT, &Tab1Panel::Updateallexp, this);
     }
 
-    // æ¨ªä¸¦ã³ã«ã™ã‚‹
+    // ‰¡•À‚Ñ‚É‚·‚é
     sub1Sizer->Add(techSizer, 0, wxALIGN_CENTER);   
     sub1Sizer->Add(tableSizer, 0, wxALIGN_CENTER | wxRIGHT|wxLEFT, 3);
     sub1Sizer->Add(techlevelSizer, 0, wxALIGN_CENTER | wxLEFT, 0);
     sub1Sizer->Add(expSizer, 0, wxALIGN_CENTER | wxLEFT, 2);
 
-    // å†’é™ºè€…ãƒ¬ãƒ™ãƒ«ã€å–å¾—çµŒé¨“å€¤ã€åˆè¨ˆä½¿ç”¨çµŒé¨“å€¤
+    // –`Œ¯ÒƒŒƒxƒ‹Aæ“¾ŒoŒ±’lA‡Œvg—pŒoŒ±’l
     wxBoxSizer* allexpSizer = new wxBoxSizer(wxHORIZONTAL);
        
-    allexpSizer->Add(new wxStaticText(this, wxID_ANY, "å–å¾—çµŒé¨“å€¤: "), 0, wxALIGN_CENTER_VERTICAL);
+    allexpSizer->Add(new wxStaticText(this, wxID_ANY, "æ“¾ŒoŒ±’l: "), 0, wxALIGN_CENTER_VERTICAL);
     getexpSpinCtrl = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(60, -1), wxSP_ARROW_KEYS, 0, 100000000, 0);
-    getexpSpinCtrl->SetIncrement(50); // å¤‰åŒ–å¹…ã‚’50ã«è¨­å®š
+    getexpSpinCtrl->SetIncrement(50); // •Ï‰»•‚ğ50‚Éİ’è
     getexpSpinCtrl->Bind(wxEVT_TEXT, &Tab1Panel::OnCompareValues, this);
     getexpSpinCtrl->Bind(wxEVT_SPINCTRL, &Tab1Panel::OnCompareValues, this);
     allexpSizer->Add(getexpSpinCtrl, 0, wxALIGN_CENTER | wxRIGHT, 6);
     
-    allexpSizer->Add(new wxStaticText(this, wxID_ANY, "åˆè¨ˆä½¿ç”¨çµŒé¨“å€¤: "), 0, wxALIGN_CENTER_VERTICAL );
+    allexpSizer->Add(new wxStaticText(this, wxID_ANY, "‡Œvg—pŒoŒ±’l: "), 0, wxALIGN_CENTER_VERTICAL );
     allexpTextBox = new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(60, -1));
     allexpTextBox->Bind(wxEVT_TEXT, &Tab1Panel::OnCompareValues, this);
     allexpSizer->Add(allexpTextBox, 0, wxALIGN_CENTER);
 
-    // å†’é™ºè€…ãƒ¬ãƒ™ãƒ«ã€å–å¾—çµŒé¨“å€¤ã€åˆè¨ˆä½¿ç”¨çµŒé¨“å€¤
+    // –`Œ¯ÒƒŒƒxƒ‹Aæ“¾ŒoŒ±’lA‡Œvg—pŒoŒ±’l
     wxBoxSizer* levelSizer = new wxBoxSizer(wxHORIZONTAL);
-    levelSizer->Add(new wxStaticText(this, wxID_ANY, "å†’é™ºè€…ãƒ¬ãƒ™ãƒ«: "), 0, wxALIGN_CENTER_VERTICAL );
+    levelSizer->Add(new wxStaticText(this, wxID_ANY, "–`Œ¯ÒƒŒƒxƒ‹: "), 0, wxALIGN_CENTER_VERTICAL );
     levelTextBox = new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(40, -1));
     levelTextBox->Bind(wxEVT_TEXT, &Tab1Panel::Updatehp, this);
     levelSizer->Add(levelTextBox, 0, wxALIGN_CENTER);
 
-    warningText = new wxStaticText(this, wxID_ANY, "å–å¾—çµŒé¨“å€¤ã‚’è¶…éã—ã¦ã„ã¾ã™ï¼", wxPoint(10, 10));
+    warningText = new wxStaticText(this, wxID_ANY, "æ“¾ŒoŒ±’l‚ğ’´‰ß‚µ‚Ä‚¢‚Ü‚·I", wxPoint(10, 10));
     warningText->Bind(wxEVT_TEXT, &Tab1Panel::OnCompareValues, this);
-    warningText->SetForegroundColour(*wxRED); // èµ¤è‰²ã«è¨­å®š
-    warningText->Hide(); // åˆæœŸçŠ¶æ…‹ã§ã¯éè¡¨ç¤ºã«ã™ã‚‹
+    warningText->SetForegroundColour(*wxRED); // ÔF‚Éİ’è
+    warningText->Hide(); // ‰Šúó‘Ô‚Å‚Í”ñ•\¦‚É‚·‚é
     levelSizer->Add(warningText, 0, wxALIGN_CENTER| wxLEFT, 10);
 
 
@@ -368,55 +365,55 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
     wxBoxSizer* sub2Sizer = new wxBoxSizer(wxHORIZONTAL);
 
     wxBoxSizer* talentSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText * talentlabel = new wxStaticText(this, wxID_ANY, "æˆ¦é—˜ç‰¹æŠ€");
-    talentSizer->Add(talentlabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText * talentlabel = new wxStaticText(this, wxID_ANY, "í“¬“Á‹Z");
+    talentSizer->Add(talentlabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 8; ++i) {
-        wxString talentText = wxString::Format("%d: ", 2 * i + 1); // æ•°å€¤ã‚’æ–‡å­—åˆ—ã«å¤‰æ›
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        wxString talentText = wxString::Format("%d: ", 2 * i + 1); // ”’l‚ğ•¶š—ñ‚É•ÏŠ·
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         talentTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, talentText, wxDefaultPosition, wxSize(120, -1));
-        talentSizer->Add(talentTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        talentSizer->Add(talentTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         talentTextBoxes[i]->Bind(wxEVT_TEXT, &Tab1Panel::Updatehp, this);
     }
 
     wxBoxSizer* abstSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* abstlabel = new wxStaticText(this, wxID_ANY, "åŠ¹æœæ¦‚è¦");
-    abstSizer->Add(abstlabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* abstlabel = new wxStaticText(this, wxID_ANY, "Œø‰ÊŠT—v");
+    abstSizer->Add(abstlabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 8; ++i) {
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         abstTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(120, -1));
-        abstSizer->Add(abstTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        abstSizer->Add(abstTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
     }
 
-    // æ¨ªä¸¦ã³ã«ã™ã‚‹
+    // ‰¡•À‚Ñ‚É‚·‚é
     sub2Sizer->Add(talentSizer, 0, wxALIGN_CENTER);
     sub2Sizer->Add(abstSizer, 0, wxALIGN_CENTER | wxLEFT, 0);
 
-    //sub1Sizerã¨sub2Seizerã‚’subSeizerã«ã¾ã¨ã‚ã‚‹
+    //sub1Sizer‚Æsub2Seizer‚ğsubSeizer‚É‚Ü‚Æ‚ß‚é
     subSizer->Add(ssubSizer, 0, wxALIGN_TOP);
     subSizer->Add(sub2Sizer, 0, wxALIGN_TOP | wxLEFT, 20);
 
-    // subSizerã‚’è¦ªSizerã«è¿½åŠ 
+    // subSizer‚ğeSizer‚É’Ç‰Á
     sizer->Add(subSizer, 0, wxEXPAND | wxLEFT, 3);
 
 
-    // è¨˜è¿°æ¬„ã®è¨­å®š
+    // ‹Lq—“‚Ìİ’è
     freespaceSizer = new wxBoxSizer(wxHORIZONTAL);
     wxBoxSizer* freeSizer = new wxBoxSizer(wxHORIZONTAL);
 
     wxBoxSizer* freetalentSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* freetalentlabel = new wxStaticText(this, wxID_ANY, "è‡ªå‹•å–å¾—ãªã©");
-    freetalentSizer->Add(freetalentlabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* freetalentlabel = new wxStaticText(this, wxID_ANY, "©“®æ“¾‚È‚Ç");
+    freetalentSizer->Add(freetalentlabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     freetalentTextBox = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(110, 150), wxTE_MULTILINE | wxTE_PROCESS_ENTER);
     freetalentTextBox->Bind(wxEVT_TEXT, &Tab1Panel::Updatehp, this);
     freetalentSizer->Add(freetalentTextBox, 0, wxALIGN_LEFT | wxLEFT, 3);
 
     wxBoxSizer* freeabstSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* freeabstlabel = new wxStaticText(this, wxID_ANY, "åŠ¹æœæ¦‚è¦");
-    freeabstSizer->Add(freeabstlabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* freeabstlabel = new wxStaticText(this, wxID_ANY, "Œø‰ÊŠT—v");
+    freeabstSizer->Add(freeabstlabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     freeabstTextBox = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(110, 150), wxTE_MULTILINE | wxTE_PROCESS_ENTER);
     freeabstSizer->Add(freeabstTextBox, 0, wxALIGN_LEFT);
 
@@ -427,16 +424,16 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
     wxBoxSizer* magicSizer = new wxBoxSizer(wxHORIZONTAL);
 
     wxBoxSizer* magictalentSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* magictalentlabel = new wxStaticText(this, wxID_ANY, "ã‚ˆãä½¿ã†é­”æ³•ãªã©");
-    magictalentSizer->Add(magictalentlabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* magictalentlabel = new wxStaticText(this, wxID_ANY, "‚æ‚­g‚¤–‚–@‚È‚Ç");
+    magictalentSizer->Add(magictalentlabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     magictalentTextBox = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(110, 150), wxTE_MULTILINE | wxTE_PROCESS_ENTER);
     magictalentSizer->Add(magictalentTextBox, 0, wxALIGN_LEFT);
 
     wxBoxSizer* magicabstSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* magicabstlabel = new wxStaticText(this, wxID_ANY, "MP, åŠ¹æœæ¦‚è¦");
-    magicabstSizer->Add(magicabstlabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* magicabstlabel = new wxStaticText(this, wxID_ANY, "MP, Œø‰ÊŠT—v");
+    magicabstSizer->Add(magicabstlabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     magicabstTextBox = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(110, 150), wxTE_MULTILINE | wxTE_PROCESS_ENTER);
     magicabstSizer->Add(magicabstTextBox, 0, wxALIGN_LEFT);
 
@@ -445,11 +442,11 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
 
 
     wxBoxSizer* battleSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* battlelabel = new wxStaticText(this, wxID_ANY, "æˆ¦é—˜é–¢é€£ãƒ¡ãƒ¢");
-    wxStaticText* battlelabel2 = new wxStaticText(this, wxID_ANY, "(å—ã‘ãŸåŠ¹æœãªã©)");
-    battleSizer->Add(battlelabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
-    battleSizer->Add(battlelabel2, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* battlelabel = new wxStaticText(this, wxID_ANY, "í“¬ŠÖ˜Aƒƒ‚");
+    wxStaticText* battlelabel2 = new wxStaticText(this, wxID_ANY, "(ó‚¯‚½Œø‰Ê‚È‚Ç)");
+    battleSizer->Add(battlelabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
+    battleSizer->Add(battlelabel2, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     battleTextBox = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(110, 131), wxTE_MULTILINE | wxTE_PROCESS_ENTER);
     battleSizer->Add(battleTextBox, 0, wxALIGN_LEFT);
 
@@ -462,166 +459,166 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
 
     sizer->Add(freespaceSizer, 0, wxALIGN_LEFT | wxTOP, 15);
 
-    placeholderSizer = new wxBoxSizer(wxVERTICAL); // ãã®ä»–æŠ€èƒ½ã®å…¥ã‚‹å ´æ‰€
+    placeholderSizer = new wxBoxSizer(wxVERTICAL); // ‚»‚Ì‘¼‹Z”\‚Ì“ü‚éêŠ
 
     otherskillSizer = new wxBoxSizer(wxHORIZONTAL);
     placeholderSizer->Add(otherskillSizer, 0, wxALIGN_LEFT);
     sizer->Add(placeholderSizer, 0, wxALL, 5);
 
 
-    // è¦ªSizerã‚’æ¨ªä¸¦ã³ã«è¨­å®š
+    // eSizer‚ğ‰¡•À‚Ñ‚Éİ’è
     trioSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    // è¨€èªã®åˆæœŸåŒ–
+    // Œ¾Œê‚Ì‰Šú‰»
     wxBoxSizer* langSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* langlabel = new wxStaticText(this, wxID_ANY, "è¨€èª");
-    langSizer->Add(langlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
-    const wxString langtext[10] = { "äº¤æ˜“å…±é€šèª", "æ±ç”¨è›®æ—èª", "åœ°æ–¹èª(ãƒ–ãƒ«ãƒ©ã‚¤ãƒˆ)", "ç¨®æ—è¨€èª( )", "é­”æ³•æ–‡æ˜èª", "é­”å‹•æ©Ÿæ–‡æ˜èª", "å¦–ç²¾èª", "ç¥ç´€æ–‡æ˜èª", "é­”ç¥èª", ""};
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* langlabel = new wxStaticText(this, wxID_ANY, "Œ¾Œê");
+    langSizer->Add(langlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
+    const wxString langtext[10] = { "ŒğˆÕ‹¤’ÊŒê", "”Ä—p”Ø‘°Œê", "’n•ûŒê(ƒuƒ‹ƒ‰ƒCƒg)", "í‘°Œ¾Œê( )", "–‚–@•¶–¾Œê", "–‚“®‹@•¶–¾Œê", "—d¸Œê", "_‹I•¶–¾Œê", "–‚_Œê", ""};
     for (int i = 0; i < 10; ++i) {
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         langTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, langtext[i], wxDefaultPosition, wxSize(110, -1));
-        langSizer->Add(langTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        langSizer->Add(langTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
     }
 
-    // ä¼šè©±ã®åˆæœŸåŒ–
+    // ‰ï˜b‚Ì‰Šú‰»
     wxBoxSizer* speakSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* speaklabel = new wxStaticText(this, wxID_ANY, "ä¼šè©±");
-    speakSizer->Add(speaklabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* speaklabel = new wxStaticText(this, wxID_ANY, "‰ï˜b");
+    speakSizer->Add(speaklabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 10; ++i) {
-        // ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚ğ’Ç‰Á
         speakcheckBoxes[i] = new wxCheckBox(this, wxID_ANY, "", wxDefaultPosition, wxSize(-1, -1));
         speakSizer->Add(speakcheckBoxes[i], 0, wxCENTER | wxTOP | wxBOTTOM, 4.5);
     }
     speakcheckBoxes[0]->SetValue(true);
 
-    // èª­æ–‡ã®åˆæœŸåŒ–
+    // “Ç•¶‚Ì‰Šú‰»
     wxBoxSizer* readSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* readlabel = new wxStaticText(this, wxID_ANY, "èª­æ–‡");
-    readSizer->Add(readlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* readlabel = new wxStaticText(this, wxID_ANY, "“Ç•¶");
+    readSizer->Add(readlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 10; ++i) {
-        // ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚ğ’Ç‰Á
         readcheckBoxes[i] = new wxCheckBox(this, wxID_ANY, "", wxDefaultPosition, wxSize(-1, -1));
         readSizer->Add(readcheckBoxes[i], 0, wxCENTER | wxTOP | wxBOTTOM, 4.5);
     }
     readcheckBoxes[0]->SetValue(true);
 
-    //sub1Sizerã¨sub2Seizerã‚’subSeizerã«ã¾ã¨ã‚ã‚‹
+    //sub1Sizer‚Æsub2Seizer‚ğsubSeizer‚É‚Ü‚Æ‚ß‚é
     trioSizer->Add(langSizer, 0, wxALIGN_TOP | wxLEFT, 2);
     trioSizer->Add(speakSizer, 0, wxALIGN_TOP | wxLEFT, 1);
     trioSizer->Add(readSizer, 0, wxALIGN_TOP | wxLEFT, 1);
 
     wxBoxSizer* otherSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* otherlabel = new wxStaticText(this, wxID_ANY, "çµŒæ­´ã€ãã®ä»–ãƒ¡ãƒ¢ãªã©");
-    otherSizer->Add(otherlabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* otherlabel = new wxStaticText(this, wxID_ANY, "Œo—ğA‚»‚Ì‘¼ƒƒ‚‚È‚Ç");
+    otherSizer->Add(otherlabel, 0, wxALIGN_CENTER | wxBOTTOM, 2);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     otherTextBox = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(360, 235), wxTE_MULTILINE | wxTE_PROCESS_ENTER);
     otherSizer->Add(otherTextBox, 0, wxALIGN_LEFT);
     
-    // weaponSizerã‚’trioSizerã«è¿½åŠ 
+    // weaponSizer‚ğtrioSizer‚É’Ç‰Á
     trioSizer->Add(otherSizer, 0, wxALIGN_TOP | wxLEFT, 5);
 
-    // subSizerã‚’è¦ªSizerã«è¿½åŠ 
+    // subSizer‚ğeSizer‚É’Ç‰Á
     sizer->Add(trioSizer, 0, wxEXPAND | wxTOP, 15);
 
 
-    wxStaticText* item = new wxStaticText(this, wxID_ANY, "---æ­¦å…·ãƒ»æ‰€æŒå“---");
+    wxStaticText* item = new wxStaticText(this, wxID_ANY, "---•‹ïEŠ•i---");
     sizer->Add(item, 0, wxALL, 10);
 
-    // æ‰€æŒå“æ¬„ã®åˆæœŸåŒ–
+    // Š•i—“‚Ì‰Šú‰»
     wxBoxSizer* itemSizer = new wxBoxSizer(wxVERTICAL);
 
-    // æ­¦å™¨æ¬„ã®åˆæœŸåŒ–
+    // •Ší—“‚Ì‰Šú‰»
     wxBoxSizer* weaponSizer = new wxBoxSizer(wxHORIZONTAL);
 
     wxBoxSizer* weaponnameSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* weaponnamelabel = new wxStaticText(this, wxID_ANY, "æ­¦å™¨");
-    weaponnameSizer->Add(weaponnamelabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* weaponnamelabel = new wxStaticText(this, wxID_ANY, "•Ší");
+    weaponnameSizer->Add(weaponnamelabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 3; ++i) {
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         weaponnameTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(110, 46));
-        weaponnameSizer->Add(weaponnameTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        weaponnameSizer->Add(weaponnameTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
     }
 
     wxBoxSizer* weaponuseSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* weaponuselabel = new wxStaticText(this, wxID_ANY, "ç”¨æ³•");
-    weaponuseSizer->Add(weaponuselabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* weaponuselabel = new wxStaticText(this, wxID_ANY, "—p–@");
+    weaponuseSizer->Add(weaponuselabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 6; ++i) {
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         weaponuseTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(50, -1));
-        weaponuseSizer->Add(weaponuseTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        weaponuseSizer->Add(weaponuseTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
     }
 
     wxBoxSizer* weaponstrSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* weaponstrlabel = new wxStaticText(this, wxID_ANY, "å¿…ç­‹");
-    weaponstrSizer->Add(weaponstrlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* weaponstrlabel = new wxStaticText(this, wxID_ANY, "•K‹Ø");
+    weaponstrSizer->Add(weaponstrlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 6; ++i) {
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         weaponstrTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(40, -1));
-        weaponstrSizer->Add(weaponstrTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        weaponstrSizer->Add(weaponstrTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
     }
 
     wxBoxSizer* weaponhitSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* weaponhitlabel = new wxStaticText(this, wxID_ANY, "å‘½ä¸­åŠ›");
-    weaponhitSizer->Add(weaponhitlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* weaponhitlabel = new wxStaticText(this, wxID_ANY, "–½’†—Í");
+    weaponhitSizer->Add(weaponhitlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 6; ++i) {
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         weaponhitTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(40, -1));
-        weaponhitSizer->Add(weaponhitTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        weaponhitSizer->Add(weaponhitTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         weaponhitTextBoxes[i]->Bind(wxEVT_TEXT, &Tab1Panel::Updatehp, this);
     }
 
     wxBoxSizer* weapondmSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* weapondmlabel = new wxStaticText(this, wxID_ANY, "å¨åŠ›");
-    weapondmSizer->Add(weapondmlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* weapondmlabel = new wxStaticText(this, wxID_ANY, "ˆĞ—Í");
+    weapondmSizer->Add(weapondmlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 6; ++i) {
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         weapondmTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(50, -1));
-        weapondmSizer->Add(weapondmTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        weapondmSizer->Add(weapondmTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
     }
 
 
     wxBoxSizer* weaponcritSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* weaponcritlabel = new wxStaticText(this, wxID_ANY, "Cå€¤");
-    weaponcritSizer->Add(weaponcritlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* weaponcritlabel = new wxStaticText(this, wxID_ANY, "C’l");
+    weaponcritSizer->Add(weaponcritlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 6; ++i) {
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         weaponcritTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "11", wxDefaultPosition, wxSize(50, -1));
-        weaponcritSizer->Add(weaponcritTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        weaponcritSizer->Add(weaponcritTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
     }
 
 
     wxBoxSizer* weaponaddSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* weaponaddlabel = new wxStaticText(this, wxID_ANY, "è¿½åŠ D");
-    weaponaddSizer->Add(weaponaddlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* weaponaddlabel = new wxStaticText(this, wxID_ANY, "’Ç‰ÁD");
+    weaponaddSizer->Add(weaponaddlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 6; ++i) {
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         weaponaddTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(50, -1));
-        weaponaddSizer->Add(weaponaddTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        weaponaddSizer->Add(weaponaddTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         weaponaddTextBoxes[i]->Bind(wxEVT_TEXT, &Tab1Panel::Updatehp, this);
     }
 
 
     wxBoxSizer* weaponotherSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* weaponotherlabel = new wxStaticText(this, wxID_ANY, "å‚™è€ƒ");
-    weaponotherSizer->Add(weaponotherlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* weaponotherlabel = new wxStaticText(this, wxID_ANY, "”õl");
+    weaponotherSizer->Add(weaponotherlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 3; ++i) {
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         weaponotherTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(140, 46), wxTE_MULTILINE | wxTE_PROCESS_ENTER);
-        weaponotherSizer->Add(weaponotherTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        weaponotherSizer->Add(weaponotherTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
     }
     
-    //weaponç³»åˆ—ã‚’ã¾ã¨ã‚ã‚‹
+    //weaponŒn—ñ‚ğ‚Ü‚Æ‚ß‚é
     weaponSizer->Add(weaponnameSizer, 0, wxALIGN_CENTER);
     weaponSizer->Add(weaponuseSizer, 0, wxALIGN_CENTER | wxLEFT, 0);
     weaponSizer->Add(weaponstrSizer, 0, wxALIGN_CENTER | wxLEFT, 0);
@@ -632,66 +629,66 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
     weaponSizer->Add(weaponotherSizer, 0, wxALIGN_CENTER | wxLEFT, 0);
 
 
-    // é˜²å…·æ¬„ã¨æ‰€æŒé‡‘æ¬„ã‚’ã‚ã‚ã›ã‚‹
+    // –h‹ï—“‚ÆŠ‹à—“‚ğ‚ ‚í‚¹‚é
     wxBoxSizer* armorSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    // é˜²å…·æ¬„ã®åˆæœŸåŒ–
+    // –h‹ï—“‚Ì‰Šú‰»
     wxBoxSizer* subarmorSizer = new wxBoxSizer(wxHORIZONTAL);
 
     wxBoxSizer* armornameSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* armornamelabel = new wxStaticText(this, wxID_ANY, "é˜²å…·");
-    armornameSizer->Add(armornamelabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
-    const wxString armortext[3] = { "é§", "ç›¾", "ãã®ä»–" };
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* armornamelabel = new wxStaticText(this, wxID_ANY, "–h‹ï");
+    armornameSizer->Add(armornamelabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
+    const wxString armortext[3] = { "ŠZ", "‚", "‚»‚Ì‘¼" };
     for (int i = 0; i < 3; ++i) {
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         armornameTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, armortext[i] + ":", wxDefaultPosition, wxSize(110, -1));
-        armornameSizer->Add(armornameTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        armornameSizer->Add(armornameTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
     }
 
     wxBoxSizer* armorstrSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* armorstrlabel = new wxStaticText(this, wxID_ANY, "å¿…ç­‹");
-    armorstrSizer->Add(armorstrlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* armorstrlabel = new wxStaticText(this, wxID_ANY, "•K‹Ø");
+    armorstrSizer->Add(armorstrlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 3; ++i) {
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         armorstrTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(50, -1));
-        armorstrSizer->Add(armorstrTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        armorstrSizer->Add(armorstrTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
     }
 
     wxBoxSizer* armorevadeSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* armorevadelabel = new wxStaticText(this, wxID_ANY, "å›é¿ä¿®æ­£");
-    armorevadeSizer->Add(armorevadelabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* armorevadelabel = new wxStaticText(this, wxID_ANY, "‰ñ”ğC³");
+    armorevadeSizer->Add(armorevadelabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 3; ++i) {
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         armorevadeTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(50, -1));
-        armorevadeSizer->Add(armorevadeTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        armorevadeSizer->Add(armorevadeTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         armorevadeTextBoxes[i]->Bind(wxEVT_TEXT, &Tab1Panel::Updatehp, this);
     }
 
     wxBoxSizer* armorblockSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* armorblocklabel = new wxStaticText(this, wxID_ANY, "é˜²è­·ç‚¹");
-    armorblockSizer->Add(armorblocklabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* armorblocklabel = new wxStaticText(this, wxID_ANY, "–hŒì“_");
+    armorblockSizer->Add(armorblocklabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 3; ++i) {
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         armorblockTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(40, -1));
-        armorblockSizer->Add(armorblockTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        armorblockSizer->Add(armorblockTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         armorblockTextBoxes[i]->Bind(wxEVT_TEXT, &Tab1Panel::Updatehp, this);
     }
 
     wxBoxSizer* armorotherSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* armorotherlabel = new wxStaticText(this, wxID_ANY, "å‚™è€ƒ");
-    armorotherSizer->Add(armorotherlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* armorotherlabel = new wxStaticText(this, wxID_ANY, "”õl");
+    armorotherSizer->Add(armorotherlabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     for (int i = 0; i < 3; ++i) {
-        // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         armorotherTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(120, -1));
-        armorotherSizer->Add(armorotherTextBoxes[i], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        armorotherSizer->Add(armorotherTextBoxes[i], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
     }
 
-    //armorç³»åˆ—ã‚’ã¾ã¨ã‚ã‚‹
+    //armorŒn—ñ‚ğ‚Ü‚Æ‚ß‚é
     subarmorSizer->Add(armornameSizer, 0, wxALIGN_CENTER);
     subarmorSizer->Add(armorstrSizer, 0, wxALIGN_CENTER | wxLEFT, 0);
     subarmorSizer->Add(armorevadeSizer, 0, wxALIGN_CENTER | wxLEFT, 0);
@@ -700,26 +697,26 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
 
 
 
-    // é‡‘éŠ­ã®ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹
+    // ‹à‘K‚ÌƒeƒLƒXƒgƒ{ƒbƒNƒX
     wxBoxSizer* moneySizer = new wxBoxSizer(wxVERTICAL);
 
     wxBoxSizer* poketSizer = new wxBoxSizer(wxHORIZONTAL);
-    poketSizer->Add(new wxStaticText(this, wxID_ANY, "æ‰€æŒé‡‘: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
+    poketSizer->Add(new wxStaticText(this, wxID_ANY, "Š‹à: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
     poketSpinCtrl = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(60, -1), wxSP_ARROW_KEYS, 0, 100000, 0);
     poketSizer->Add(poketSpinCtrl, 0, wxALIGN_CENTER);
     poketSizer->Add(new wxStaticText(this, wxID_ANY, "G"), 0, wxALIGN_CENTER_VERTICAL | wxLEFT, 0);
 
     wxBoxSizer* debtSizer = new wxBoxSizer(wxHORIZONTAL);
-    debtSizer->Add(new wxStaticText(this, wxID_ANY, "é é‡‘/å€Ÿé‡‘: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
+    debtSizer->Add(new wxStaticText(this, wxID_ANY, "—a‹à/Ø‹à: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
     debtTextBox = new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(60, -1));
     debtSizer->Add(debtTextBox, 0, wxALIGN_CENTER);
     debtSizer->Add(new wxStaticText(this, wxID_ANY, "G"), 0, wxALIGN_CENTER_VERTICAL | wxLEFT, 0);
 
     wxBoxSizer* glorySizer = new wxBoxSizer(wxHORIZONTAL);
-    glorySizer->Add(new wxStaticText(this, wxID_ANY, "åèª‰ç‚¹: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
+    glorySizer->Add(new wxStaticText(this, wxID_ANY, "–¼—_“_: "), 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
     glorySpinCtrl = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(60, -1), wxSP_ARROW_KEYS, 0, 100000, 0);
     glorySizer->Add(glorySpinCtrl, 0, wxALIGN_CENTER);
-    glorySizer->Add(new wxStaticText(this, wxID_ANY, "ç‚¹"), 0, wxALIGN_CENTER_VERTICAL | wxLEFT, 0);
+    glorySizer->Add(new wxStaticText(this, wxID_ANY, "“_"), 0, wxALIGN_CENTER_VERTICAL | wxLEFT, 0);
 
     moneySizer->Add(poketSizer, 0, wxALIGN_LEFT | wxBOTTOM, 2);
     moneySizer->Add(debtSizer, 0, wxALIGN_LEFT | wxBOTTOM, 5);
@@ -738,21 +735,21 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
 
     wxBoxSizer* acesSizer1 = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer* acesSizer2 = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* aceslabel = new wxStaticText(this, wxID_ANY, "å„éƒ¨ä½ã®è£…é£¾å“");
-    acesSizer1->Add(aceslabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
-    const wxString acesLabels[12] = { "é ­", "é¡”", "è€³", "é¦–", "èƒŒä¸­", "å³æ‰‹", "å·¦æ‰‹", "è…°", "è¶³", "ãã®ä»–", "ãã®ä»–2", "ãã®ä»–3" };
-    for (int i = 0; i < 12; ++i) { //è£…é£¾å“å
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* aceslabel = new wxStaticText(this, wxID_ANY, "Še•”ˆÊ‚Ì‘•ü•i");
+    acesSizer1->Add(aceslabel, 0, wxALIGN_CENTER | wxBOTTOM, 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
+    const wxString acesLabels[12] = { "“ª", "Šç", "¨", "ñ", "”w’†", "‰Eè", "¶è", "˜", "‘«", "‚»‚Ì‘¼", "‚»‚Ì‘¼2", "‚»‚Ì‘¼3" };
+    for (int i = 0; i < 12; ++i) { //‘•ü•i–¼
         acesTextBoxes[i] = new wxTextCtrl(this, wxID_ANY, acesLabels[i] + ": ", wxDefaultPosition, wxSize(150, -1));
         acesSizer1->Add(acesTextBoxes[i], 0, wxALIGN_LEFT);
     }
     acesTextBoxes[10]->Hide();
     acesTextBoxes[11]->Hide();
     
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* aceslabel2 = new wxStaticText(this, wxID_ANY, "åŠ¹æœæ¦‚è¦");
-    acesSizer2->Add(aceslabel2, 0, wxALIGN_CENTER | wxBOTTOM , 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
-    for (int i = 0; i < 12; ++i) { // è£…é£¾å“ã®åŠ¹æœ
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* aceslabel2 = new wxStaticText(this, wxID_ANY, "Œø‰ÊŠT—v");
+    acesSizer2->Add(aceslabel2, 0, wxALIGN_CENTER | wxBOTTOM , 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
+    for (int i = 0; i < 12; ++i) { // ‘•ü•i‚ÌŒø‰Ê
         acesTextBoxes2[i] = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(175, -1));
         acesSizer2->Add(acesTextBoxes2[i], 0, wxALIGN_LEFT);
         
@@ -765,9 +762,9 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
 
 
     wxBoxSizer* bagSizer = new wxBoxSizer(wxVERTICAL);
-    // ãƒ©ãƒ™ãƒ«ã‚’è¿½åŠ 
-    wxStaticText* baglabel = new wxStaticText(this, wxID_ANY, "æ‰€æŒã‚¢ã‚¤ãƒ†ãƒ ãªã©");
-    bagSizer->Add(baglabel, 0, wxALIGN_CENTER | wxBOTTOM , 5);  // ãƒ©ãƒ™ãƒ«ã®ä¸‹ã«ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¿½åŠ 
+    // ƒ‰ƒxƒ‹‚ğ’Ç‰Á
+    wxStaticText* baglabel = new wxStaticText(this, wxID_ANY, "ŠƒAƒCƒeƒ€‚È‚Ç");
+    bagSizer->Add(baglabel, 0, wxALIGN_CENTER | wxBOTTOM , 5);  // ƒ‰ƒxƒ‹‚Ì‰º‚ÉƒXƒy[ƒX‚ğ’Ç‰Á
     bagTextBox = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(250, 300), wxTE_MULTILINE | wxTE_PROCESS_ENTER);
     bagSizer->Add(bagTextBox, 0, wxALIGN_LEFT);
 
@@ -783,29 +780,29 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
 
 
 void Tab1Panel::SetCharacterData(const wxString& name, const wxString& species, const wxString& feature, const std::vector<int>& data){
-    if (data.size() < 5) return;  // ãƒ‡ãƒ¼ã‚¿æ•°ãŒè¶³ã‚Šãªã‘ã‚Œã°ä½•ã‚‚ã—ãªã„
+    if (data.size() < 5) return;  // ƒf[ƒ^”‚ª‘«‚è‚È‚¯‚ê‚Î‰½‚à‚µ‚È‚¢
 
     nameTextBox->SetValue(name);
     speciesTextBox->SetValue(species);
     spfeatureTextBox->SetValue(feature);
     ImpurityTextBox->SetValue(wxString::Format("%d", data[9]));
 
-    // æŠ€ãƒ»ä½“ãƒ»å¿ƒ
+    // ‹ZE‘ÌES
     for (int i = 0; i < 3; ++i) {
         bornTextBoxes[i]->SetValue(wxString::Format("%d", data[i]));
     }
-    // Aï½F
+    // A`F
     for (int i = 0; i < 6; ++i) {
         abilityTextBoxes[i]->SetValue(wxString::Format("%d", data[3 + i]));
     }
-    //// å™¨ç”¨ãƒ»æ•æ·ãƒ»ç­‹åŠ›ãƒ»ç”Ÿå‘½ãƒ»çŸ¥åŠ›ãƒ»ç²¾ç¥
+    //// Ší—pE•q·E‹Ø—ÍE¶–½E’m—ÍE¸_
     //for (int i = 0; i < 6; ++i) {
     //    attributeTextBoxes[i]->SetValue(wxString::Format("%d", data[9 + i]));
     //}
 }
 
 void Tab1Panel::UpdateAttribute(wxCommandEvent& event) {
-    long bornVal[3], abilityVal[6], growthVal[6], increaseVal[6]; // å–å¾—ã™ã‚‹å€¤ã‚’æ ¼ç´ã™ã‚‹é…åˆ—
+    long bornVal[3], abilityVal[6], growthVal[6], increaseVal[6]; // æ“¾‚·‚é’l‚ğŠi”[‚·‚é”z—ñ
 
     for (int i = 0; i < 3; ++i) {
         bornTextBoxes[i]->GetValue().ToLong(&bornVal[i]);
@@ -817,7 +814,7 @@ void Tab1Panel::UpdateAttribute(wxCommandEvent& event) {
         increaseVal[i] = increaseSpinCtrl[i]->GetValue();
     }
 
-    // åˆè¨ˆã‚’ å„attributeTextBoxes ã«ã‚»ãƒƒãƒˆ
+    // ‡Œv‚ğ ŠeattributeTextBoxes ‚ÉƒZƒbƒg
     attributeTextBoxes[0]->SetValue(wxString::Format("%ld", bornVal[0] + abilityVal[0] + growthVal[0]));
     attributeTextBoxes[1]->SetValue(wxString::Format("%ld", bornVal[0] + abilityVal[1] + growthVal[1]));
     attributeTextBoxes[2]->SetValue(wxString::Format("%ld", bornVal[1] + abilityVal[2] + growthVal[2]));
@@ -828,26 +825,26 @@ void Tab1Panel::UpdateAttribute(wxCommandEvent& event) {
 }
 
 void Tab1Panel::Updatebonus(wxCommandEvent& event) {
-    long attributeVal[6], increaseVal[6]; // å–å¾—ã™ã‚‹å€¤ã‚’æ ¼ç´ã™ã‚‹é…åˆ—
+    long attributeVal[6], increaseVal[6]; // æ“¾‚·‚é’l‚ğŠi”[‚·‚é”z—ñ
 
     for (int i = 0; i < 6; ++i) {
         attributeTextBoxes[i]->GetValue().ToLong(&attributeVal[i]);
         increaseVal[i] = increaseSpinCtrl[i]->GetValue();
     }
 
-    // ãƒœãƒ¼ãƒŠã‚¹è¨ˆç®—ã‚’å„bonusTextBoxã«ã‚»ãƒƒãƒˆ
+    // ƒ{[ƒiƒXŒvZ‚ğŠebonusTextBox‚ÉƒZƒbƒg
     for (int i = 0; i < 6; ++i) {
         bonusTextBoxes[i]->SetValue(wxString::Format("%ld", (attributeVal[i] + increaseVal[i]) / 6));
     }
 }
 
 void Tab1Panel::Updatelevel(wxCommandEvent& event) {
-    long techlevel[6]; //å–å¾—ã™ã‚‹å€¤ã‚’æ ¼ç´ã™ã‚‹é…åˆ—
+    long techlevel[6]; //æ“¾‚·‚é’l‚ğŠi”[‚·‚é”z—ñ
     int advlevel=0;
     for (int i = 0; i < 6; ++i) {
         techlevel[i] = techlevelSpinCtrl[i]->GetValue();
     }
-    // é…åˆ—ã®ä¸­ã®æœ€å¤§å€¤ã‚’å–å¾—
+    // ”z—ñ‚Ì’†‚ÌÅ‘å’l‚ğæ“¾
     advlevel = *std::max_element(techlevel, techlevel + 6);
 
     levelTextBox->SetValue(wxString::Format("%ld", advlevel));
@@ -857,7 +854,7 @@ void Tab1Panel::Updatehp(wxCommandEvent& event) {
     int lv = 0, aglity = 0, vital = 0, magic = 0, hit = 0, evade = 0, damage = 0, mplv=0, mlv = 0, armor = 0, tarmor = 0 ,weaponhit = 0, weapondamage = 0, armorevade = 0, tarmorevade = 0, tech = 0, mov = 0, sage = 0 ;
     long bonus[6], hitally[6], evadeally[6], damageally[6],  magically[6], weaponhitally[6], weapondamageally[6];
     std::fill(magically, magically + 6, 0), std::fill(hitally, hitally + 6, 0), std::fill(evadeally, evadeally + 6, 0), std::fill(damageally, damageally + 6, 0);
-    bool enhancerAdded = false;  // è¿½åŠ æ¸ˆã¿ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
+    bool enhancerAdded = false;  // ’Ç‰ÁÏ‚İ‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
 
     levelTextBox->GetValue().ToInt(&lv);
     attributeTextBoxes[1]->GetValue().ToInt(&aglity);
@@ -865,102 +862,102 @@ void Tab1Panel::Updatehp(wxCommandEvent& event) {
     attributeTextBoxes[5]->GetValue().ToInt(&magic);
 
     for (int i = 0; i < 6; ++i) {
-		bonusTextBoxes[i]->GetValue().ToLong(&bonus[i]); // ãƒœãƒ¼ãƒŠã‚¹ã‚’å–å¾—
+		bonusTextBoxes[i]->GetValue().ToLong(&bonus[i]); // ƒ{[ƒiƒX‚ğæ“¾
     }
 
     int evadetrue = 0;
-    wxBoxSizer* newSizer = new wxBoxSizer(wxHORIZONTAL); // lvç¿’å¾—æŠ€èƒ½ã®è¦‹å‡ºã—
-    wxBoxSizer* lvskillSizer1 = new wxBoxSizer(wxVERTICAL); // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹æ¨ªä¸¦ã¹
-    wxBoxSizer* lvskillSizer2 = new wxBoxSizer(wxVERTICAL); // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹æ¨ªä¸¦ã¹
+    wxBoxSizer* newSizer = new wxBoxSizer(wxHORIZONTAL); // lvK“¾‹Z”\‚ÌŒ©o‚µ
+    wxBoxSizer* lvskillSizer1 = new wxBoxSizer(wxVERTICAL); // ƒeƒLƒXƒgƒ{ƒbƒNƒX‰¡•À‚×
+    wxBoxSizer* lvskillSizer2 = new wxBoxSizer(wxVERTICAL); // ƒeƒLƒXƒgƒ{ƒbƒNƒX‰¡•À‚×
 
     for (int i = 0; i < 6; ++i) {
-		weaponhitTextBoxes[i]->GetValue().ToLong(&weaponhitally[i]); // æ­¦å™¨ã®å‘½ä¸­åŠ›ã‚’å–å¾—
-        weaponaddTextBoxes[i]->GetValue().ToLong(&weapondamageally[i]); // æ­¦å™¨ã®è¿½åŠ Dã‚’å–å¾—
+		weaponhitTextBoxes[i]->GetValue().ToLong(&weaponhitally[i]); // •Ší‚Ì–½’†—Í‚ğæ“¾
+        weaponaddTextBoxes[i]->GetValue().ToLong(&weapondamageally[i]); // •Ší‚Ì’Ç‰ÁD‚ğæ“¾
 
-        std::string className = techTextBoxes[i]->GetValue().ToStdString(); // æŠ€èƒ½åã‚’å–å¾—
+        std::string className = techTextBoxes[i]->GetValue().ToStdString(); // ‹Z”\–¼‚ğæ“¾
         if (className.empty()) {
             //this->Layout();
-            continue; // æŠ€èƒ½åãŒç©ºã®å ´åˆã¯ã‚¹ã‚­ãƒƒãƒ—
+            continue; // ‹Z”\–¼‚ª‹ó‚Ìê‡‚ÍƒXƒLƒbƒv
         }
 
-        else if (className == "ãƒ•ã‚¡ã‚¤ã‚¿ãƒ¼" || className == "ã‚°ãƒ©ãƒƒãƒ—ãƒ©ãƒ¼" || className == "ãƒ•ã‚§ãƒ³ã‚µãƒ¼") {
+        else if (className == "ƒtƒ@ƒCƒ^[" || className == "ƒOƒ‰ƒbƒvƒ‰[" || className == "ƒtƒFƒ“ƒT[") {
             hitally[i] = techlevelSpinCtrl[i]->GetValue() + bonus[0];
             evadeally[i] = techlevelSpinCtrl[i]->GetValue() + bonus[1];
 			damageally[i] = techlevelSpinCtrl[i]->GetValue() + bonus[2];
 
-		} // æˆ¦å£«ç³»æŠ€èƒ½ å‘½ä¸­åŠ›ã€å›é¿åŠ›ã€è¿½åŠ D
+		} // ímŒn‹Z”\ –½’†—ÍA‰ñ”ğ—ÍA’Ç‰ÁD
 
-        else if (className == "ã‚·ãƒ¥ãƒ¼ã‚¿ãƒ¼") {
+        else if (className == "ƒVƒ…[ƒ^[") {
             hitally[i] = techlevelSpinCtrl[i]->GetValue() + bonus[0];
-            damageally[i] = techlevelSpinCtrl[i]->GetValue(); //ç­‹åŠ›Bãªã—
+            damageally[i] = techlevelSpinCtrl[i]->GetValue(); //‹Ø—ÍB‚È‚µ
             
-            for (int i = 0; i < 8; ++i) { // å›é¿ã®åˆ¤å®š
-                std::string talentName = talentTextBoxes[i]->GetValue().ToStdString(); // ç‰¹æŠ€åã‚’å–å¾—
-                if (talentName.find("å°„æ‰‹ã®ä½“è¡“") != std::string::npos){
-					evadetrue = 1; // å°„æ‰‹ã®ä½“è¡“ãŒã‚ã‚‹å ´åˆ
+            for (int i = 0; i < 8; ++i) { // ‰ñ”ğ‚Ì”»’è
+                std::string talentName = talentTextBoxes[i]->GetValue().ToStdString(); // “Á‹Z–¼‚ğæ“¾
+                if (talentName.find("Ëè‚Ì‘Ìp") != std::string::npos){
+					evadetrue = 1; // Ëè‚Ì‘Ìp‚ª‚ ‚éê‡
                     break;
                 }
             }
             if (evadetrue == 1) {
                 evadeally[i] = techlevelSpinCtrl[i]->GetValue() + bonus[1];
             }
-        } // ã‚·ãƒ¥ãƒ¼ã‚¿ãƒ¼ å‘½ä¸­åŠ›ã€å›é¿åŠ›ã¯ç‰¹æ®Š
+        } // ƒVƒ…[ƒ^[ –½’†—ÍA‰ñ”ğ—Í‚Í“Áê
 
-        else if (className == "ã‚½ãƒ¼ã‚µãƒ©ãƒ¼" || className == "ã‚³ãƒ³ã‚¸ãƒ£ãƒ©ãƒ¼" || className == "ãƒ—ãƒªãƒ¼ã‚¹ãƒˆ" || className == "ãƒã‚®ãƒ†ãƒƒã‚¯" || className == "ãƒ•ã‚§ã‚¢ãƒªãƒ¼ãƒ†ã‚¤ãƒãƒ¼") {
+        else if (className == "ƒ\[ƒTƒ‰[" || className == "ƒRƒ“ƒWƒƒƒ‰[" || className == "ƒvƒŠ[ƒXƒg" || className == "ƒ}ƒMƒeƒbƒN" || className == "ƒtƒFƒAƒŠ[ƒeƒCƒ}[") {
             magically[i] = techlevelSpinCtrl[i]->GetValue();
-        }// é­”æ³•ä½¿ã„ç³»æŠ€èƒ½
+        }// –‚–@g‚¢Œn‹Z”\
 
-        else if (className == "ã‚¹ã‚«ã‚¦ãƒˆ" || className == "ãƒ¬ãƒ³ã‚¸ãƒ£ãƒ¼") {
-            tech = techlevelSpinCtrl[i]->GetValue() + bonus[0]; // æŠ€å·§
-            mov = techlevelSpinCtrl[i]->GetValue() + bonus[1]; // é‹å‹•ã€å…ˆåˆ¶åŠ›
-        }// å…ˆåˆ¶æŠ€èƒ½
+        else if (className == "ƒXƒJƒEƒg" || className == "ƒŒƒ“ƒWƒƒ[") {
+            tech = techlevelSpinCtrl[i]->GetValue() + bonus[0]; // ‹ZI
+            mov = techlevelSpinCtrl[i]->GetValue() + bonus[1]; // ‰^“®Aæ§—Í
+        }// æ§‹Z”\
 
-        else if (className == "ã‚»ãƒ¼ã‚¸" || className == "ãƒ©ã‚¤ãƒ€ãƒ¼") {
-			sage = techlevelSpinCtrl[i]->GetValue() + bonus[4]; //è¦³å¯Ÿã€çŸ¥è­˜ã€é­”ç‰©çŸ¥è­˜
-        }// é­”ç‰©çŸ¥è­˜æŠ€èƒ½
+        else if (className == "ƒZ[ƒW" || className == "ƒ‰ƒCƒ_[") {
+			sage = techlevelSpinCtrl[i]->GetValue() + bonus[4]; //ŠÏ@A’m¯A–‚•¨’m¯
+        }// –‚•¨’m¯‹Z”\
 
-        //else if (className == "ã‚¨ãƒ³ãƒãƒ³ã‚µãƒ¼" && !enhancerAdded) {
-        //    // å…¨ä½“ã‚’ã¾ã¨ã‚ã‚‹ä¸€æ™‚çš„ãªãƒ©ãƒƒãƒ‘ãƒ¼sizer
+        //else if (className == "ƒGƒ“ƒnƒ“ƒT[" && !enhancerAdded) {
+        //    // ‘S‘Ì‚ğ‚Ü‚Æ‚ß‚éˆê“I‚Èƒ‰ƒbƒp[sizer
         //    wxBoxSizer* wrapperSizer = new wxBoxSizer(wxVERTICAL);
-        //    newSizer->Add(new wxStaticText(this, wxID_ANY, "ç¿’å¾—ç·´æŠ€"), 0);
+        //    newSizer->Add(new wxStaticText(this, wxID_ANY, "K“¾—û‹Z"), 0);
 
         //    for (int j = 0; j < 8; ++j) {
-        //        wxString otherskillText1 = wxString::Format("%d: ", j + 1); // æ•°å€¤ã‚’æ–‡å­—åˆ—ã«å¤‰æ›
-        //        //ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        //        wxString otherskillText1 = wxString::Format("%d: ", j + 1); // ”’l‚ğ•¶š—ñ‚É•ÏŠ·
+        //        //ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         //        enhanceskillTextBoxes1[j] = new wxTextCtrl(this, wxID_ANY, otherskillText1, wxDefaultPosition, wxSize(120, -1));
-        //        lvskillSizer1->Add(enhanceskillTextBoxes1[j], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        //        lvskillSizer1->Add(enhanceskillTextBoxes1[j], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         //     }
         //    for (int j = 0; j < 7; ++j) {
-        //        wxString otherskillText2 = wxString::Format("%d: ", j + 9); // æ•°å€¤ã‚’æ–‡å­—åˆ—ã«å¤‰æ›
-        //        //ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        //        wxString otherskillText2 = wxString::Format("%d: ", j + 9); // ”’l‚ğ•¶š—ñ‚É•ÏŠ·
+        //        //ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         //        enhanceskillTextBoxes2[j] = new wxTextCtrl(this, wxID_ANY, otherskillText2, wxDefaultPosition, wxSize(120, -1));
-        //        lvskillSizer2->Add(enhanceskillTextBoxes2[j], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        //        lvskillSizer2->Add(enhanceskillTextBoxes2[j], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         //    }
         //    newSizer->Add(lvskillSizer1, 0, wxALIGN_LEFT);
         //    newSizer->Add(lvskillSizer2, 0, wxALIGN_LEFT);
         //    otherskillSizer->Add(newSizer, 0, wxALIGN_LEFT);
-        //    // otherskillSizerã”ã¨è¿½åŠ 
+        //    // otherskillSizer‚²‚Æ’Ç‰Á
         //    wrapperSizer->Add(otherskillSizer, 0);
         //                 
-        //    placeholderSizer->Add(wrapperSizer, 0);//æœ€å¾Œã« wrapper ã‚’ placeholderSizer ã«è¿½åŠ ï¼
+        //    placeholderSizer->Add(wrapperSizer, 0);//ÅŒã‚É wrapper ‚ğ placeholderSizer ‚É’Ç‰ÁI
         //    this->Layout();
 
-        //    enhancerAdded = true;  // äºŒåº¦ã¨è¿½åŠ ã•ã‚Œãªã„ã‚ˆã†ã«ã™ã‚‹
+        //    enhancerAdded = true;  // “ñ“x‚Æ’Ç‰Á‚³‚ê‚È‚¢‚æ‚¤‚É‚·‚é
         //}
 
-        //else if (className == "ãƒãƒ¼ãƒ‰") {
-        //    placeholderSizer->Add(new wxStaticText(this, wxID_ANY, "ç¿’å¾—å‘ªæ­Œãƒ»çµ‚å¾‹"), 0, wxALL, 5);
+        //else if (className == "ƒo[ƒh") {
+        //    placeholderSizer->Add(new wxStaticText(this, wxID_ANY, "K“¾ô‰ÌEI—¥"), 0, wxALL, 5);
         //    for (int j = 0; j < 8; ++j) {
-        //        wxString otherskillText = wxString::Format("%d: ", j + 1); // æ•°å€¤ã‚’æ–‡å­—åˆ—ã«å¤‰æ›
-        //        //ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        //        wxString otherskillText = wxString::Format("%d: ", j + 1); // ”’l‚ğ•¶š—ñ‚É•ÏŠ·
+        //        //ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         //        otherskillTextBoxes[j] = new wxTextCtrl(this, wxID_ANY, otherskillText, wxDefaultPosition, wxSize(120, -1));
-        //        lvskillSizer1->Add(otherskillTextBoxes[j], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        //        lvskillSizer1->Add(otherskillTextBoxes[j], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         //    }
         //    for (int j = 0; j < 7; ++j) {
-        //        wxString otherskillText = wxString::Format("%d: ", j + 9); // æ•°å€¤ã‚’æ–‡å­—åˆ—ã«å¤‰æ›
-        //        //ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        //        wxString otherskillText = wxString::Format("%d: ", j + 9); // ”’l‚ğ•¶š—ñ‚É•ÏŠ·
+        //        //ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         //        otherskillTextBoxes[j] = new wxTextCtrl(this, wxID_ANY, otherskillText, wxDefaultPosition, wxSize(120, -1));
-        //        lvskillSizer2->Add(otherskillTextBoxes[j], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        //        lvskillSizer2->Add(otherskillTextBoxes[j], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         //    }
         //    newSizer->Add(lvskillSizer1, 0, wxALIGN_LEFT);
         //    newSizer->Add(lvskillSizer2, 0, wxALIGN_LEFT);
@@ -968,46 +965,46 @@ void Tab1Panel::Updatehp(wxCommandEvent& event) {
         //    this->Layout();
         //}
 
-        //else if (className == "ãƒ©ã‚¤ãƒ€ãƒ¼") {
-        //    // å…¨ä½“ã‚’ã¾ã¨ã‚ã‚‹ä¸€æ™‚çš„ãªãƒ©ãƒƒãƒ‘ãƒ¼sizer
+        //else if (className == "ƒ‰ƒCƒ_[") {
+        //    // ‘S‘Ì‚ğ‚Ü‚Æ‚ß‚éˆê“I‚Èƒ‰ƒbƒp[sizer
         //    wxBoxSizer* wrapperSizer = new wxBoxSizer(wxVERTICAL);
-        //    wrapperSizer->Add(new wxStaticText(this, wxID_ANY, "ç¿’å¾—é¨èŠ¸"), 0);
+        //    wrapperSizer->Add(new wxStaticText(this, wxID_ANY, "K“¾‹RŒ|"), 0);
 
         //    for (int j = 0; j < 8; ++j) {
-        //        wxString otherskillText1 = wxString::Format("%d: ", j + 1); // æ•°å€¤ã‚’æ–‡å­—åˆ—ã«å¤‰æ›
-        //        //ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        //        wxString otherskillText1 = wxString::Format("%d: ", j + 1); // ”’l‚ğ•¶š—ñ‚É•ÏŠ·
+        //        //ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         //        enhanceskillTextBoxes1[j] = new wxTextCtrl(this, wxID_ANY, otherskillText1, wxDefaultPosition, wxSize(120, -1));
-        //        lvskillSizer1->Add(enhanceskillTextBoxes1[j], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        //        lvskillSizer1->Add(enhanceskillTextBoxes1[j], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         //    }
         //    for (int j = 0; j < 7; ++j) {
-        //        wxString otherskillText2 = wxString::Format("%d: ", j + 9); // æ•°å€¤ã‚’æ–‡å­—åˆ—ã«å¤‰æ›
-        //        //ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        //        wxString otherskillText2 = wxString::Format("%d: ", j + 9); // ”’l‚ğ•¶š—ñ‚É•ÏŠ·
+        //        //ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         //        enhanceskillTextBoxes2[j] = new wxTextCtrl(this, wxID_ANY, otherskillText2, wxDefaultPosition, wxSize(120, -1));
-        //        lvskillSizer2->Add(enhanceskillTextBoxes2[j], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        //        lvskillSizer2->Add(enhanceskillTextBoxes2[j], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         //    }
         //    newSizer->Add(lvskillSizer1, 0, wxALIGN_LEFT);
         //    newSizer->Add(lvskillSizer2, 0, wxALIGN_LEFT);
         //    otherskillSizer->Add(newSizer, 0, wxALIGN_LEFT);
-        //    // otherskillSizerã”ã¨è¿½åŠ 
+        //    // otherskillSizer‚²‚Æ’Ç‰Á
         //    wrapperSizer->Add(otherskillSizer, 0);
 
-        //    placeholderSizer->Add(wrapperSizer, 0);//æœ€å¾Œã« wrapper ã‚’ placeholderSizer ã«è¿½åŠ ï¼
+        //    placeholderSizer->Add(wrapperSizer, 0);//ÅŒã‚É wrapper ‚ğ placeholderSizer ‚É’Ç‰ÁI
         //    this->Layout();
         //}
          
-        //else if (className == "ã‚¢ãƒ«ã‚±ãƒŸã‚¹ãƒˆ") {
-        //    placeholderSizer->Add(new wxStaticText(this, wxID_ANY, "ç¿’å¾—è³¦è¡“"), 0, wxALL, 5);
+        //else if (className == "ƒAƒ‹ƒPƒ~ƒXƒg") {
+        //    placeholderSizer->Add(new wxStaticText(this, wxID_ANY, "K“¾•Šp"), 0, wxALL, 5);
         //    for (int j = 0; j < 8; ++j) {
-        //        wxString otherskillText = wxString::Format("%d: ", j + 1); // æ•°å€¤ã‚’æ–‡å­—åˆ—ã«å¤‰æ›
-        //        //ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        //        wxString otherskillText = wxString::Format("%d: ", j + 1); // ”’l‚ğ•¶š—ñ‚É•ÏŠ·
+        //        //ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         //        otherskillTextBoxes[j] = new wxTextCtrl(this, wxID_ANY, otherskillText, wxDefaultPosition, wxSize(120, -1));
-        //        lvskillSizer1->Add(otherskillTextBoxes[j], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        //        lvskillSizer1->Add(otherskillTextBoxes[j], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         //    }
         //    for (int j = 0; j < 7; ++j) {
-        //        wxString otherskillText = wxString::Format("%d: ", j + 9); // æ•°å€¤ã‚’æ–‡å­—åˆ—ã«å¤‰æ›
-        //        //ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¿½åŠ 
+        //        wxString otherskillText = wxString::Format("%d: ", j + 9); // ”’l‚ğ•¶š—ñ‚É•ÏŠ·
+        //        //ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á
         //        otherskillTextBoxes[j] = new wxTextCtrl(this, wxID_ANY, otherskillText, wxDefaultPosition, wxSize(120, -1));
-        //        lvskillSizer2->Add(otherskillTextBoxes[j], 0, wxALIGN_LEFT);  // ä¸­å¤®æƒãˆã§ã¯ãªãå·¦æƒãˆ
+        //        lvskillSizer2->Add(otherskillTextBoxes[j], 0, wxALIGN_LEFT);  // ’†‰›‘µ‚¦‚Å‚Í‚È‚­¶‘µ‚¦
         //    }
         //    newSizer->Add(lvskillSizer1, 0, wxALIGN_LEFT);
         //    newSizer->Add(lvskillSizer2, 0, wxALIGN_LEFT);
@@ -1017,11 +1014,11 @@ void Tab1Panel::Updatehp(wxCommandEvent& event) {
 
         else {
             //this->Layout();
-            continue; // æŠ€èƒ½åãŒç©ºã®å ´åˆã¯ã‚¹ã‚­ãƒƒãƒ—
+            continue; // ‹Z”\–¼‚ª‹ó‚Ìê‡‚ÍƒXƒLƒbƒv
         }
 
     }
-    // é…åˆ—ã®ä¸­ã®æœ€å¤§å€¤ã‚’å–å¾—
+    // ”z—ñ‚Ì’†‚ÌÅ‘å’l‚ğæ“¾
 	hit = *std::max_element(hitally, hitally + 6);
     evade = *std::max_element(evadeally, evadeally + 6);
     mplv = std::accumulate(magically, magically + 6, 0);
@@ -1032,17 +1029,17 @@ void Tab1Panel::Updatehp(wxCommandEvent& event) {
     weapondamage = *std::max_element(weapondamageally, weapondamageally + 6);
 
     for (int i = 0; i < 3; ++i) {
-		armorblockTextBoxes[i]->GetValue().ToInt(&armor); // é˜²å…·ã®é˜²è­·ç‚¹ã‚’å–å¾—
+		armorblockTextBoxes[i]->GetValue().ToInt(&armor); // –h‹ï‚Ì–hŒì“_‚ğæ“¾
         tarmor += armor;
-        armorevadeTextBoxes[i]->GetValue().ToInt(&armorevade); // é˜²å…·ã®å›é¿ä¿®æ­£ã‚’å–å¾—
+        armorevadeTextBoxes[i]->GetValue().ToInt(&armorevade); // –h‹ï‚Ì‰ñ”ğC³‚ğæ“¾
 		tarmorevade += armorevade;
     }
 
-	std::string species = speciesTextBox->GetValue().ToStdString(); // ç¨®æ—åã‚’å–å¾—
-    if (species == "ãƒªãƒ«ãƒ‰ãƒ©ã‚±ãƒ³") {
+	std::string species = speciesTextBox->GetValue().ToStdString(); // í‘°–¼‚ğæ“¾
+    if (species == "ƒŠƒ‹ƒhƒ‰ƒPƒ“") {
         tarmor += 1;
-	} // ãƒªãƒ«ãƒ‰ãƒ©ã‚±ãƒ³ã®ç¨®æ—ç‰¹æ€§ã«ã‚ˆã‚Šé˜²è­·ç‚¹+1
-    else if (species == "ãƒ¬ãƒ—ãƒ©ã‚«ãƒ¼ãƒ³") {
+	} // ƒŠƒ‹ƒhƒ‰ƒPƒ“‚Ìí‘°“Á«‚É‚æ‚è–hŒì“_+1
+    else if (species == "ƒŒƒvƒ‰ƒJ[ƒ“") {
         acesTextBoxes[10]->Show();
         acesTextBoxes2[10]->Show();
         if (lv > 5) {
@@ -1054,99 +1051,99 @@ void Tab1Panel::Updatehp(wxCommandEvent& event) {
             acesTextBoxes2[11]->Hide();
         }
         this->Layout();
-    } // ãƒ¬ãƒ—ãƒ©ã‚«ãƒ¼ãƒ³ã®ç¨®æ—ç‰¹æ€§ã«ã‚ˆã‚Šlv6ã‹ã‚‰ãã®ä»–ã®éƒ¨ä½+1, lv11
+    } // ƒŒƒvƒ‰ƒJ[ƒ“‚Ìí‘°“Á«‚É‚æ‚èlv6‚©‚ç‚»‚Ì‘¼‚Ì•”ˆÊ+1, lv11
 
 
-    for (int i = 0; i < 8; ++i) { // å¸¸æ™‚ç‰¹æŠ€ã«ã‚ˆã‚‹èƒ½åŠ›å€¤ã®ä¿®æ­£
-        std::string talentName = talentTextBoxes[i]->GetValue().ToStdString(); // ç‰¹æŠ€åã‚’å–å¾—
-        if (talentName.empty()) continue; // æŠ€èƒ½åãŒç©ºã®å ´åˆã¯ã‚¹ã‚­ãƒƒãƒ—
+    for (int i = 0; i < 8; ++i) { // í“Á‹Z‚É‚æ‚é”\—Í’l‚ÌC³
+        std::string talentName = talentTextBoxes[i]->GetValue().ToStdString(); // “Á‹Z–¼‚ğæ“¾
+        if (talentName.empty()) continue; // ‹Z”\–¼‚ª‹ó‚Ìê‡‚ÍƒXƒLƒbƒv
 
-        else if (talentName.find("è¶³ã•ã°ã") != std::string::npos) {
-            restmoveTextBox->SetValue(wxString::Format("10")); // è¶³ã•ã°ããŒã‚ã‚‹å ´åˆ
+        else if (talentName.find("‘«‚³‚Î‚«") != std::string::npos) {
+            restmoveTextBox->SetValue(wxString::Format("10")); // ‘«‚³‚Î‚«‚ª‚ ‚éê‡
         }
-        else if (talentName.find("å›é¿è¡Œå‹•â… ") != std::string::npos) {
-            evade += 1; // å›é¿è¡Œå‹•â… ãŒã‚ã‚‹å ´åˆ
+        else if (talentName.find("‰ñ”ğs“®‡T") != std::string::npos) {
+            evade += 1; // ‰ñ”ğs“®‡T‚ª‚ ‚éê‡
         }
-        else if (talentName.find("å›é¿è¡Œå‹•â…¡") != std::string::npos) {
-            evade += 2; // å›é¿è¡Œå‹•â…¡ãŒã‚ã‚‹å ´åˆ 
+        else if (talentName.find("‰ñ”ğs“®‡U") != std::string::npos) {
+            evade += 2; // ‰ñ”ğs“®‡U‚ª‚ ‚éê‡ 
         }
-        else if (talentName.find("é ‘å¼·") != std::string::npos) {
-            vital += 15; // é ‘å¼·ãŒã‚ã‚‹å ´åˆ
+        else if (talentName.find("Šæ‹­") != std::string::npos) {
+            vital += 15; // Šæ‹­‚ª‚ ‚éê‡
         }
-        else if (talentName.find("è¶…é ‘å¼·") != std::string::npos) {
-            vital += 15; // è¶…é ‘å¼·ãŒã‚ã‚‹å ´åˆ
+        else if (talentName.find("’´Šæ‹­") != std::string::npos) {
+            vital += 15; // ’´Šæ‹­‚ª‚ ‚éê‡
         }
-        else if (talentName.find("æ­¦å™¨ç¿’ç†ŸA") != std::string::npos) {
-            weapondamage += 1; // æ­¦å™¨ç¿’ç†ŸAãŒã‚ã‚‹å ´åˆ
+        else if (talentName.find("•ŠíKnA") != std::string::npos) {
+            weapondamage += 1; // •ŠíKnA‚ª‚ ‚éê‡
         }
-        else if (talentName.find("æ­¦å™¨ç¿’ç†ŸS") != std::string::npos) {
-            weapondamage += 2; // æ­¦å™¨ç¿’ç†ŸSãŒã‚ã‚‹å ´åˆ
+        else if (talentName.find("•ŠíKnS") != std::string::npos) {
+            weapondamage += 2; // •ŠíKnS‚ª‚ ‚éê‡
         }
-        else if (talentName.find("é˜²å…·ç¿’ç†ŸA") != std::string::npos) {
-            tarmor += 1; // é˜²å…·ç¿’ç†ŸAãŒã‚ã‚‹å ´åˆ
+        else if (talentName.find("–h‹ïKnA") != std::string::npos) {
+            tarmor += 1; // –h‹ïKnA‚ª‚ ‚éê‡
         }
-        else if (talentName.find("é˜²å…·ç¿’ç†ŸS") != std::string::npos) {
-            tarmor += 2; // é˜²å…·ç¿’ç†ŸSãŒã‚ã‚‹å ´åˆ
+        else if (talentName.find("–h‹ïKnS") != std::string::npos) {
+            tarmor += 2; // –h‹ïKnS‚ª‚ ‚éê‡
         }
-        else if (talentName.find("é­”åŠ›å¼·åŒ–â… ") != std::string::npos) {
-            bonus[4] += 1; // é­”åŠ›å¼·åŒ–â… ãŒã‚ã‚‹å ´åˆ
+        else if (talentName.find("–‚—Í‹­‰»‡T") != std::string::npos) {
+            bonus[4] += 1; // –‚—Í‹­‰»‡T‚ª‚ ‚éê‡
         }
-        else if (talentName.find("é­”åŠ›å¼·åŒ–â…¡") != std::string::npos) {
-            bonus[4] += 2; // é­”åŠ›å¼·åŒ–â…¡ãŒã‚ã‚‹å ´åˆ
+        else if (talentName.find("–‚—Í‹­‰»‡U") != std::string::npos) {
+            bonus[4] += 2; // –‚—Í‹­‰»‡U‚ª‚ ‚éê‡
         }
-        else if (talentName.find("å‘½ä¸­å¼·åŒ–â… ") != std::string::npos) {
-            weaponhit += 1; // å‘½ä¸­å¼·åŒ–â… ãŒã‚ã‚‹å ´åˆ
+        else if (talentName.find("–½’†‹­‰»‡T") != std::string::npos) {
+            weaponhit += 1; // –½’†‹­‰»‡T‚ª‚ ‚éê‡
         }
-        else if (talentName.find("å‘½ä¸­å¼·åŒ–â…¡") != std::string::npos) {
-            weaponhit += 2; // å‘½ä¸­å¼·åŒ–â…¡ãŒã‚ã‚‹å ´åˆ
+        else if (talentName.find("–½’†‹­‰»‡U") != std::string::npos) {
+            weaponhit += 2; // –½’†‹­‰»‡U‚ª‚ ‚éê‡
         }
-        else if (talentName.find("ã‚­ãƒ£ãƒ‘ã‚·ãƒ†ã‚£") != std::string::npos) {
-             magic+= 15; // ã‚­ãƒ£ãƒ‘ã‚·ãƒ†ã‚£ãŒã‚ã‚‹å ´åˆ
+        else if (talentName.find("ƒLƒƒƒpƒVƒeƒB") != std::string::npos) {
+             magic+= 15; // ƒLƒƒƒpƒVƒeƒB‚ª‚ ‚éê‡
         }
 
     }
     
-    std::string freetalentName = freetalentTextBox->GetValue().ToStdString(); // è‡ªå‹•å–å¾—ã®ç‰¹æŠ€åã‚’å–å¾—
-    if (freetalentName.find("ã‚¿ãƒ•ãƒã‚¹") != std::string::npos) {
-		vital += 15; // ã‚¿ãƒ•ãƒã‚¹ãŒã‚ã‚‹å ´åˆ
+    std::string freetalentName = freetalentTextBox->GetValue().ToStdString(); // ©“®æ“¾‚Ì“Á‹Z–¼‚ğæ“¾
+    if (freetalentName.find("ƒ^ƒtƒlƒX") != std::string::npos) {
+		vital += 15; // ƒ^ƒtƒlƒX‚ª‚ ‚éê‡
     }
 
-    // å†’é™ºè€…ãƒ¬ãƒ™ãƒ«ã§è¨ˆç®—ã§ãã‚‹é …ç›®
+    // –`Œ¯ÒƒŒƒxƒ‹‚ÅŒvZ‚Å‚«‚é€–Ú
     hpTextBoxes[0]->SetValue(wxString::Format("%ld", (3 * lv + vital))); // Hp
-    hpTextBoxes[2]->SetValue(wxString::Format("%ld", (lv + bonus[3]))); // ç”Ÿå‘½æŠµæŠ—åŠ›
-    hpTextBoxes[3]->SetValue(wxString::Format("%ld", (lv + bonus[5]))); // ç²¾ç¥æŠµæŠ—åŠ›
+    hpTextBoxes[2]->SetValue(wxString::Format("%ld", (lv + bonus[3]))); // ¶–½’ïR—Í
+    hpTextBoxes[3]->SetValue(wxString::Format("%ld", (lv + bonus[5]))); // ¸_’ïR—Í
 
-    // é­”æ³•æŠ€èƒ½ã‚’ä»•æ§˜ã™ã‚‹é …ç›®
-    if (species == "ã‚°ãƒ©ã‚¹ãƒ©ãƒ³ãƒŠãƒ¼") {
+    // –‚–@‹Z”\‚ğd—l‚·‚é€–Ú
+    if (species == "ƒOƒ‰ƒXƒ‰ƒ“ƒi[") {
         hpTextBoxes[1]->SetValue(wxString::Format("%ld", (0)));  
-    } // ã‚°ãƒ©ã‚¹ãƒ©ãƒ³ãƒŠãƒ¼ã¯MP0
+    } // ƒOƒ‰ƒXƒ‰ƒ“ƒi[‚ÍMP0
     else {
         hpTextBoxes[1]->SetValue(wxString::Format("%ld", (3 * mplv + magic)));  // Mp
     }
 
 
-    hitSpinCtrl[0]->SetValue(wxString::Format("%ld", (hit + weaponhit)));// å‘½ä¸­åŠ›
-    hitSpinCtrl[1]->SetValue(wxString::Format("%ld", (damage + weapondamage)));// è¿½åŠ D
-    hitSpinCtrl[2]->SetValue(wxString::Format("%ld", (evade + tarmorevade)));// å›é¿åŠ›
-	hitSpinCtrl[3]->SetValue(wxString::Format("%ld", (tarmor)));// é˜²è­·ç‚¹
+    hitSpinCtrl[0]->SetValue(wxString::Format("%ld", (hit + weaponhit)));// –½’†—Í
+    hitSpinCtrl[1]->SetValue(wxString::Format("%ld", (damage + weapondamage)));// ’Ç‰ÁD
+    hitSpinCtrl[2]->SetValue(wxString::Format("%ld", (evade + tarmorevade)));// ‰ñ”ğ—Í
+	hitSpinCtrl[3]->SetValue(wxString::Format("%ld", (tarmor)));// –hŒì“_
 
-    packSpinCtrl[0]->SetValue(wxString::Format("%ld", (tech)));// æŠ€å·§
-    packSpinCtrl[1]->SetValue(wxString::Format("%ld", (mov)));// é‹å‹•
-    packSpinCtrl[2]->SetValue(wxString::Format("%ld", (sage)));// è¦³å¯Ÿ
-    packSpinCtrl[3]->SetValue(wxString::Format("%ld", (sage)));// çŸ¥è­˜
-    packSpinCtrl[4]->SetValue(wxString::Format("%ld", (sage)));// é­”ç‰©çŸ¥è­˜
-    packSpinCtrl[5]->SetValue(wxString::Format("%ld", (mov)));// å…ˆåˆ¶åŠ›
-	packSpinCtrl[6]->SetValue(wxString::Format("%ld", (mlv + bonus[4])));// é­”åŠ›
+    packSpinCtrl[0]->SetValue(wxString::Format("%ld", (tech)));// ‹ZI
+    packSpinCtrl[1]->SetValue(wxString::Format("%ld", (mov)));// ‰^“®
+    packSpinCtrl[2]->SetValue(wxString::Format("%ld", (sage)));// ŠÏ@
+    packSpinCtrl[3]->SetValue(wxString::Format("%ld", (sage)));// ’m¯
+    packSpinCtrl[4]->SetValue(wxString::Format("%ld", (sage)));// –‚•¨’m¯
+    packSpinCtrl[5]->SetValue(wxString::Format("%ld", (mov)));// æ§—Í
+	packSpinCtrl[6]->SetValue(wxString::Format("%ld", (mlv + bonus[4])));// –‚—Í
     
     
-    moveTextBox->SetValue(wxString::Format("%ld", aglity)); // ç§»å‹•åŠ›
-    fullmoveTextBox->SetValue(wxString::Format("%ld", 3*aglity)); // å…¨åŠ›ç§»å‹•åŠ›
+    moveTextBox->SetValue(wxString::Format("%ld", aglity)); // ˆÚ“®—Í
+    fullmoveTextBox->SetValue(wxString::Format("%ld", 3*aglity)); // ‘S—ÍˆÚ“®—Í
 }
 
 
 
 void Tab1Panel::Updateexp(wxCommandEvent& event) {
-    long techlevelVal[6], tableVal[6]; // å–å¾—ã™ã‚‹å€¤ã‚’æ ¼ç´ã™ã‚‹é…åˆ—
+    long techlevelVal[6], tableVal[6]; // æ“¾‚·‚é’l‚ğŠi”[‚·‚é”z—ñ
 
     for (int i = 0; i < 6; ++i) {
         techlevelVal[i] = techlevelSpinCtrl[i]->GetValue();
@@ -1248,47 +1245,47 @@ void Tab1Panel::Updateexp(wxCommandEvent& event) {
         }
     }
 
-    // expè¨ˆç®—ã‚’å„expTextBoxã«ã‚»ãƒƒãƒˆ
+    // expŒvZ‚ğŠeexpTextBox‚ÉƒZƒbƒg
     for (int i = 0; i < 6; ++i) {
         expTextBoxes[i]->SetValue(wxString::Format("%ld", tableVal[i]));
     }
 }
 
 void Tab1Panel::Updateallexp(wxCommandEvent& event) {
-    long expVal[6]; // å–å¾—ã™ã‚‹å€¤ã‚’æ ¼ç´ã™ã‚‹é…åˆ—
+    long expVal[6]; // æ“¾‚·‚é’l‚ğŠi”[‚·‚é”z—ñ
     int allexp{};
     for (int i = 0; i < 6; ++i) {
         expTextBoxes[i]->GetValue().ToLong(&expVal[i]);
         allexp += expVal[i];
     }
     allexpTextBox->ChangeValue(wxString::Format("%ld", allexp));
-    //allexpTextBox->Update(); // UIã‚’æ›´æ–°ã™ã‚‹
+    //allexpTextBox->Update(); // UI‚ğXV‚·‚é
 
-    // æ‰‹å‹•ã§ã‚¤ãƒ™ãƒ³ãƒˆã‚’ç™ºç”Ÿã•ã›ã‚‹
+    // è“®‚ÅƒCƒxƒ“ƒg‚ğ”­¶‚³‚¹‚é
     wxCommandEvent compareevent(wxEVT_COMMAND_TEXT_UPDATED, allexpTextBox->GetId());
-    compareevent.SetEventObject(allexpTextBox);  // ã‚¤ãƒ™ãƒ³ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¨­å®š
-    allexpTextBox->GetEventHandler()->ProcessEvent(compareevent);  // ã‚¤ãƒ™ãƒ³ãƒˆã‚’å‡¦ç†
+    compareevent.SetEventObject(allexpTextBox);  // ƒCƒxƒ“ƒgƒIƒuƒWƒFƒNƒg‚ğİ’è
+    allexpTextBox->GetEventHandler()->ProcessEvent(compareevent);  // ƒCƒxƒ“ƒg‚ğˆ—
 }
 
-//ç´¯è¨ˆä½¿ç”¨çµŒé¨“å€¤ãŒå–å¾—çµŒé¨“å€¤ã‚’è¶Šã—ãŸå ´åˆã®è­¦å‘Š
+//—İŒvg—pŒoŒ±’l‚ªæ“¾ŒoŒ±’l‚ğ‰z‚µ‚½ê‡‚ÌŒx
 void Tab1Panel::OnCompareValues(wxCommandEvent& event) {
     long valueA = 0;
     long valueB = 0;
-    // Aâ†’å–å¾—çµŒé¨“å€¤, Bâ†’ç´¯è¨ˆä½¿ç”¨çµŒé¨“å€¤ã‚’å–å¾—
+    // A¨æ“¾ŒoŒ±’l, B¨—İŒvg—pŒoŒ±’l‚ğæ“¾
     valueA = getexpSpinCtrl->GetValue();
     allexpTextBox->GetValue().ToLong(&valueB);
 
-    // BãŒAã‚ˆã‚Šã‚‚å¤§ãã‘ã‚Œã°ã€è­¦å‘Šãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤º
+    // B‚ªA‚æ‚è‚à‘å‚«‚¯‚ê‚ÎAŒxƒƒbƒZ[ƒW‚ğ•\¦
     if (valueB > valueA) {
-        // StaticTextã‚’è¡¨ç¤º
+        // StaticText‚ğ•\¦
         warningText->Show();
     }
     else {
-        // AãŒBã‚ˆã‚Šå¤§ãã„å ´åˆã¯StaticTextã‚’éè¡¨ç¤º
+        // A‚ªB‚æ‚è‘å‚«‚¢ê‡‚ÍStaticText‚ğ”ñ•\¦
         warningText->Hide();
     }
 
-    // ãƒ‘ãƒãƒ«ã‚’å†æç”»ã—ã¦UIã‚’æ›´æ–°
+    // ƒpƒlƒ‹‚ğÄ•`‰æ‚µ‚ÄUI‚ğXV
     Layout();
 }
 
@@ -1296,111 +1293,111 @@ void Tab1Panel::OnCompareValues(wxCommandEvent& event) {
 
 
 void Tab1Panel::OnSpinCtrlChange(wxCommandEvent& event) {
-    Updateexp(event);   // 1ã¤ç›®ã®å‡¦ç†
-    Updatelevel(event); // 2ã¤ç›®ã®å‡¦ç†
-	Updatehp(event); // 3ã¤ç›®ã®å‡¦ç†
+    Updateexp(event);   // 1‚Â–Ú‚Ìˆ—
+    Updatelevel(event); // 2‚Â–Ú‚Ìˆ—
+	Updatehp(event); // 3‚Â–Ú‚Ìˆ—
 }
 
 void Tab1Panel::abilityChange(wxCommandEvent& event) {
-    Updatebonus(event);   // 1ã¤ç›®ã®å‡¦ç†
-    Updatehp(event); // 2ã¤ç›®ã®å‡¦ç†
+    Updatebonus(event);   // 1‚Â–Ú‚Ìˆ—
+    Updatehp(event); // 2‚Â–Ú‚Ìˆ—
 }
 
 
-// jsonãƒ•ã‚¡ã‚¤ãƒ«ã¸ã®æ›¸ãå‡ºã—å‡¦ç†
+// jsonƒtƒ@ƒCƒ‹‚Ö‚Ì‘‚«o‚µˆ—
 
 bool Tab1Panel::SaveToJson(const wxString& filename) {
     json root;
 
-    // æ–‡å­—åˆ—ãƒ‡ãƒ¼ã‚¿
-    root["name"] = std::string(nameTextBox->GetValue().ToUTF8().data()); // åå‰
-    root["PL"] = std::string(PLTextBox->GetValue().ToUTF8().data()); // PLå
-    root["species"] = std::string(speciesTextBox->GetValue().ToUTF8().data()); // ç¨®æ—
-    root["age"] = wxAtoi(ageTextBox->GetValue()); // å¹´é½¢
-    root["sex"] = std::string(sexTextBox->GetValue().ToUTF8().data()); // æ€§åˆ¥
-    root["spfeature"] = std::string(spfeatureTextBox->GetValue().ToUTF8().data()); // ç¨®æ—ç‰¹æ€§
-    root["impurity"] = wxAtoi(ImpurityTextBox->GetValue()); // ç©¢ã‚Œ
-    root["birth"] = std::string(birthTextBox->GetValue().ToUTF8().data()); // ç”Ÿã¾ã‚Œ
-    root["faith"] = std::string(faithTextBox->GetValue().ToUTF8().data()); // ä¿¡ä»°
-    root["rank"] = std::string(rankTextBox->GetValue().ToUTF8().data()); // å†’é™ºè€…ãƒ©ãƒ³ã‚¯
+    // •¶š—ñƒf[ƒ^
+    root["name"] = std::string(nameTextBox->GetValue().ToUTF8().data()); // –¼‘O
+    root["PL"] = std::string(PLTextBox->GetValue().ToUTF8().data()); // PL–¼
+    root["species"] = std::string(speciesTextBox->GetValue().ToUTF8().data()); // í‘°
+    root["age"] = wxAtoi(ageTextBox->GetValue()); // ”N—î
+    root["sex"] = std::string(sexTextBox->GetValue().ToUTF8().data()); // «•Ê
+    root["spfeature"] = std::string(spfeatureTextBox->GetValue().ToUTF8().data()); // í‘°“Á«
+    root["impurity"] = wxAtoi(ImpurityTextBox->GetValue()); // âq‚ê
+    root["birth"] = std::string(birthTextBox->GetValue().ToUTF8().data()); // ¶‚Ü‚ê
+    root["faith"] = std::string(faithTextBox->GetValue().ToUTF8().data()); // M‹Â
+    root["rank"] = std::string(rankTextBox->GetValue().ToUTF8().data()); // –`Œ¯Òƒ‰ƒ“ƒN
 
-    // å¿ƒã€æŠ€ã€ä½“
+    // SA‹ZA‘Ì
     for (int i = 0; i < 3; ++i) {
-        root["born"][i] = wxAtoi(bornTextBoxes[i]->GetValue());  // æ•°å€¤ã¨ã—ã¦ä¿å­˜
+        root["born"][i] = wxAtoi(bornTextBoxes[i]->GetValue());  // ”’l‚Æ‚µ‚Ä•Û‘¶
     }
 
-    // Aï½Fã€æˆé•·ã€å™¨ç”¨ï½ç²¾ç¥ã€å¢—å¼·ã€ãƒœãƒ¼ãƒŠã‚¹
+    // A`FA¬’·AŠí—p`¸_A‘‹­Aƒ{[ƒiƒX
     for (int i = 0; i < 6; ++i) {
-        root["ability"][i] = wxAtoi(abilityTextBoxes[i]->GetValue());  // æ•°å€¤ã¨ã—ã¦ä¿å­˜
+        root["ability"][i] = wxAtoi(abilityTextBoxes[i]->GetValue());  // ”’l‚Æ‚µ‚Ä•Û‘¶
         root["growth"][i] = growthSpinCtrl[i]->GetValue();
         root["attribute"][i] = wxAtoi(attributeTextBoxes[i]->GetValue());
         root["increase"][i] = increaseSpinCtrl[i]->GetValue();
         root["bonus"][i] = wxAtoi(bonusTextBoxes[i]->GetValue());
     }
 
-    // HPã€MPã€æŠµæŠ—åŠ›ã€å‘½ä¸­åŠ›ã€è¿½åŠ Dã€å›é¿åŠ›ã€é˜²è­·ç‚¹
+    // HPAMPA’ïR—ÍA–½’†—ÍA’Ç‰ÁDA‰ñ”ğ—ÍA–hŒì“_
     for (int i = 0; i < 4; ++i) {
-        root["hp"][i] = wxAtoi(hpTextBoxes[i]->GetValue());  // æ•°å€¤ã¨ã—ã¦ä¿å­˜
+        root["hp"][i] = wxAtoi(hpTextBoxes[i]->GetValue());  // ”’l‚Æ‚µ‚Ä•Û‘¶
         root["hit"][i] = hitSpinCtrl[i]->GetValue();
     }
 
-    // åˆ¤å®šãƒ‘ãƒƒã‚±ãƒ¼ã‚¸
+    // ”»’èƒpƒbƒP[ƒW
     for (int i = 0; i < 7; ++i) {
         root["pack"][i] = packSpinCtrl[i]->GetValue();
     }
 
-    root["move"] = wxAtoi(moveTextBox->GetValue()); // ç§»å‹•åŠ›
-    root["fullmove"] = wxAtoi(fullmoveTextBox->GetValue()); // å…¨åŠ›ç§»å‹•
-    root["restmove"] = wxAtoi(restmoveTextBox->GetValue()); // åˆ¶é™ç§»å‹•
+    root["move"] = wxAtoi(moveTextBox->GetValue()); // ˆÚ“®—Í
+    root["fullmove"] = wxAtoi(fullmoveTextBox->GetValue()); // ‘S—ÍˆÚ“®
+    root["restmove"] = wxAtoi(restmoveTextBox->GetValue()); // §ŒÀˆÚ“®
 
-    // æŠ€èƒ½ã€æŠ€èƒ½ãƒ†ãƒ¼ãƒ–ãƒ«A,Bã€æŠ€èƒ½ãƒ¬ãƒ™ãƒ«ã€ä½¿ç”¨çµŒé¨“å€¤
+    // ‹Z”\A‹Z”\ƒe[ƒuƒ‹A,BA‹Z”\ƒŒƒxƒ‹Ag—pŒoŒ±’l
     for (int i = 0; i < 6; ++i) {
         root["tech"][i] = std::string(techTextBoxes[i]->GetValue().ToUTF8().data());
-        root["table"][i] = tableradioA[i]->GetValue() ? "A" : "B"; // trueãªã‚‰Aã€falseãªã‚‰Bã¨ã„ã†æ–‡å­—ã§ä¿å­˜
+        root["table"][i] = tableradioA[i]->GetValue() ? "A" : "B"; // true‚È‚çAAfalse‚È‚çB‚Æ‚¢‚¤•¶š‚Å•Û‘¶
         root["techlevel"][i] = techlevelSpinCtrl[i]->GetValue();
         root["exp"][i] = wxAtoi(expTextBoxes[i]->GetValue());
     }
 
-    root["level"] = wxAtoi(levelTextBox->GetValue()); // å†’é™ºè€…ãƒ¬ãƒ™ãƒ«
-    root["getexp"] = getexpSpinCtrl->GetValue(); // å–å¾—çµŒé¨“å€¤
-    root["allexp"] = wxAtoi(allexpTextBox->GetValue()); // åˆè¨ˆä½¿ç”¨çµŒé¨“å€¤
+    root["level"] = wxAtoi(levelTextBox->GetValue()); // –`Œ¯ÒƒŒƒxƒ‹
+    root["getexp"] = getexpSpinCtrl->GetValue(); // æ“¾ŒoŒ±’l
+    root["allexp"] = wxAtoi(allexpTextBox->GetValue()); // ‡Œvg—pŒoŒ±’l
 
-    // æˆ¦é—˜ç‰¹æŠ€ã€åŠ¹æœæ¦‚è¦
+    // í“¬“Á‹ZAŒø‰ÊŠT—v
     for (int i = 0; i < 8; ++i) {
         root["talent"][i] = std::string(talentTextBoxes[i]->GetValue().ToUTF8().data());
         root["abst"][i] = std::string(abstTextBoxes[i]->GetValue().ToUTF8().data());
     }
 
-    root["freetalent"] = std::string(freetalentTextBox->GetValue().ToUTF8().data()); // è‡ªå‹•ç¿’å¾—ç‰¹æŠ€
-    root["freeabst"] = std::string(freeabstTextBox->GetValue().ToUTF8().data()); // è‡ªå‹•ç¿’å¾—åŠ¹æœ
-    root["magictalent"] = std::string(magictalentTextBox->GetValue().ToUTF8().data()); // ã‚ˆãä½¿ã†é­”æ³•ãªã©
-    root["magicabst"] = std::string(magicabstTextBox->GetValue().ToUTF8().data()); // MPã€åŠ¹æœæ¦‚è¦
-    root["battle"] = std::string(battleTextBox->GetValue().ToUTF8().data()); // æˆ¦é—˜åŠ¹æœãƒ¡ãƒ¢
-    root["other"] = std::string(otherTextBox->GetValue().ToUTF8().data()); // çµŒæ­´ã€ãã®ä»–ãƒ¡ãƒ¢
+    root["freetalent"] = std::string(freetalentTextBox->GetValue().ToUTF8().data()); // ©“®K“¾“Á‹Z
+    root["freeabst"] = std::string(freeabstTextBox->GetValue().ToUTF8().data()); // ©“®K“¾Œø‰Ê
+    root["magictalent"] = std::string(magictalentTextBox->GetValue().ToUTF8().data()); // ‚æ‚­g‚¤–‚–@‚È‚Ç
+    root["magicabst"] = std::string(magicabstTextBox->GetValue().ToUTF8().data()); // MPAŒø‰ÊŠT—v
+    root["battle"] = std::string(battleTextBox->GetValue().ToUTF8().data()); // í“¬Œø‰Êƒƒ‚
+    root["other"] = std::string(otherTextBox->GetValue().ToUTF8().data()); // Œo—ğA‚»‚Ì‘¼ƒƒ‚
 
-    // ä½¿ç”¨è¨€èªã€ä¼šè©±ã€èª­æ–‡
+    // g—pŒ¾ŒêA‰ï˜bA“Ç•¶
     for (int i = 0; i < 10; ++i) {
         root["lang"][i] = std::string(langTextBoxes[i]->GetValue().ToUTF8().data());
-        root["speak"][i] = speakcheckBoxes[i]->GetValue();  // true ã¾ãŸã¯ false ã‚’ä¿å­˜
-        root["read"][i] = readcheckBoxes[i]->GetValue();    // true ã¾ãŸã¯ false ã‚’ä¿å­˜
+        root["speak"][i] = speakcheckBoxes[i]->GetValue();  // true ‚Ü‚½‚Í false ‚ğ•Û‘¶
+        root["read"][i] = readcheckBoxes[i]->GetValue();    // true ‚Ü‚½‚Í false ‚ğ•Û‘¶
     }
 
-    // æ­¦å™¨å
+    // •Ší–¼
     for (int i = 0; i < 3; ++i) {
-        root["weaponname"][i] = std::string(weaponnameTextBoxes[i]->GetValue().ToUTF8().data());  // æ•°å€¤ã¨ã—ã¦ä¿å­˜
+        root["weaponname"][i] = std::string(weaponnameTextBoxes[i]->GetValue().ToUTF8().data());  // ”’l‚Æ‚µ‚Ä•Û‘¶
     }
 
-    // ç”¨æ³•ã€å¿…ç­‹ã€å‘½ä¸­åŠ›ã€å¨åŠ›ã€Cå€¤ã€è¿½åŠ D
+    // —p–@A•K‹ØA–½’†—ÍAˆĞ—ÍAC’lA’Ç‰ÁD
     for (int i = 0; i < 6; ++i) {
         root["weaponuse"][i] = std::string(weaponuseTextBoxes[i]->GetValue().ToUTF8().data());
-        root["weaponstr"][i] = wxAtoi(weaponstrTextBoxes[i]->GetValue());// æ•°å€¤ã¨ã—ã¦ä¿å­˜
+        root["weaponstr"][i] = wxAtoi(weaponstrTextBoxes[i]->GetValue());// ”’l‚Æ‚µ‚Ä•Û‘¶
         root["weaponhit"][i] = wxAtoi(weaponhitTextBoxes[i]->GetValue());
         root["weapondm"][i] = wxAtoi(weapondmTextBoxes[i]->GetValue());
         root["weaponcrit"][i] = wxAtoi(weaponcritTextBoxes[i]->GetValue());
         root["weaponadd"][i] = wxAtoi(weaponaddTextBoxes[i]->GetValue());
     }
 
-    // å‚™è€ƒã€é˜²å…·åã€å¿…ç­‹ã€å›é¿ä¿®æ­£ã€é˜²è­·ç‚¹ã€å‚™è€ƒ
+    // ”õlA–h‹ï–¼A•K‹ØA‰ñ”ğC³A–hŒì“_A”õl
     for (int i = 0; i < 3; ++i) {
         root["weapomother"][i] = std::string(weaponotherTextBoxes[i]->GetValue().ToUTF8().data());
         root["armorname"][i] = std::string(armornameTextBoxes[i]->GetValue().ToUTF8().data());
@@ -1410,17 +1407,17 @@ bool Tab1Panel::SaveToJson(const wxString& filename) {
         root["armorother"][i] = std::string(armorotherTextBoxes[i]->GetValue().ToUTF8().data());
     }
 
-    root["poket"] = poketSpinCtrl->GetValue(); // æ‰€æŒé‡‘
-    root["debt"] = wxAtoi(debtTextBox->GetValue()); // é é‡‘/å€Ÿé‡‘
-    root["glory"] = glorySpinCtrl->GetValue(); // åèª‰ç‚¹
+    root["poket"] = poketSpinCtrl->GetValue(); // Š‹à
+    root["debt"] = wxAtoi(debtTextBox->GetValue()); // —a‹à/Ø‹à
+    root["glory"] = glorySpinCtrl->GetValue(); // –¼—_“_
 
     for (int i = 0; i < 12; ++i) {
-        root["aces"][i] = std::string(acesTextBoxes[i]->GetValue().ToUTF8().data()); // è£…é£¾å“
-        root["aces2"][i] = std::string(acesTextBoxes2[i]->GetValue().ToUTF8().data()); // è£…é£¾å“åŠ¹æœ
+        root["aces"][i] = std::string(acesTextBoxes[i]->GetValue().ToUTF8().data()); // ‘•ü•i
+        root["aces2"][i] = std::string(acesTextBoxes2[i]->GetValue().ToUTF8().data()); // ‘•ü•iŒø‰Ê
     }
-    root["bag"] = std::string(bagTextBox->GetValue().ToUTF8().data()); // æ‰€æŒã‚¢ã‚¤ãƒ†ãƒ ãªã©
+    root["bag"] = std::string(bagTextBox->GetValue().ToUTF8().data()); // ŠƒAƒCƒeƒ€‚È‚Ç
 
-    // JSONãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›
+    // JSONƒtƒ@ƒCƒ‹o—Í
     std::ofstream file(filename.ToStdString());
     if (!file) {
         wxLogError("Failed to open file: %s", filename);
@@ -1438,19 +1435,19 @@ bool Tab1Panel::SaveToJson(const wxString& filename) {
 }
 
 
-//// jsonãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ã®å‡¦ç†
+//// jsonƒtƒ@ƒCƒ‹“Ç‚İ‚İ‚Ìˆ—
 bool Tab1Panel::LoadFromJson(const wxString& filename) {
-    // JSONãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚€
-    std::ifstream file(filename.ToStdString()); // ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³
+    // JSONƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ş
+    std::ifstream file(filename.ToStdString()); // ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“
     if (!file.is_open()) {
-        return false; // ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‹ã‘ãªã„å ´åˆ
+        return false; // ƒtƒ@ƒCƒ‹‚ªŠJ‚¯‚È‚¢ê‡
     }
 
     nlohmann::json root;
-    file >> root; // JSONãƒ‘ãƒ¼ã‚¹
+    file >> root; // JSONƒp[ƒX
     file.close();
 
-    // æ–‡å­—åˆ—ãƒ‡ãƒ¼ã‚¿ã®ã‚»ãƒƒãƒˆ
+    // •¶š—ñƒf[ƒ^‚ÌƒZƒbƒg
     nameTextBox->SetValue(wxString::FromUTF8(root["name"].get<std::string>().c_str()));
     PLTextBox->SetValue(wxString::FromUTF8(root["PL"].get<std::string>().c_str()));
     speciesTextBox->SetValue(wxString::FromUTF8(root["species"].get<std::string>().c_str()));
@@ -1462,12 +1459,12 @@ bool Tab1Panel::LoadFromJson(const wxString& filename) {
     faithTextBox->SetValue(wxString::FromUTF8(root["faith"].get<std::string>().c_str()));
     rankTextBox->SetValue(wxString::FromUTF8(root["rank"].get<std::string>().c_str()));
 
-    // born[3] ã®ã‚»ãƒƒãƒˆï¼ˆå¿ƒã€æŠ€ã€ä½“ï¼‰
+    // born[3] ‚ÌƒZƒbƒgiSA‹ZA‘Ìj
     for (int i = 0; i < 3; ++i) {
         bornTextBoxes[i]->SetValue(wxString::Format(wxT("%d"), root["born"][i].get<int>()));
     }
 
-    // abilityã€growthã€attributeã€increaseã€bonus ã®ã‚»ãƒƒãƒˆ
+    // abilityAgrowthAattributeAincreaseAbonus ‚ÌƒZƒbƒg
     for (int i = 0; i < 6; ++i) {
         abilityTextBoxes[i]->SetValue(wxString::Format(wxT("%d"), root["ability"][i].get<int>()));
         growthSpinCtrl[i]->SetValue(root["growth"][i].get<int>());
@@ -1476,18 +1473,18 @@ bool Tab1Panel::LoadFromJson(const wxString& filename) {
         bonusTextBoxes[i]->SetValue(wxString::Format(wxT("%d"), root["bonus"][i].get<int>()));
     }
 
-    // hpã€hit ã®ã‚»ãƒƒãƒˆ
+    // hpAhit ‚ÌƒZƒbƒg
     for (int i = 0; i < 4; ++i) {
         hpTextBoxes[i]->SetValue(wxString::Format(wxT("%d"), root["hp"][i].get<int>()));
         hitSpinCtrl[i]->SetValue(root["hit"][i].get<int>());
     }
 
-    // pack ã®ã‚»ãƒƒãƒˆ
+    // pack ‚ÌƒZƒbƒg
     for (int i = 0; i < 6; ++i) {
         packSpinCtrl[i]->SetValue(root["pack"][i].get<int>());
     }
 
-    // ãã®ä»–ã®ãƒ‡ãƒ¼ã‚¿ï¼ˆç§»å‹•åŠ›ã€çµŒé¨“å€¤ãªã©ï¼‰
+    // ‚»‚Ì‘¼‚Ìƒf[ƒ^iˆÚ“®—ÍAŒoŒ±’l‚È‚Çj
     moveTextBox->SetValue(wxString::Format(wxT("%d"), root["move"].get<int>()));
     fullmoveTextBox->SetValue(wxString::Format(wxT("%d"), root["fullmove"].get<int>()));
     restmoveTextBox->SetValue(wxString::Format(wxT("%d"), root["restmove"].get<int>()));
@@ -1496,7 +1493,7 @@ bool Tab1Panel::LoadFromJson(const wxString& filename) {
     getexpSpinCtrl->SetValue(root["getexp"].get<int>());
     allexpTextBox->SetValue(wxString::Format(wxT("%d"), root["allexp"].get<int>()));
 
-    // æŠ€èƒ½ãªã©
+    // ‹Z”\‚È‚Ç
     for (int i = 0; i < 6; ++i) {
         techTextBoxes[i]->SetValue(wxString::FromUTF8(root["tech"][i].get<std::string>().c_str()));
         tableradioA[i]->SetValue(root["table"][i].get<std::string>() == "A");
@@ -1505,7 +1502,7 @@ bool Tab1Panel::LoadFromJson(const wxString& filename) {
         expTextBoxes[i]->SetValue(wxString::Format(wxT("%d"), root["exp"][i].get<int>()));
     }
 
-    // æˆ¦é—˜ç‰¹æŠ€ã€åŠ¹æœæ¦‚è¦
+    // í“¬“Á‹ZAŒø‰ÊŠT—v
     for (int i = 0; i < 8; ++i) {
         talentTextBoxes[i]->SetValue(wxString::FromUTF8(root["talent"][i].get<std::string>().c_str()));
         abstTextBoxes[i]->SetValue(wxString::FromUTF8(root["abst"][i].get<std::string>().c_str()));
@@ -1518,19 +1515,19 @@ bool Tab1Panel::LoadFromJson(const wxString& filename) {
     battleTextBox->SetValue(wxString::FromUTF8(root["battle"].get<std::string>().c_str()));
     otherTextBox->SetValue(wxString::FromUTF8(root["other"].get<std::string>().c_str()));
 
-    // ä½¿ç”¨è¨€èªã€ä¼šè©±ã€èª­æ–‡
+    // g—pŒ¾ŒêA‰ï˜bA“Ç•¶
     for (int i = 0; i < 10; ++i) {
         langTextBoxes[i]->SetValue(wxString::FromUTF8(root["lang"][i].get<std::string>().c_str()));
         speakcheckBoxes[i]->SetValue(root["speak"][i].get<bool>());
         readcheckBoxes[i]->SetValue(root["read"][i].get<bool>());
     }
 
-    // æ­¦å™¨å
+    // •Ší–¼
     for (int i = 0; i < 3; ++i) {
         weaponnameTextBoxes[i]->SetValue(wxString::FromUTF8(root["weaponname"][i].get<std::string>().c_str()));
     }
 
-    // æ­¦å™¨ç”¨æ³•ã€å¿…ç­‹ãªã©
+    // •Ší—p–@A•K‹Ø‚È‚Ç
     for (int i = 0; i < 6; ++i) {
         weaponuseTextBoxes[i]->SetValue(wxString::FromUTF8(root["weaponuse"][i].get<std::string>().c_str()));
         weaponstrTextBoxes[i]->SetValue(wxString::Format(wxT("%d"), root["weaponstr"][i].get<int>()));
@@ -1540,7 +1537,7 @@ bool Tab1Panel::LoadFromJson(const wxString& filename) {
         weaponaddTextBoxes[i]->SetValue(wxString::Format(wxT("%d"), root["weaponadd"][i].get<int>()));
     }
 
-    // é˜²å…·å
+    // –h‹ï–¼
     for (int i = 0; i < 3; ++i) {
         weaponotherTextBoxes[i]->SetValue(wxString::FromUTF8(root["weapomother"][i].get<std::string>().c_str()));
         armornameTextBoxes[i]->SetValue(wxString::FromUTF8(root["armorname"][i].get<std::string>().c_str()));
@@ -1550,11 +1547,11 @@ bool Tab1Panel::LoadFromJson(const wxString& filename) {
         armorotherTextBoxes[i]->SetValue(wxString::FromUTF8(root["armorother"][i].get<std::string>().c_str()));
     }
 
-    // æ‰€æŒé‡‘ã€å€Ÿé‡‘ãªã©
+    // Š‹àAØ‹à‚È‚Ç
     poketSpinCtrl->SetValue(root["poket"].get<int>());
     debtTextBox->SetValue(wxString::Format(wxT("%d"), root["debt"].get<int>()));
     glorySpinCtrl->SetValue(root["glory"].get<int>());
-    // è£…é£¾å“ãªã©
+    // ‘•ü•i‚È‚Ç
     for (int i = 0; i < 12; ++i) {
         acesTextBoxes[i] -> SetValue(wxString::FromUTF8(root["aces"][i].get<std::string>().c_str()));
         acesTextBoxes2[i]->SetValue(wxString::FromUTF8(root["aces2"][i].get<std::string>().c_str()));

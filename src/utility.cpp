@@ -1,10 +1,6 @@
-#pragma execution_character_set("utf-8")
-
-
-// UTF-8 encoding: ã‚ã„ã†ãˆãŠ
 #include <random>
 
-// dæ“ä½œ: 1d, 2d, 1d+6 ãªã©ã‚’è¨ˆç®—ã™ã‚‹é–¢æ•°
+// d‘€ì: 1d, 2d, 1d+6 ‚È‚Ç‚ğŒvZ‚·‚éŠÖ”
 int RollDice(int times, int add = 0) {
     static std::random_device rd;
     static std::mt19937 gen(rd());

@@ -1,7 +1,3 @@
-#pragma execution_character_set("utf-8")
-
-
-// UTF-8 encoding: ã‚ã„ã†ãˆãŠ
 #include "Tab2.h"
 #include "Tab1.h" 
 #include "utility.h"
@@ -15,20 +11,20 @@
 #include <iomanip>
 
 
-// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 Tab2Panel::Tab2Panel(wxWindow* parent, wxNotebook* notebook, Tab1Panel* tab1Panel) : wxPanel(parent), notebook(notebook), tab1Panel(tab1Panel), resultsSizer(new wxBoxSizer(wxVERTICAL)) {
-    // ãƒ¡ã‚¤ãƒ³ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
+    // ƒƒCƒ“ƒŒƒCƒAƒEƒg
 
-    // ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãªã©ã§ä¸€åº¦ã ã‘å‘¼ã³å‡ºã™
-    //new wxLogWindow(this, "ãƒ‡ãƒãƒƒã‚°ãƒ­ã‚°", true);
+    // ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚È‚Ç‚Åˆê“x‚¾‚¯ŒÄ‚Ño‚·
+    //new wxLogWindow(this, "ƒfƒoƒbƒOƒƒO", true);
 
-    // ãƒ•ã‚©ãƒ³ãƒˆè¨­å®š
+    // ƒtƒHƒ“ƒgİ’è
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
 
-    // åå‰å…¥åŠ›ã‚»ã‚¯ã‚·ãƒ§ãƒ³
+    // –¼‘O“ü—ÍƒZƒNƒVƒ‡ƒ“
     wxBoxSizer* nameSizer = new wxBoxSizer(wxHORIZONTAL);
-    wxStaticText* nameLabel = new wxStaticText(this, wxID_ANY, "åå‰: ");
-    nameTextBox = new wxTextCtrl(this, wxID_ANY, "æ–°è¦ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼", wxDefaultPosition, wxSize(100, -1));
+    wxStaticText* nameLabel = new wxStaticText(this, wxID_ANY, "–¼‘O: ");
+    nameTextBox = new wxTextCtrl(this, wxID_ANY, "V‹KƒLƒƒƒ‰ƒNƒ^[", wxDefaultPosition, wxSize(100, -1));
     nameErrorText = new wxStaticText(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxALIGN_LEFT);
     nameErrorText->SetForegroundColour(*wxRED);
     nameErrorText->Hide();
@@ -39,30 +35,30 @@ Tab2Panel::Tab2Panel(wxWindow* parent, wxNotebook* notebook, Tab1Panel* tab1Pane
     mainSizer->Add(nameSizer, 0, wxEXPAND | wxALL, 10);
     mainSizer->Add(nameErrorText, 0, wxLEFT | wxRIGHT, 10);
 
-    // ç¨®æ—ãƒªã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚»ã‚¯ã‚·ãƒ§ãƒ³
+    // í‘°ƒŠƒXƒgƒ{ƒbƒNƒXƒZƒNƒVƒ‡ƒ“
     wxBoxSizer* speciesSizer = new wxBoxSizer(wxHORIZONTAL);
-    wxStaticText* speciesLabel = new wxStaticText(this, wxID_ANY, "ç¨®æ—: ");
+    wxStaticText* speciesLabel = new wxStaticText(this, wxID_ANY, "í‘°: ");
     wxArrayString speciesChoices;
-    speciesChoices.Add("é¸æŠã—ã¦ãã ã•ã„");
-    speciesChoices.Add("äººé–“");
-    speciesChoices.Add("ã‚¨ãƒ«ãƒ•");
-    speciesChoices.Add("ãƒ‰ãƒ¯ãƒ¼ãƒ•");
-    speciesChoices.Add("ã‚¿ãƒ“ãƒƒãƒˆ");
-    speciesChoices.Add("ãƒ«ãƒ¼ãƒ³ãƒ•ã‚©ãƒ¼ã‚¯");
-    speciesChoices.Add("ãƒŠã‚¤ãƒˆãƒ¡ã‚¢");
-    speciesChoices.Add("ãƒªã‚«ãƒ³ãƒˆ");
-    speciesChoices.Add("ãƒªãƒ«ãƒ‰ãƒ©ã‚±ãƒ³");
-    speciesChoices.Add("ã‚°ãƒ©ã‚¹ãƒ©ãƒ³ãƒŠãƒ¼");
-    speciesChoices.Add("ãƒ¡ãƒªã‚¢");
-    speciesChoices.Add("ãƒ†ã‚£ã‚¨ãƒ³ã‚¹");
-    speciesChoices.Add("ãƒ¬ãƒ—ãƒ©ã‚«ãƒ¼ãƒ³");
+    speciesChoices.Add("‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢");
+    speciesChoices.Add("lŠÔ");
+    speciesChoices.Add("ƒGƒ‹ƒt");
+    speciesChoices.Add("ƒhƒ[ƒt");
+    speciesChoices.Add("ƒ^ƒrƒbƒg");
+    speciesChoices.Add("ƒ‹[ƒ“ƒtƒH[ƒN");
+    speciesChoices.Add("ƒiƒCƒgƒƒA");
+    speciesChoices.Add("ƒŠƒJƒ“ƒg");
+    speciesChoices.Add("ƒŠƒ‹ƒhƒ‰ƒPƒ“");
+    speciesChoices.Add("ƒOƒ‰ƒXƒ‰ƒ“ƒi[");
+    speciesChoices.Add("ƒƒŠƒA");
+    speciesChoices.Add("ƒeƒBƒGƒ“ƒX");
+    speciesChoices.Add("ƒŒƒvƒ‰ƒJ[ƒ“");
 
     speciesListBox = new wxListBox(this, wxID_ANY, wxDefaultPosition, wxSize(200, 100), speciesChoices, wxLB_SINGLE);
     speciesListBox->Bind(wxEVT_LISTBOX, &Tab2Panel::OnSpeciesSelected, this);
     speciesListBox->SetSelection(0);
     
 
-    InitializeSpeciesData(); // ã‚°ãƒªãƒƒãƒ‰ç”Ÿæˆã«å¿…è¦ãªãƒ‡ãƒ¼ã‚¿ã‚’å…ˆã«åˆæœŸåŒ–
+    InitializeSpeciesData(); // ƒOƒŠƒbƒh¶¬‚É•K—v‚Èƒf[ƒ^‚ğæ‚É‰Šú‰»
 
 
     speciesSizer->Add(speciesLabel, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
@@ -70,19 +66,19 @@ Tab2Panel::Tab2Panel(wxWindow* parent, wxNotebook* notebook, Tab1Panel* tab1Pane
 
     mainSizer->Add(speciesSizer, 0, wxEXPAND | wxALL, 10);
 
-    // ç”Ÿã¾ã‚Œã‚»ã‚¯ã‚·ãƒ§ãƒ³
+    // ¶‚Ü‚êƒZƒNƒVƒ‡ƒ“
     wxFont font(15, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
     wxBoxSizer* birthSizer = new wxBoxSizer(wxHORIZONTAL);
-    wxStaticText* birthLabel = new wxStaticText(this, wxID_ANY, "ç”Ÿã¾ã‚Œ: ");
-    wxStaticText* skillLabel = new wxStaticText(this, wxID_ANY, "æŠ€: ");
+    wxStaticText* birthLabel = new wxStaticText(this, wxID_ANY, "¶‚Ü‚ê: ");
+    wxStaticText* skillLabel = new wxStaticText(this, wxID_ANY, "‹Z: ");
     skillSpinCtrl = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(50, -1), wxSP_ARROW_KEYS, 0, 99, 7);
-    skillSpinCtrl->SetFont(font);  // ãƒ•ã‚©ãƒ³ãƒˆé©ç”¨
-    wxStaticText* bodyLabel = new wxStaticText(this, wxID_ANY, "ä½“: ");
+    skillSpinCtrl->SetFont(font);  // ƒtƒHƒ“ƒg“K—p
+    wxStaticText* bodyLabel = new wxStaticText(this, wxID_ANY, "‘Ì: ");
     bodySpinCtrl = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(50, -1), wxSP_ARROW_KEYS, 0, 99, 7);
-    bodySpinCtrl->SetFont(font);  // ãƒ•ã‚©ãƒ³ãƒˆé©ç”¨
-    wxStaticText* mindLabel = new wxStaticText(this, wxID_ANY, "å¿ƒ: ");
+    bodySpinCtrl->SetFont(font);  // ƒtƒHƒ“ƒg“K—p
+    wxStaticText* mindLabel = new wxStaticText(this, wxID_ANY, "S: ");
     mindSpinCtrl = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(50, -1), wxSP_ARROW_KEYS, 0, 99, 7);
-    mindSpinCtrl->SetFont(font);  // ãƒ•ã‚©ãƒ³ãƒˆé©ç”¨
+    mindSpinCtrl->SetFont(font);  // ƒtƒHƒ“ƒg“K—p
 
     birthSizer->Add(birthLabel, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
     birthSizer->Add(skillLabel, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
@@ -94,8 +90,8 @@ Tab2Panel::Tab2Panel(wxWindow* parent, wxNotebook* notebook, Tab1Panel* tab1Pane
 
     mainSizer->Add(birthSizer, 0, wxEXPAND | wxALL, 10);
 
-    // ä½œæˆãƒœã‚¿ãƒ³
-    wxButton* createButton = new wxButton(this, wxID_ANY, "ä½œæˆ");
+    // ì¬ƒ{ƒ^ƒ“
+    wxButton* createButton = new wxButton(this, wxID_ANY, "ì¬");
     createButton->Bind(wxEVT_BUTTON, &Tab2Panel::OnCreateButtonClicked, this);
 
     mainSizer->Add(createButton, 0, wxALIGN_CENTER | wxALL, 10);
@@ -103,44 +99,44 @@ Tab2Panel::Tab2Panel(wxWindow* parent, wxNotebook* notebook, Tab1Panel* tab1Pane
 
 
 
-    // è¡¨ç¤ºå°‚ç”¨ã®ç¨®æ—è¡¨ã‚³ãƒ³ãƒ†ãƒŠ
-    wxStaticBoxSizer* gridBox = new wxStaticBoxSizer(wxVERTICAL, this, "ç¨®æ—ã®ç”Ÿã¾ã‚Œè¡¨");
+    // •\¦ê—p‚Ìí‘°•\ƒRƒ“ƒeƒi
+    wxStaticBoxSizer* gridBox = new wxStaticBoxSizer(wxVERTICAL, this, "í‘°‚Ì¶‚Ü‚ê•\");
 
     wxPanel* gridPanel = new wxPanel(this);
     wxBoxSizer* gridPanelSizer = new wxBoxSizer(wxVERTICAL);
 
-    // è¡¨ç¤ºç”¨ã®ã‚°ãƒªãƒƒãƒ‰ä½œæˆ
+    // •\¦—p‚ÌƒOƒŠƒbƒhì¬
     for (const auto& [name, data] : speciesData) {
         int numRows = static_cast<int>(data.size());
-        int numCols = 4; // ç”Ÿã¾ã‚Œã€æŠ€èƒ½ã€èƒ½åŠ›å€¤ã€çµŒé¨“ç‚¹
+        int numCols = 4; // ¶‚Ü‚êA‹Z”\A”\—Í’lAŒoŒ±“_
 
         wxGrid* grid = new wxGrid(gridPanel, wxID_ANY);
         grid->SetMinSize(wxSize(500, 300));
         grid->CreateGrid(numRows, numCols);
 
-        // ã‚«ãƒ©ãƒ ãƒ©ãƒ™ãƒ«
-        grid->SetColLabelValue(0, "ç”Ÿã¾ã‚Œ");
-        grid->SetColLabelValue(1, "åˆæœŸæ‰€æœ‰æŠ€èƒ½");
-        grid->SetColLabelValue(2, "åŸºç¤èƒ½åŠ›å€¤");
-        grid->SetColLabelValue(3, "åˆæœŸçµŒé¨“ç‚¹");
+        // ƒJƒ‰ƒ€ƒ‰ƒxƒ‹
+        grid->SetColLabelValue(0, "¶‚Ü‚ê");
+        grid->SetColLabelValue(1, "‰ŠúŠ—L‹Z”\");
+        grid->SetColLabelValue(2, "Šî‘b”\—Í’l");
+        grid->SetColLabelValue(3, "‰ŠúŒoŒ±“_");
 
-        grid->SetRowLabelSize(0); // è¡Œãƒ©ãƒ™ãƒ«éè¡¨ç¤º
+        grid->SetRowLabelSize(0); // sƒ‰ƒxƒ‹”ñ•\¦
 
-        // å„ã‚»ãƒ«ã«ãƒ‡ãƒ¼ã‚¿ã‚’ã‚»ãƒƒãƒˆ
+        // ŠeƒZƒ‹‚Éƒf[ƒ^‚ğƒZƒbƒg
         for (int row = 0; row < numRows; ++row) {
             for (int col = 0; col < numCols; ++col) {
                 if (col < static_cast<int>(data[row].size())) {
                     grid->SetCellValue(row, col, data[row][col]);
-                    grid->SetReadOnly(row, col);  // ç·¨é›†ä¸å¯ã«ã™ã‚‹
+                    grid->SetReadOnly(row, col);  // •ÒW•s‰Â‚É‚·‚é
                 }
             }
         }
 
-        // ã‚»ãƒ«ã®è‡ªå‹•ã‚µã‚¤ã‚ºèª¿æ•´
+        // ƒZƒ‹‚Ì©“®ƒTƒCƒY’²®
         grid->AutoSizeColumns();
-        // å¿…è¦ã«å¿œã˜ã¦è¡Œã®é«˜ã•ã‚‚è‡ªå‹•èª¿æ•´
+        // •K—v‚É‰‚¶‚Äs‚Ì‚‚³‚à©“®’²®
         grid->AutoSizeRows();
-        grid->Hide(); // åˆæœŸã¯éš ã™
+        grid->Hide(); // ‰Šú‚Í‰B‚·
         speciesTables[name] = grid;
         gridPanelSizer->Add(grid, 1, wxEXPAND | wxALL, 5);
     }
@@ -154,190 +150,190 @@ Tab2Panel::Tab2Panel(wxWindow* parent, wxNotebook* notebook, Tab1Panel* tab1Pane
 
 
 
-    // ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’é©ç”¨
+    // ƒŒƒCƒAƒEƒg‚ğ“K—p
     this->SetSizer(mainSizer);
 }
-// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+// ƒfƒXƒgƒ‰ƒNƒ^
 Tab2Panel::~Tab2Panel() {
-    // resultsSizer ã‚’è§£æ”¾
+    // resultsSizer ‚ğ‰ğ•ú
     delete resultsSizer;
 }
 
 
 void Tab2Panel::InitializeSpeciesData()
 {
-    // ä¾‹ï¼šã€Œäººé–“ã€ã®ãƒ‡ãƒ¼ã‚¿ã‚’å…¥ã‚Œã‚‹
-    speciesData["äººé–“"] = {
-        // ãƒ«ãƒ«ãƒ–1
-        {"é­”å‹•æ©Ÿå¸«", "ãƒã‚®ãƒ†ãƒƒã‚¯", "æŠ€8    ä½“4    å¿ƒ9", "2000ç‚¹"},
-        {"é­”è¡“å¸«", "ã‚½ãƒ¼ã‚µãƒ©ãƒ¼", "æŠ€6    ä½“5    å¿ƒ10", "2000ç‚¹"},
-        {"è»½æˆ¦å£«", "ã‚¹ã‚«ã‚¦ãƒˆ&ãƒ•ã‚§ãƒ³ã‚µãƒ¼", "æŠ€10    ä½“7    å¿ƒ4", "2000ç‚¹"},
-        {"ä¸€èˆ¬äºº", "ãªã—", "æŠ€7    ä½“7    å¿ƒ7", "3000ç‚¹"},
-        {"å‚­å…µ", "ãƒ•ã‚¡ã‚¤ã‚¿ãƒ¼orã‚°ãƒ©ãƒƒãƒ—ãƒ©ãƒ¼", "æŠ€8    ä½“10    å¿ƒ4", "2000ç‚¹"},
-        {"ç¥å®˜", "ãƒ—ãƒªãƒ¼ã‚¹ãƒˆ", "æŠ€4    ä½“8    å¿ƒ9", "2000ç‚¹"},
-        {"æ“éœŠè¡“å¸«", "ã‚³ãƒ³ã‚¸ãƒ£ãƒ©ãƒ¼", "æŠ€7    ä½“4    å¿ƒ10", "2000ç‚¹"},
-        {"å†’é™ºè€…", "ãªã—", "æŠ€2d    ä½“2d    å¿ƒ2d", "3000ç‚¹"},
-        //ãƒ«ãƒ«ãƒ–2
-        {"å°„æ‰‹", "ã‚·ãƒ¥ãƒ¼ã‚¿ãƒ¼", "æŠ€9    ä½“5    å¿ƒ7", "2500ç‚¹"},
-        {"å‰£å£«", "ãƒ•ã‚§ãƒ³ã‚µãƒ¼", "æŠ€9    ä½“6    å¿ƒ6", "2500ç‚¹"},
-        {"æ‹³é—˜å£«", "ã‚°ãƒ©ãƒƒãƒ—ãƒ©ãƒ¼", "æŠ€8    ä½“8    å¿ƒ5", "2000ç‚¹"},
-        {"æˆ¦å£«", "ãƒ•ã‚¡ã‚¤ã‚¿ãƒ¼", "æŠ€7    ä½“9    å¿ƒ5", "2000ç‚¹"},
-        {"ç·´ä½“å£«", "ã‚¨ãƒ³ãƒãƒ³ã‚µãƒ¼", "æŠ€6    ä½“8    å¿ƒ7", "2500ç‚¹"},
-        {"æ­Œäºº", "ãƒãƒ¼ãƒ‰", "æŠ€5    ä½“7    å¿ƒ9", "2500ç‚¹"},
-        {"å¦–ç²¾ä½¿ã„", "ãƒ•ã‚§ã‚¢ãƒªãƒ¼ãƒ†ã‚¤ãƒãƒ¼", "æŠ€5    ä½“6    å¿ƒ10", "2000ç‚¹"}
+    // —áFulŠÔv‚Ìƒf[ƒ^‚ğ“ü‚ê‚é
+    speciesData["lŠÔ"] = {
+        // ƒ‹ƒ‹ƒu1
+        {"–‚“®‹@t", "ƒ}ƒMƒeƒbƒN", "‹Z8    ‘Ì4    S9", "2000“_"},
+        {"–‚pt", "ƒ\[ƒTƒ‰[", "‹Z6    ‘Ì5    S10", "2000“_"},
+        {"Œyím", "ƒXƒJƒEƒg&ƒtƒFƒ“ƒT[", "‹Z10    ‘Ì7    S4", "2000“_"},
+        {"ˆê”Êl", "‚È‚µ", "‹Z7    ‘Ì7    S7", "3000“_"},
+        {"—b•º", "ƒtƒ@ƒCƒ^[orƒOƒ‰ƒbƒvƒ‰[", "‹Z8    ‘Ì10    S4", "2000“_"},
+        {"_Š¯", "ƒvƒŠ[ƒXƒg", "‹Z4    ‘Ì8    S9", "2000“_"},
+        {"‘€—ìpt", "ƒRƒ“ƒWƒƒƒ‰[", "‹Z7    ‘Ì4    S10", "2000“_"},
+        {"–`Œ¯Ò", "‚È‚µ", "‹Z2d    ‘Ì2d    S2d", "3000“_"},
+        //ƒ‹ƒ‹ƒu2
+        {"Ëè", "ƒVƒ…[ƒ^[", "‹Z9    ‘Ì5    S7", "2500“_"},
+        {"Œ•m", "ƒtƒFƒ“ƒT[", "‹Z9    ‘Ì6    S6", "2500“_"},
+        {"Œ“¬m", "ƒOƒ‰ƒbƒvƒ‰[", "‹Z8    ‘Ì8    S5", "2000“_"},
+        {"ím", "ƒtƒ@ƒCƒ^[", "‹Z7    ‘Ì9    S5", "2000“_"},
+        {"—û‘Ìm", "ƒGƒ“ƒnƒ“ƒT[", "‹Z6    ‘Ì8    S7", "2500“_"},
+        {"‰Ìl", "ƒo[ƒh", "‹Z5    ‘Ì7    S9", "2500“_"},
+        {"—d¸g‚¢", "ƒtƒFƒAƒŠ[ƒeƒCƒ}[", "‹Z5    ‘Ì6    S10", "2000“_"}
     };
-    // ã‚¨ãƒ«ãƒ•
-    speciesData["ã‚¨ãƒ«ãƒ•"] = {
-        {"å‰£å£«", "ãƒ•ã‚§ãƒ³ã‚µãƒ¼", "æŠ€12    ä½“5    å¿ƒ9", "2500ç‚¹"},
-        {"è–¬å¸«", "ã‚»ãƒ¼ã‚¸&ãƒ¬ãƒ³ã‚¸ãƒ£ãƒ¼", "æŠ€10    ä½“5    å¿ƒ11", "2000ç‚¹"},
-        {"ç¥å®˜", "ãƒ—ãƒªãƒ¼ã‚¹ãƒˆ", "æŠ€9    ä½“5    å¿ƒ12", "2000ç‚¹"},
-        {"æ“éœŠè¡“å¸«", "ã‚³ãƒ³ã‚¸ãƒ£ãƒ©ãƒ¼", "æŠ€9    ä½“4    å¿ƒ13", "2000ç‚¹"},
-        {"é­”è¡“å¸«", "ã‚½ãƒ¼ã‚µãƒ©ãƒ¼", "æŠ€10    ä½“3    å¿ƒ13", "2000ç‚¹"},
-        {"å°„æ‰‹", "ã‚·ãƒ¥ãƒ¼ã‚¿ãƒ¼", "æŠ€13    ä½“5    å¿ƒ8", "2500ç‚¹"},
+    // ƒGƒ‹ƒt
+    speciesData["ƒGƒ‹ƒt"] = {
+        {"Œ•m", "ƒtƒFƒ“ƒT[", "‹Z12    ‘Ì5    S9", "2500“_"},
+        {"–òt", "ƒZ[ƒW&ƒŒƒ“ƒWƒƒ[", "‹Z10    ‘Ì5    S11", "2000“_"},
+        {"_Š¯", "ƒvƒŠ[ƒXƒg", "‹Z9    ‘Ì5    S12", "2000“_"},
+        {"‘€—ìpt", "ƒRƒ“ƒWƒƒƒ‰[", "‹Z9    ‘Ì4    S13", "2000“_"},
+        {"–‚pt", "ƒ\[ƒTƒ‰[", "‹Z10    ‘Ì3    S13", "2000“_"},
+        {"Ëè", "ƒVƒ…[ƒ^[", "‹Z13    ‘Ì5    S8", "2500“_"},
 
-        {"ç·´ä½“å£«", "ã‚¨ãƒ³ãƒãƒ³ã‚µãƒ¼", "æŠ€11    ä½“5    å¿ƒ10", "2500ç‚¹"},
-        {"å¯†åµ", "ã‚¹ã‚«ã‚¦ãƒˆ", "æŠ€12    ä½“4    å¿ƒ10", "2500ç‚¹"},
-        {"å¦–ç²¾ä½¿ã„", "ãƒ•ã‚§ã‚¢ãƒªãƒ¼ãƒ†ã‚¤ãƒãƒ¼", "æŠ€10    ä½“2    å¿ƒ14", "2000ç‚¹"},
-        {"æ‹³é—˜å£«", "ã‚°ãƒ©ãƒƒãƒ—ãƒ©ãƒ¼", "æŠ€11    ä½“4    å¿ƒ11", "2000ç‚¹"},
-        {"åŸéŠè©©äºº", "ãƒãƒ¼ãƒ‰", "æŠ€9    ä½“3    å¿ƒ14", "2500ç‚¹"}
+        {"—û‘Ìm", "ƒGƒ“ƒnƒ“ƒT[", "‹Z11    ‘Ì5    S10", "2500“_"},
+        {"–§’ã", "ƒXƒJƒEƒg", "‹Z12    ‘Ì4    S10", "2500“_"},
+        {"—d¸g‚¢", "ƒtƒFƒAƒŠ[ƒeƒCƒ}[", "‹Z10    ‘Ì2    S14", "2000“_"},
+        {"Œ“¬m", "ƒOƒ‰ƒbƒvƒ‰[", "‹Z11    ‘Ì4    S11", "2000“_"},
+        {"‹á—Vl", "ƒo[ƒh", "‹Z9    ‘Ì3    S14", "2500“_"}
     };
-    // ãƒ‰ãƒ¯ãƒ¼ãƒ•
-    speciesData["ãƒ‰ãƒ¯ãƒ¼ãƒ•"] = {
-        {"å°„æ‰‹", "ã‚·ãƒ¥ã‚¿ãƒ¼", "æŠ€6    ä½“8    å¿ƒ6", "2500ç‚¹"},
-        {"æˆ¦å£«", "ãƒ•ã‚¡ã‚¤ã‚¿ãƒ¼", "æŠ€4    ä½“11    å¿ƒ5", "2000ç‚¹"},
-        {"æ‹³é—˜å£«", "ã‚°ãƒ©ãƒƒãƒ—ãƒ©ãƒ¼", "æŠ€5    ä½“10    å¿ƒ5", "2000ç‚¹"},
-        {"ç¥å®˜", "ãƒ—ãƒªãƒ¼ã‚¹ãƒˆ", "æŠ€4    ä½“7    å¿ƒ9", "2000ç‚¹"},
-        {"é­”å‹•æ©Ÿå¸«", "ãƒã‚®ãƒ†ãƒƒã‚¯", "æŠ€6    ä½“7    å¿ƒ7", "2000ç‚¹"},
+    // ƒhƒ[ƒt
+    speciesData["ƒhƒ[ƒt"] = {
+        {"Ëè", "ƒVƒ…ƒ^[", "‹Z6    ‘Ì8    S6", "2500“_"},
+        {"ím", "ƒtƒ@ƒCƒ^[", "‹Z4    ‘Ì11    S5", "2000“_"},
+        {"Œ“¬m", "ƒOƒ‰ƒbƒvƒ‰[", "‹Z5    ‘Ì10    S5", "2000“_"},
+        {"_Š¯", "ƒvƒŠ[ƒXƒg", "‹Z4    ‘Ì7    S9", "2000“_"},
+        {"–‚“®‹@t", "ƒ}ƒMƒeƒbƒN", "‹Z6    ‘Ì7    S7", "2000“_"},
 
-        {"å­¦è€…", "ã‚»ãƒ¼ã‚¸", "æŠ€3    ä½“8    å¿ƒ9", "2500ç‚¹"},
-        {"é‡ä¼", "ãƒ¬ãƒ³ã‚¸ãƒ£ãƒ¼", "æŠ€6    ä½“9    å¿ƒ5", "2500ç‚¹"},
-        {"ç·´ä½“å£«", "ã‚¨ãƒ³ãƒãƒ³ã‚µãƒ¼", "æŠ€5    ä½“9    å¿ƒ6", "2500ç‚¹"},
-        {"åŸéŠè©©äºº", "ãƒãƒ¼ãƒ‰", "æŠ€4    ä½“8    å¿ƒ8", "2500ç‚¹"},
-        {"å¦–ç²¾ä½¿ã„", "ãƒ•ã‚§ã‚¢ãƒªãƒ¼ãƒ†ã‚¤ãƒãƒ¼", "æŠ€5    ä½“6    å¿ƒ9", "2000ç‚¹"}
+        {"ŠwÒ", "ƒZ[ƒW", "‹Z3    ‘Ì8    S9", "2500“_"},
+        {"–ì•š", "ƒŒƒ“ƒWƒƒ[", "‹Z6    ‘Ì9    S5", "2500“_"},
+        {"—û‘Ìm", "ƒGƒ“ƒnƒ“ƒT[", "‹Z5    ‘Ì9    S6", "2500“_"},
+        {"‹á—Vl", "ƒo[ƒh", "‹Z4    ‘Ì8    S8", "2500“_"},
+        {"—d¸g‚¢", "ƒtƒFƒAƒŠ[ƒeƒCƒ}[", "‹Z5    ‘Ì6    S9", "2000“_"}
     };
-    // ã‚¿ãƒ“ãƒƒãƒˆ
-    speciesData["ã‚¿ãƒ“ãƒƒãƒˆ"] = {
-        {"æ“éœŠè¡“å¸«", "ã‚³ãƒ³ã‚¸ãƒ£ãƒ©ãƒ¼", "æŠ€6    ä½“6    å¿ƒ10", "2000ç‚¹"},
-        {"é­”è¡“å¸«", "ã‚½ãƒ¼ã‚µãƒ©ãƒ¼", "æŠ€5    ä½“7    å¿ƒ10", "2000ç‚¹"},
-        {"å­¦è€…", "ã‚»ãƒ¼ã‚¸", "æŠ€5    ä½“8    å¿ƒ9", "2500ç‚¹"},
-        {"é­”å‹•æ©Ÿå¸«", "ãƒã‚®ãƒ†ãƒƒã‚¯", "æŠ€8    ä½“5    å¿ƒ9", "2000ç‚¹"},
+    // ƒ^ƒrƒbƒg
+    speciesData["ƒ^ƒrƒbƒg"] = {
+        {"‘€—ìpt", "ƒRƒ“ƒWƒƒƒ‰[", "‹Z6    ‘Ì6    S10", "2000“_"},
+        {"–‚pt", "ƒ\[ƒTƒ‰[", "‹Z5    ‘Ì7    S10", "2000“_"},
+        {"ŠwÒ", "ƒZ[ƒW", "‹Z5    ‘Ì8    S9", "2500“_"},
+        {"–‚“®‹@t", "ƒ}ƒMƒeƒbƒN", "‹Z8    ‘Ì5    S9", "2000“_"},
 
-        {"é­”å°å¸«", "ã‚½ãƒ¼ã‚µãƒ©ãƒ¼&ã‚³ãƒ³ã‚¸ãƒ£ãƒ©ãƒ¼", "æŠ€5    ä½“6    å¿ƒ11", "1000ç‚¹"},
-        {"å¦–ç²¾ä½¿ã„", "ãƒ•ã‚§ã‚¢ãƒªãƒ¼ãƒ†ã‚¤ãƒãƒ¼", "æŠ€7    ä½“5    å¿ƒ10", "2000ç‚¹"},
-        {"åŸéŠè©©äºº", "ãƒãƒ¼ãƒ‰", "æŠ€6    ä½“7    å¿ƒ9", "2500ç‚¹"},
-        {"è–¬å¸«", "ãƒ¬ãƒ³ã‚¸ãƒ£ãƒ¼", "æŠ€7    ä½“6    å¿ƒ9", "2500ç‚¹"}
+        {"–‚“±t", "ƒ\[ƒTƒ‰[&ƒRƒ“ƒWƒƒƒ‰[", "‹Z5    ‘Ì6    S11", "1000“_"},
+        {"—d¸g‚¢", "ƒtƒFƒAƒŠ[ƒeƒCƒ}[", "‹Z7    ‘Ì5    S10", "2000“_"},
+        {"‹á—Vl", "ƒo[ƒh", "‹Z6    ‘Ì7    S9", "2500“_"},
+        {"–òt", "ƒŒƒ“ƒWƒƒ[", "‹Z7    ‘Ì6    S9", "2500“_"}
     };
-    // ãƒ«ãƒ¼ãƒ³ãƒ•ã‚©ãƒ¼ã‚¯
-    speciesData["ãƒ«ãƒ¼ãƒ³ãƒ•ã‚©ãƒ¼ã‚¯"] = {
-        {"å­¦è€…", "ã‚»ãƒ¼ã‚¸", "æŠ€8    ä½“10    å¿ƒ8", "2500ç‚¹"},
-        {"å°„æ‰‹", "ã‚·ãƒ¥ãƒ¼ã‚¿ãƒ¼", "æŠ€12    ä½“8    å¿ƒ6", "2500ç‚¹"},
-        {"æˆ¦å£«", "ãƒ•ã‚¡ã‚¤ã‚¿ãƒ¼orã‚°ãƒ©ãƒƒãƒ—ãƒ©ãƒ¼", "æŠ€9    ä½“12    å¿ƒ5", "2000ç‚¹"},
-        {"é­”å‹•æ©Ÿå¸«", "ãƒã‚®ãƒ†ãƒƒã‚¯", "æŠ€12    ä½“8    å¿ƒ6", "2000ç‚¹"},
-        {"é­”è¡“å¸«", "ã‚½ãƒ¼ã‚µãƒ©ãƒ¼", "æŠ€9    ä½“8    å¿ƒ9", "2000ç‚¹"},
+    // ƒ‹[ƒ“ƒtƒH[ƒN
+    speciesData["ƒ‹[ƒ“ƒtƒH[ƒN"] = {
+        {"ŠwÒ", "ƒZ[ƒW", "‹Z8    ‘Ì10    S8", "2500“_"},
+        {"Ëè", "ƒVƒ…[ƒ^[", "‹Z12    ‘Ì8    S6", "2500“_"},
+        {"ím", "ƒtƒ@ƒCƒ^[orƒOƒ‰ƒbƒvƒ‰[", "‹Z9    ‘Ì12    S5", "2000“_"},
+        {"–‚“®‹@t", "ƒ}ƒMƒeƒbƒN", "‹Z12    ‘Ì8    S6", "2000“_"},
+        {"–‚pt", "ƒ\[ƒTƒ‰[", "‹Z9    ‘Ì8    S9", "2000“_"},
 
-        {"å¯†åµ", "ã‚¹ã‚«ã‚¦ãƒˆ", "æŠ€12    ä½“6    å¿ƒ8", "2500ç‚¹"},
-        {"ç·´ä½“å£«", "ã‚¨ãƒ³ãƒãƒ³ã‚µãƒ¼", "æŠ€10    ä½“8    å¿ƒ8", "2500ç‚¹"},
-        {"è»½æˆ¦å£«", "ãƒ•ã‚§ãƒ³ã‚µãƒ¼", "æŠ€11    ä½“9    å¿ƒ6", "2500ç‚¹"},
-        {"åŸéŠè©©äºº", "ãƒãƒ¼ãƒ‰", "æŠ€8    ä½“9    å¿ƒ9", "2500ç‚¹"},
-        {"æ“éœŠè¡“å¸«", "ã‚³ãƒ³ã‚¸ãƒ£ãƒ©ãƒ¼", "æŠ€7    ä½“9    å¿ƒ10", "2000ç‚¹"}
+        {"–§’ã", "ƒXƒJƒEƒg", "‹Z12    ‘Ì6    S8", "2500“_"},
+        {"—û‘Ìm", "ƒGƒ“ƒnƒ“ƒT[", "‹Z10    ‘Ì8    S8", "2500“_"},
+        {"Œyím", "ƒtƒFƒ“ƒT[", "‹Z11    ‘Ì9    S6", "2500“_"},
+        {"‹á—Vl", "ƒo[ƒh", "‹Z8    ‘Ì9    S9", "2500“_"},
+        {"‘€—ìpt", "ƒRƒ“ƒWƒƒƒ‰[", "‹Z7    ‘Ì9    S10", "2000“_"}
     };
-    // ãƒŠã‚¤ãƒˆãƒ¡ã‚¢
-    speciesData["ãƒŠã‚¤ãƒˆãƒ¡ã‚¢"] = {
-        {"é­”è¡“å¸«", "ã‚½ãƒ¼ã‚µãƒ©ãƒ¼", "æŠ€5    ä½“13    å¿ƒ12", "2000ç‚¹"},
-        {"å‚­å…µ", "ãƒ•ã‚¡ã‚¤ã‚¿ãƒ¼orã‚°ãƒ©ãƒƒãƒ—ãƒ©ãƒ¼", "æŠ€7    ä½“15    å¿ƒ8", "2000ç‚¹"},
-        {"è»½æˆ¦å£«", "ãƒ•ã‚§ãƒ³ã‚µãƒ¼&ã‚¹ã‚«ã‚¦ãƒˆ", "æŠ€11    ä½“13    å¿ƒ6", "2000ç‚¹"},
-        {"ç¥å®˜", "ãƒ—ãƒªãƒ¼ã‚¹ãƒˆ", "æŠ€6    ä½“14    å¿ƒ10", "2000ç‚¹"},
-        {"é­”å‹•æ©Ÿå¸«", "ãƒã‚®ãƒ†ãƒƒã‚¯", "æŠ€9    ä½“9    å¿ƒ12", "2000ç‚¹"},
+    // ƒiƒCƒgƒƒA
+    speciesData["ƒiƒCƒgƒƒA"] = {
+        {"–‚pt", "ƒ\[ƒTƒ‰[", "‹Z5    ‘Ì13    S12", "2000“_"},
+        {"—b•º", "ƒtƒ@ƒCƒ^[orƒOƒ‰ƒbƒvƒ‰[", "‹Z7    ‘Ì15    S8", "2000“_"},
+        {"Œyím", "ƒtƒFƒ“ƒT[&ƒXƒJƒEƒg", "‹Z11    ‘Ì13    S6", "2000“_"},
+        {"_Š¯", "ƒvƒŠ[ƒXƒg", "‹Z6    ‘Ì14    S10", "2000“_"},
+        {"–‚“®‹@t", "ƒ}ƒMƒeƒbƒN", "‹Z9    ‘Ì9    S12", "2000“_"},
 
-        {"åŸéŠè©©äºº", "ãƒãƒ¼ãƒ‰", "æŠ€8    ä½“13    å¿ƒ9", "2500ç‚¹"},
-        {"ç·´ä½“å£«", "ã‚¨ãƒ³ãƒãƒ³ã‚µãƒ¼", "æŠ€9    ä½“14    å¿ƒ7", "2500ç‚¹"},
-        {"å°„æ‰‹", "ã‚·ãƒ¥ãƒ¼ã‚¿ãƒ¼", "æŠ€10    ä½“10    å¿ƒ10", "2500ç‚¹"},
-        {"é‡ä¼", "ãƒ¬ãƒ³ã‚¸ãƒ£ãƒ¼", "æŠ€9    ä½“12    å¿ƒ9", "2500ç‚¹"},
-        {"æ“éœŠè¡“å¸«", "ã‚³ãƒ³ã‚¸ãƒ£ãƒ©ãƒ¼", "æŠ€6    ä½“11    å¿ƒ13", "2000ç‚¹"}
+        {"‹á—Vl", "ƒo[ƒh", "‹Z8    ‘Ì13    S9", "2500“_"},
+        {"—û‘Ìm", "ƒGƒ“ƒnƒ“ƒT[", "‹Z9    ‘Ì14    S7", "2500“_"},
+        {"Ëè", "ƒVƒ…[ƒ^[", "‹Z10    ‘Ì10    S10", "2500“_"},
+        {"–ì•š", "ƒŒƒ“ƒWƒƒ[", "‹Z9    ‘Ì12    S9", "2500“_"},
+        {"‘€—ìpt", "ƒRƒ“ƒWƒƒƒ‰[", "‹Z6    ‘Ì11    S13", "2000“_"}
     };
-    // ãƒªã‚«ãƒ³ãƒˆ
-    speciesData["ãƒªã‚«ãƒ³ãƒˆ"] = {
-        {"å¯†åµ", "ã‚¹ã‚«ã‚¦ãƒˆ", "æŠ€13    ä½“5    å¿ƒ7", "2500ç‚¹"},
-        {"æˆ¦å£«", "ãƒ•ã‚¡ã‚¤ã‚¿ãƒ¼", "æŠ€10    ä½“9    å¿ƒ6", "2000ç‚¹"},
-        {"æ‹³é—˜å£«", "ã‚°ãƒ©ãƒƒãƒ—ãƒ©ãƒ¼", "æŠ€11    ä½“7    å¿ƒ7", "2000ç‚¹"},
-        {"è»½æˆ¦å£«", "ãƒ•ã‚§ãƒ³ã‚µãƒ¼", "æŠ€12    ä½“6    å¿ƒ7", "2500ç‚¹"},
-        {"é‡ä¼", "ãƒ¬ãƒ³ã‚¸ãƒ£ãƒ¼", "æŠ€9    ä½“8    å¿ƒ8", "2500ç‚¹"},
+    // ƒŠƒJƒ“ƒg
+    speciesData["ƒŠƒJƒ“ƒg"] = {
+        {"–§’ã", "ƒXƒJƒEƒg", "‹Z13    ‘Ì5    S7", "2500“_"},
+        {"ím", "ƒtƒ@ƒCƒ^[", "‹Z10    ‘Ì9    S6", "2000“_"},
+        {"Œ“¬m", "ƒOƒ‰ƒbƒvƒ‰[", "‹Z11    ‘Ì7    S7", "2000“_"},
+        {"Œyím", "ƒtƒFƒ“ƒT[", "‹Z12    ‘Ì6    S7", "2500“_"},
+        {"–ì•š", "ƒŒƒ“ƒWƒƒ[", "‹Z9    ‘Ì8    S8", "2500“_"},
 
-        {"åŸéŠè©©äºº", "ãƒãƒ¼ãƒ‰", "æŠ€8    ä½“9    å¿ƒ8", "2500ç‚¹"},
-        {"å°„æ‰‹", "ã‚·ãƒ¥ãƒ¼ã‚¿ãƒ¼", "æŠ€11    ä½“8    å¿ƒ6", "2500ç‚¹"},
-        {"ç·´ä½“å£«", "ã‚¨ãƒ³ãƒãƒ³ã‚µãƒ¼", "æŠ€10    ä½“8    å¿ƒ7", "2500ç‚¹"},
-        {"å­¦è€…", "ã‚»ãƒ¼ã‚¸", "æŠ€10    ä½“7    å¿ƒ8", "2500ç‚¹"},
-        {"ç¥å®˜", "ãƒ—ãƒªãƒ¼ã‚¹ãƒˆ", "æŠ€9    ä½“7    å¿ƒ9", "2000ç‚¹"}
+        {"‹á—Vl", "ƒo[ƒh", "‹Z8    ‘Ì9    S8", "2500“_"},
+        {"Ëè", "ƒVƒ…[ƒ^[", "‹Z11    ‘Ì8    S6", "2500“_"},
+        {"—û‘Ìm", "ƒGƒ“ƒnƒ“ƒT[", "‹Z10    ‘Ì8    S7", "2500“_"},
+        {"ŠwÒ", "ƒZ[ƒW", "‹Z10    ‘Ì7    S8", "2500“_"},
+        {"_Š¯", "ƒvƒŠ[ƒXƒg", "‹Z9    ‘Ì7    S9", "2000“_"}
     };
-    // ãƒªãƒ«ãƒ‰ãƒ©ã‚±ãƒ³
-    speciesData["ãƒªãƒ«ãƒ‰ãƒ©ã‚±ãƒ³"] = {
-        {"é‡ä¼", "ãƒ¬ãƒ³ã‚¸ãƒ£ãƒ¼", "æŠ€6    ä½“12    å¿ƒ7", "2500ç‚¹"},
-        {"æ‹³é—˜å£«", "ã‚°ãƒ©ãƒƒãƒ—ãƒ©ãƒ¼", "æŠ€6    ä½“13    å¿ƒ6", "2000ç‚¹"},
-        {"æˆ¦å£«", "ãƒ•ã‚¡ã‚¤ã‚¿ãƒ¼", "æŠ€5    ä½“14    å¿ƒ6", "2000ç‚¹"},
-        {"å•†äºº", "ã‚»ãƒ¼ã‚¸", "æŠ€5    ä½“11    å¿ƒ9", "2500ç‚¹"},
-        {"ç¥å®˜", "ãƒ—ãƒªãƒ¼ã‚¹ãƒˆ", "æŠ€4    ä½“13    å¿ƒ8", "2000ç‚¹"},
+    // ƒŠƒ‹ƒhƒ‰ƒPƒ“
+    speciesData["ƒŠƒ‹ƒhƒ‰ƒPƒ“"] = {
+        {"–ì•š", "ƒŒƒ“ƒWƒƒ[", "‹Z6    ‘Ì12    S7", "2500“_"},
+        {"Œ“¬m", "ƒOƒ‰ƒbƒvƒ‰[", "‹Z6    ‘Ì13    S6", "2000“_"},
+        {"ím", "ƒtƒ@ƒCƒ^[", "‹Z5    ‘Ì14    S6", "2000“_"},
+        {"¤l", "ƒZ[ƒW", "‹Z5    ‘Ì11    S9", "2500“_"},
+        {"_Š¯", "ƒvƒŠ[ƒXƒg", "‹Z4    ‘Ì13    S8", "2000“_"},
 
-        {"å°„æ‰‹", "ã‚·ãƒ¥ãƒ¼ã‚¿ãƒ¼", "æŠ€7    ä½“12    å¿ƒ6", "2500ç‚¹"},
-        {"è»½æˆ¦å£«", "ãƒ•ã‚§ãƒ³ã‚µãƒ¼", "æŠ€6    ä½“11    å¿ƒ8", "2500ç‚¹"},
-        {"ç·´ä½“å£«", "ã‚¨ãƒ³ãƒãƒ³ã‚µãƒ¼", "æŠ€5    ä½“12    å¿ƒ8", "2500ç‚¹"},
-        {"é­”æ³•ä½¿ã„", "ã‚½ãƒ¼ã‚µãƒ©ãƒ¼orã‚³ãƒ³ã‚¸ãƒ£ãƒ©ãƒ¼", "æŠ€4    ä½“12    å¿ƒ9", "2000ç‚¹"},
-        {"å¦–ç²¾ä½¿ã„", "ãƒ•ã‚§ã‚¢ãƒªãƒ¼ãƒ†ã‚¤ãƒãƒ¼", "æŠ€3    ä½“12    å¿ƒ10", "2000ç‚¹"}
+        {"Ëè", "ƒVƒ…[ƒ^[", "‹Z7    ‘Ì12    S6", "2500“_"},
+        {"Œyím", "ƒtƒFƒ“ƒT[", "‹Z6    ‘Ì11    S8", "2500“_"},
+        {"—û‘Ìm", "ƒGƒ“ƒnƒ“ƒT[", "‹Z5    ‘Ì12    S8", "2500“_"},
+        {"–‚–@g‚¢", "ƒ\[ƒTƒ‰[orƒRƒ“ƒWƒƒƒ‰[", "‹Z4    ‘Ì12    S9", "2000“_"},
+        {"—d¸g‚¢", "ƒtƒFƒAƒŠ[ƒeƒCƒ}[", "‹Z3    ‘Ì12    S10", "2000“_"}
     };
-    // ã‚°ãƒ©ã‚¹ãƒ©ãƒ³ãƒŠãƒ¼
-    speciesData["ã‚°ãƒ©ã‚¹ãƒ©ãƒ³ãƒŠãƒ¼"] = {
-        {"ç›—ã£äºº", "ã‚¹ã‚«ã‚¦ãƒˆ", "æŠ€13    ä½“0    å¿ƒ12", "2500ç‚¹"},
-        {"è»½æˆ¦å£«", "ãƒ•ã‚§ãƒ³ã‚µãƒ¼", "æŠ€14    ä½“1    å¿ƒ10", "2500ç‚¹"},
-        {"é‡ä¼", "ãƒ¬ãƒ³ã‚¸ãƒ£ãƒ¼", "æŠ€12    ä½“1    å¿ƒ12", "2500ç‚¹"},
-        {"å°„æ‰‹", "ã‚·ãƒ¥ãƒ¼ã‚¿ãƒ¼", "æŠ€14    ä½“0    å¿ƒ11", "2500ç‚¹"},
-        {"è¶£å‘³äºº", "ã‚»ãƒ¼ã‚¸orãƒãƒ¼ãƒ‰", "æŠ€12    ä½“0    å¿ƒ13", "2500ç‚¹"},
+    // ƒOƒ‰ƒXƒ‰ƒ“ƒi[
+    speciesData["ƒOƒ‰ƒXƒ‰ƒ“ƒi["] = {
+        {"“‚Ál", "ƒXƒJƒEƒg", "‹Z13    ‘Ì0    S12", "2500“_"},
+        {"Œyím", "ƒtƒFƒ“ƒT[", "‹Z14    ‘Ì1    S10", "2500“_"},
+        {"–ì•š", "ƒŒƒ“ƒWƒƒ[", "‹Z12    ‘Ì1    S12", "2500“_"},
+        {"Ëè", "ƒVƒ…[ƒ^[", "‹Z14    ‘Ì0    S11", "2500“_"},
+        {"ï–¡l", "ƒZ[ƒWorƒo[ƒh", "‹Z12    ‘Ì0    S13", "2500“_"},
 
-        {"å­¦è€…", "ã‚»ãƒ¼ã‚¸", "æŠ€11    ä½“1    å¿ƒ13", "2500ç‚¹"},
-        {"æ‹³é—˜å£«", "ã‚°ãƒ©ãƒƒãƒ—ãƒ©ãƒ¼", "æŠ€14    ä½“2    å¿ƒ9", "2000ç‚¹"},
-        {"æ—…äºº", "ãªã—", "æŠ€11    ä½“2    å¿ƒ12", "3000ç‚¹"},
-        {"å¯†åµ", "ãƒ•ã‚§ãƒ³ã‚µãƒ¼&ã‚¹ã‚«ã‚¦ãƒˆ", "æŠ€15    ä½“0    å¿ƒ10", "2000ç‚¹"},
-        {"åŸéŠè©©äºº", "ãƒãƒ¼ãƒ‰", "æŠ€12    ä½“0    å¿ƒ13", "2500ç‚¹"}
+        {"ŠwÒ", "ƒZ[ƒW", "‹Z11    ‘Ì1    S13", "2500“_"},
+        {"Œ“¬m", "ƒOƒ‰ƒbƒvƒ‰[", "‹Z14    ‘Ì2    S9", "2000“_"},
+        {"—·l", "‚È‚µ", "‹Z11    ‘Ì2    S12", "3000“_"},
+        {"–§’ã", "ƒtƒFƒ“ƒT[&ƒXƒJƒEƒg", "‹Z15    ‘Ì0    S10", "2000“_"},
+        {"‹á—Vl", "ƒo[ƒh", "‹Z12    ‘Ì0    S13", "2500“_"}
     };
-    // ãƒ¡ãƒªã‚¢
-    speciesData["ãƒ¡ãƒªã‚¢"] = {
-        {"é‡ä¼", "ãƒ¬ãƒ³ã‚¸ãƒ£ãƒ¼", "æŠ€9    ä½“8    å¿ƒ12", "2500ç‚¹"},
-        {"ç¥å®˜", "ãƒ—ãƒªãƒ¼ã‚¹ãƒˆ", "æŠ€8    ä½“8    å¿ƒ13", "2000ç‚¹"},
-        {"å¦–ç²¾ä½¿ã„", "ãƒ•ã‚§ã‚¢ãƒªãƒ¼ãƒ†ã‚¤ãƒãƒ¼", "æŠ€8    ä½“7    å¿ƒ14", "2000ç‚¹"},
-        {"é­”è¡“å¸«", "ã‚½ãƒ¼ã‚µãƒ©ãƒ¼", "æŠ€8    ä½“6    å¿ƒ15", "2000ç‚¹"},
-        {"æ“éœŠè¡“å¸«", "ã‚³ãƒ³ã‚¸ãƒ£ãƒ©ãƒ¼", "æŠ€7    ä½“6    å¿ƒ16", "2000ç‚¹"},
+    // ƒƒŠƒA
+    speciesData["ƒƒŠƒA"] = {
+        {"–ì•š", "ƒŒƒ“ƒWƒƒ[", "‹Z9    ‘Ì8    S12", "2500“_"},
+        {"_Š¯", "ƒvƒŠ[ƒXƒg", "‹Z8    ‘Ì8    S13", "2000“_"},
+        {"—d¸g‚¢", "ƒtƒFƒAƒŠ[ƒeƒCƒ}[", "‹Z8    ‘Ì7    S14", "2000“_"},
+        {"–‚pt", "ƒ\[ƒTƒ‰[", "‹Z8    ‘Ì6    S15", "2000“_"},
+        {"‘€—ìpt", "ƒRƒ“ƒWƒƒƒ‰[", "‹Z7    ‘Ì6    S16", "2000“_"},
 
-        {"å°„æ‰‹", "ã‚·ãƒ¥ãƒ¼ã‚¿ãƒ¼", "æŠ€10    ä½“7    å¿ƒ12", "2500ç‚¹"},
-        {"è»½æˆ¦å£«", "ãƒ•ã‚§ãƒ³ã‚µãƒ¼", "æŠ€10    ä½“8    å¿ƒ11", "2500ç‚¹"},
-        {"é­”å°å¸«", "ã‚½ãƒ¼ã‚µãƒ©ãƒ¼&ã‚³ãƒ³ã‚¸ãƒ£ãƒ©ãƒ¼", "æŠ€8    ä½“5    å¿ƒ16", "1000ç‚¹"},
-        {"åŸéŠè©©äºº", "ãƒãƒ¼ãƒ‰", "æŠ€7    ä½“7    å¿ƒ15", "2500ç‚¹"},
-        {"ç·´ä½“å£«", "ã‚¨ãƒ³ãƒãƒ³ã‚µãƒ¼", "æŠ€9    ä½“9    å¿ƒ11", "2500ç‚¹"}
+        {"Ëè", "ƒVƒ…[ƒ^[", "‹Z10    ‘Ì7    S12", "2500“_"},
+        {"Œyím", "ƒtƒFƒ“ƒT[", "‹Z10    ‘Ì8    S11", "2500“_"},
+        {"–‚“±t", "ƒ\[ƒTƒ‰[&ƒRƒ“ƒWƒƒƒ‰[", "‹Z8    ‘Ì5    S16", "1000“_"},
+        {"‹á—Vl", "ƒo[ƒh", "‹Z7    ‘Ì7    S15", "2500“_"},
+        {"—û‘Ìm", "ƒGƒ“ƒnƒ“ƒT[", "‹Z9    ‘Ì9    S11", "2500“_"}
     };
-    // ãƒ†ã‚£ã‚¨ãƒ³ã‚¹
-    speciesData["ãƒ†ã‚£ã‚¨ãƒ³ã‚¹"] = {
-        {"é¨æ‰‹", "ãƒ©ã‚¤ãƒ€ãƒ¼", "æŠ€10    ä½“11    å¿ƒ7", "2500ç‚¹"},
-        {"æ‹³é—˜å£«", "ã‚°ãƒ©ãƒƒãƒ—ãƒ©ãƒ¼", "æŠ€9    ä½“13    å¿ƒ6", "2000ç‚¹"},
-        {"æˆ¦å£«", "ãƒ•ã‚¡ã‚¤ã‚¿ãƒ¼", "æŠ€8    ä½“12    å¿ƒ8", "2000ç‚¹"},
-        {"ç¥å®˜", "ãƒ—ãƒªãƒ¼ã‚¹ãƒˆ", "æŠ€7    ä½“12    å¿ƒ9", "2000ç‚¹"},
-        {"é­”æ³•ä½¿ã„", "ã‚½ãƒ¼ã‚µãƒ©ãƒ¼", "æŠ€6    ä½“12    å¿ƒ10", "2000ç‚¹"},
+    // ƒeƒBƒGƒ“ƒX
+    speciesData["ƒeƒBƒGƒ“ƒX"] = {
+        {"‹Rè", "ƒ‰ƒCƒ_[", "‹Z10    ‘Ì11    S7", "2500“_"},
+        {"Œ“¬m", "ƒOƒ‰ƒbƒvƒ‰[", "‹Z9    ‘Ì13    S6", "2000“_"},
+        {"ím", "ƒtƒ@ƒCƒ^[", "‹Z8    ‘Ì12    S8", "2000“_"},
+        {"_Š¯", "ƒvƒŠ[ƒXƒg", "‹Z7    ‘Ì12    S9", "2000“_"},
+        {"–‚–@g‚¢", "ƒ\[ƒTƒ‰[", "‹Z6    ‘Ì12    S10", "2000“_"},
 
-        {"å°„æ‰‹", "ã‚·ãƒ¥ãƒ¼ã‚¿ãƒ¼", "æŠ€11    ä½“12    å¿ƒ5", "2500ç‚¹"},
-        {"å¯†åµ", "ã‚¹ã‚«ã‚¦ãƒˆ", "æŠ€10    ä½“10    å¿ƒ8", "2500ç‚¹"},
-        {"é­”æ³•æˆ¦å£«", "ãƒ•ã‚¡ã‚¤ã‚¿ãƒ¼&ã‚½ãƒ¼ã‚µãƒ©ãƒ¼", "æŠ€9    ä½“11    å¿ƒ8", "1000ç‚¹"},
-        {"å¦–ç²¾ä½¿ã„", "ãƒ•ã‚§ã‚¢ãƒªãƒ¼ãƒ†ã‚¤ãƒãƒ¼", "æŠ€7    ä½“11    å¿ƒ10", "2000ç‚¹"},
-        {"å­¦è€…", "ã‚»ãƒ¼ã‚¸", "æŠ€8    ä½“11    å¿ƒ9", "2500ç‚¹"}
+        {"Ëè", "ƒVƒ…[ƒ^[", "‹Z11    ‘Ì12    S5", "2500“_"},
+        {"–§’ã", "ƒXƒJƒEƒg", "‹Z10    ‘Ì10    S8", "2500“_"},
+        {"–‚–@ím", "ƒtƒ@ƒCƒ^[&ƒ\[ƒTƒ‰[", "‹Z9    ‘Ì11    S8", "1000“_"},
+        {"—d¸g‚¢", "ƒtƒFƒAƒŠ[ƒeƒCƒ}[", "‹Z7    ‘Ì11    S10", "2000“_"},
+        {"ŠwÒ", "ƒZ[ƒW", "‹Z8    ‘Ì11    S9", "2500“_"}
     };
-    // ãƒ¬ãƒ—ãƒ©ã‚«ãƒ¼ãƒ³
-    speciesData["ãƒ¬ãƒ—ãƒ©ã‚«ãƒ¼ãƒ³"] = {
-        {"è»½æˆ¦å£«", "ãƒ•ã‚§ãƒ³ã‚µãƒ¼", "æŠ€13    ä½“5    å¿ƒ5", "2500ç‚¹"},
-        {"å°„æ‰‹", "ã‚·ãƒ¥ãƒ¼ã‚¿ãƒ¼", "æŠ€12    ä½“6    å¿ƒ5", "2500ç‚¹"},
-        {"å¯†åµ", "ã‚¹ã‚«ã‚¦ãƒˆ", "æŠ€14    ä½“4    å¿ƒ5", "2500ç‚¹"},
-        {"å¦–ç²¾ä½¿ã„", "ãƒ•ã‚§ã‚¢ãƒªãƒ¼ãƒ†ã‚¤ãƒãƒ¼", "æŠ€11    ä½“4    å¿ƒ8", "2000ç‚¹"},
-        {"éŒ¬é‡‘è¡“å¸«", "ã‚¢ãƒ«ã‚±ãƒŸã‚¹ãƒˆ", "æŠ€11    ä½“5    å¿ƒ7", "2500ç‚¹"},
+    // ƒŒƒvƒ‰ƒJ[ƒ“
+    speciesData["ƒŒƒvƒ‰ƒJ[ƒ“"] = {
+        {"Œyím", "ƒtƒFƒ“ƒT[", "‹Z13    ‘Ì5    S5", "2500“_"},
+        {"Ëè", "ƒVƒ…[ƒ^[", "‹Z12    ‘Ì6    S5", "2500“_"},
+        {"–§’ã", "ƒXƒJƒEƒg", "‹Z14    ‘Ì4    S5", "2500“_"},
+        {"—d¸g‚¢", "ƒtƒFƒAƒŠ[ƒeƒCƒ}[", "‹Z11    ‘Ì4    S8", "2000“_"},
+        {"˜B‹àpt", "ƒAƒ‹ƒPƒ~ƒXƒg", "‹Z11    ‘Ì5    S7", "2500“_"},
 
-        {"é‡ä¼", "ãƒ¬ãƒ³ã‚¸ãƒ£ãƒ¼", "æŠ€12    ä½“5    å¿ƒ6", "2500ç‚¹"},
-        {"è¶£å‘³äºº", "ã‚»ãƒ¼ã‚¸&ãƒãƒ¼ãƒ‰", "æŠ€13    ä½“4    å¿ƒ6", "2000ç‚¹"},
-        {"é­”å‹•æ©Ÿå¸«", "ãƒã‚®ãƒ†ãƒƒã‚¯", "æŠ€12    ä½“4    å¿ƒ7", "2000ç‚¹"},
-        {"ç¥å®˜", "ãƒ—ãƒªãƒ¼ã‚¹ãƒˆ", "æŠ€10    ä½“5    å¿ƒ8", "2000ç‚¹"},
-        {"é­”å°å¸«", "ã‚½ãƒ¼ã‚µãƒ©ãƒ¼orã‚³ãƒ³ã‚¸ãƒ£ãƒ©ãƒ¼", "æŠ€11    ä½“3    å¿ƒ9", "2000ç‚¹"}
+        {"–ì•š", "ƒŒƒ“ƒWƒƒ[", "‹Z12    ‘Ì5    S6", "2500“_"},
+        {"ï–¡l", "ƒZ[ƒW&ƒo[ƒh", "‹Z13    ‘Ì4    S6", "2000“_"},
+        {"–‚“®‹@t", "ƒ}ƒMƒeƒbƒN", "‹Z12    ‘Ì4    S7", "2000“_"},
+        {"_Š¯", "ƒvƒŠ[ƒXƒg", "‹Z10    ‘Ì5    S8", "2000“_"},
+        {"–‚“±t", "ƒ\[ƒTƒ‰[orƒRƒ“ƒWƒƒƒ‰[", "‹Z11    ‘Ì3    S9", "2000“_"}
     };  
 }
 
@@ -348,24 +344,24 @@ void Tab2Panel::OnSpeciesSelected(wxCommandEvent& event) {
     if (selection == wxNOT_FOUND || selection == 0) return;
 
     wxString selectedSpecies = speciesListBox->GetString(selection);
-    //wxLogMessage("é¸æŠã•ã‚ŒãŸç¨®æ—: %s", selectedSpecies);
+    //wxLogMessage("‘I‘ğ‚³‚ê‚½í‘°: %s", selectedSpecies);
 
-    //wxLogMessage("ã“ã“ã¾ã§æ¥ãŸ");
-    //wxLogDebug("é¸æŠã•ã‚ŒãŸç¨®æ—: %s", selectedSpecies);
+    //wxLogMessage("‚±‚±‚Ü‚Å—ˆ‚½");
+    //wxLogDebug("‘I‘ğ‚³‚ê‚½í‘°: %s", selectedSpecies);
 
 
     for (auto& [name, grid] : speciesTables) {
         if (name == selectedSpecies) {
             grid->Show();
-            grid->SetMinSize(wxSize(500, 300)); // ã‚µã‚¤ã‚ºæŒ‡å®š
-            //wxLogMessage("è¡¨ç¤ºå¯¾è±¡: %s", name);
+            grid->SetMinSize(wxSize(500, 300)); // ƒTƒCƒYw’è
+            //wxLogMessage("•\¦‘ÎÛ: %s", name);
         }
         else {
             grid->Hide();
         }
     }
 
-    // ã‚°ãƒªãƒƒãƒ‰ã®è¦ªï¼ˆé€šå¸¸ã¯ gridPanelï¼‰ã«ã‚‚ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’æŒ‡ç¤º
+    // ƒOƒŠƒbƒh‚Ìei’Êí‚Í gridPanelj‚É‚àƒŒƒCƒAƒEƒg‚ğw¦
     if (!speciesTables.empty()) {
         auto anyGrid = speciesTables.begin()->second;
         if (anyGrid) {
@@ -373,7 +369,7 @@ void Tab2Panel::OnSpeciesSelected(wxCommandEvent& event) {
         }
     }
 
-    Layout();  // Tab2Panelè‡ªä½“ã®ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚‚æ›´æ–°
+    Layout();  // Tab2Panel©‘Ì‚ÌƒŒƒCƒAƒEƒg‚àXV
     Refresh();
 }
 
@@ -383,166 +379,166 @@ void Tab2Panel::OnSpeciesSelected(wxCommandEvent& event) {
 
 
 void Tab2Panel::OnCreateButtonClicked(wxCommandEvent&) {
-        // åå‰ã®å…¥åŠ›ãƒã‚§ãƒƒã‚¯
+        // –¼‘O‚Ì“ü—Íƒ`ƒFƒbƒN
         wxString name = nameTextBox->GetValue();
         if (name.IsEmpty()) {
-            nameErrorText->SetLabel("ã“ã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„");
+            nameErrorText->SetLabel("‚±‚ÌƒtƒB[ƒ‹ƒh‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢");
             nameErrorText->Show();
             this->Layout();
             return;
         }
         nameErrorText->Hide();
         
-        // ç¨®æ—ã®é¸æŠãƒã‚§ãƒƒã‚¯
+        // í‘°‚Ì‘I‘ğƒ`ƒFƒbƒN
         int speciesIndex = speciesListBox->GetSelection();
         if (speciesIndex == 0) {
-            wxMessageBox("ç¨®æ—ã‚’é¸æŠã—ã¦ãã ã•ã„", "ã‚¨ãƒ©ãƒ¼", wxOK | wxICON_ERROR);
+            wxMessageBox("í‘°‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢", "ƒGƒ‰[", wxOK | wxICON_ERROR);
             return;
         }
-        // ç¨®æ—ã®æ–‡å­—ã®å–å¾—
+        // í‘°‚Ì•¶š‚Ìæ“¾
         wxString speciesName = speciesListBox->GetString(speciesIndex);
         
-        // è©¦è¡Œçµæœã‚’ç”Ÿæˆã™ã‚‹å‡¦ç†
+        // sŒ‹‰Ê‚ğ¶¬‚·‚éˆ—
 
-        trialResults.clear(); // ä»¥å‰ã®è©¦è¡Œã‚’å‰Šé™¤
+        trialResults.clear(); // ˆÈ‘O‚Ìs‚ğíœ
 
-        // 3å›ã®è©¦è¡Œã‚’å®Ÿè¡Œ
+        // 3‰ñ‚Ìs‚ğÀs
         for (int i = 0; i < 3; ++i) {
             TrialResult result;
 
             result.name = std::string(name.mb_str());
             result.species = std::string(speciesName.mb_str());
 
-            // æŠ€ã€ä½“ã€å¿ƒã®å€¤ã‚’å–å¾—
+            // ‹ZA‘ÌAS‚Ì’l‚ğæ“¾
             result.born[0] = skillSpinCtrl->GetValue();
             result.born[1] = bodySpinCtrl->GetValue();
             result.born[2] = mindSpinCtrl->GetValue();
 
-            // ç¨®æ—ã«å¿œã˜ãŸA~Fã‚’è¨ˆç®—
+            // í‘°‚É‰‚¶‚½A~F‚ğŒvZ
             CalculateAttributes(speciesIndex, result.dicenumber, result.diceeffect, result.ability, result.impurity, result.feature);
             std::cout << "After CalculateAttributes: result.dicenumber = " << result.dicenumber << std::endl;
 
-            // å„èƒ½åŠ›å€¤ã¨ãƒœãƒ¼ãƒŠã‚¹ã‚’è¨ˆç®—
+            // Še”\—Í’l‚Æƒ{[ƒiƒX‚ğŒvZ
             CalculateAbilityValues(result);
 
             trialResults.push_back(result);
         }
-        // çµæœã‚’è¡¨ç¤º
+        // Œ‹‰Ê‚ğ•\¦
         DisplayResults();
     }
     
 
 void Tab2Panel::CalculateAttributes(int speciesIndex, int& dicenumber, int& diceeffect, int* ability,int& impurity, std::string& feature) {
-    // ç¨®æ—ã«å¿œã˜ã¦A~Fã‚’è¨ˆç®— (ãƒªã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã¨å¯¾å¿œ)
+    // í‘°‚É‰‚¶‚ÄA~F‚ğŒvZ (ƒŠƒXƒgƒ{ƒbƒNƒX‚ÌƒCƒ“ƒfƒbƒNƒX‚Æ‘Î‰)
     switch (speciesIndex) {
-    case 1: // äººé–“
+    case 1: // lŠÔ
         dicenumber = 12;
         diceeffect = 0;
-        feature = "[å‰£ã®åŠ è­·/é‹å‘½å¤‰è»¢]";
+        feature = "[Œ•‚Ì‰ÁŒì/‰^–½•Ï“]]";
         impurity = 0;
         for (int i = 0; i < 6; ++i) ability[i] = RollDice(2, 0);
         break;
-    case 2: // ã‚¨ãƒ«ãƒ•
+    case 2: // ƒGƒ‹ƒt
         dicenumber = 11;
         diceeffect = 0;
         impurity = 0;
-        feature = "[æš—è¦–][å‰£ã®åŠ è­·/å„ªã—ãæ°´]";
+        feature = "[ˆÃ‹][Œ•‚Ì‰ÁŒì/—D‚µ‚«…]";
         ability[0] = RollDice(2, 0); ability[1] = RollDice(2, 0); // A,B
         ability[2] = RollDice(1, 0); ability[3] = RollDice(2, 0); // C,D
         ability[4] = RollDice(2, 0); ability[5] = RollDice(2, 0); // E,F   
         break;
-    case 3: // ãƒ‰ãƒ¯ãƒ¼ãƒ•
+    case 3: // ƒhƒ[ƒt
         dicenumber = 10;
         diceeffect = 1.2;
         impurity = 0;
-        feature = "[æš—è¦–][å‰£ã®åŠ è­·/ç‚èº«]";
+        feature = "[ˆÃ‹][Œ•‚Ì‰ÁŒì/‰Šg]";
         ability[0] = RollDice(2, 6); ability[1] = RollDice(1, 0);
         ability[2] = RollDice(2, 0); ability[3] = RollDice(2, 0);
         ability[4] = RollDice(1, 0); ability[5] = RollDice(2, 6);
         break;
-    case 4: // ã‚¿ãƒ“ãƒƒãƒˆ
+    case 4: // ƒ^ƒrƒbƒg
         dicenumber = 9;
         diceeffect = 0.6667;
         impurity = 0;
-        feature = "[ç¬¬å…­æ„Ÿ]";
+        feature = "[‘æ˜ZŠ´]";
         ability[0] = RollDice(1, 0); ability[1] = RollDice(1, 0);
         ability[2] = RollDice(1, 0); ability[3] = RollDice(2, 0);
         ability[4] = RollDice(2, 6); ability[5] = RollDice(2, 0);
         break;
-    case 5: // ãƒ«ãƒ¼ãƒ³ãƒ•ã‚©ãƒ¼ã‚¯
+    case 5: // ƒ‹[ƒ“ƒtƒH[ƒN
         dicenumber = 10;
         diceeffect = 0;
         impurity = 0;
-        feature =  "[æš—è¦–][HPå¤‰æ›]";
+        feature =  "[ˆÃ‹][HP•ÏŠ·]";
         ability[0] = RollDice(2, 0); ability[1] = RollDice(1, 0);
         ability[2] = RollDice(2, 0); ability[3] = RollDice(2, 0);
         ability[4] = RollDice(2, 0); ability[5] = RollDice(1, 0);
         break;
-    case 6: // ãƒŠã‚¤ãƒˆãƒ¡ã‚¢
+    case 6: // ƒiƒCƒgƒƒA
         dicenumber = 10;
         diceeffect = 0;
         impurity = 1;
-        feature =  "[ç•°è²Œ][å¼±ç‚¹(å±æ€§)]";
+        feature =  "[ˆÙ–e][ã“_(‘®«)]";
         ability[0] = RollDice(2, 0); ability[1] = RollDice(2, 0);
         ability[2] = RollDice(1, 0); ability[3] = RollDice(1, 0);
         ability[4] = RollDice(2, 0); ability[5] = RollDice(2, 0);
         break;
-    case 7: // ãƒªã‚«ãƒ³ãƒˆ
+    case 7: // ƒŠƒJƒ“ƒg
         dicenumber = 8;
         diceeffect = 1.125;
         impurity = 0;
-        feature =  "[æš—è¦–(ç£å¤‰è²Œ)][ç£å¤‰è²Œ]";
+        feature =  "[ˆÃ‹(b•Ï–e)][b•Ï–e]";
         ability[0] = RollDice(1, 0); ability[1] = RollDice(1, 3);
         ability[2] = RollDice(2, 0); ability[3] = RollDice(2, 0);
         ability[4] = RollDice(1, 6); ability[5] = RollDice(1, 0);
         break;
-    case 8: // ãƒªãƒ«ãƒ‰ãƒ©ã‚±ãƒ³
+    case 8: // ƒŠƒ‹ƒhƒ‰ƒPƒ“
         dicenumber = 10;
         diceeffect = 0.6;
         impurity = 0;
-        feature =  "[é±—ã®çš®è†š][å°»å°¾ãŒæ­¦å™¨][å‰£ã®åŠ è­·/é¢¨ã®ç¿¼]";
+        feature =  "[—Ø‚Ì”ç•†][K”ö‚ª•Ší][Œ•‚Ì‰ÁŒì/•—‚Ì—ƒ]";
         ability[0] = RollDice(1, 0); ability[1] = RollDice(2, 0);
         ability[2] = RollDice(2, 0); ability[3] = RollDice(2, 6);
         ability[4] = RollDice(1, 0); ability[5] = RollDice(2, 0);
         break;
-    case 9: // ã‚°ãƒ©ã‚¹ãƒ©ãƒ³ãƒŠãƒ¼
+    case 9: // ƒOƒ‰ƒXƒ‰ƒ“ƒi[
         dicenumber = 10;
         diceeffect = 1.2;
         impurity = 0;
-        feature =  "[ãƒãƒŠä¸å¹²æ¸‰][è™«ã‚„æ¤ç‰©ã¨ã®æ„æ€ç–é€š]";
+        feature =  "[ƒ}ƒi•sŠ±Â][’‚âA•¨‚Æ‚ÌˆÓv‘a’Ê]";
         ability[0] = RollDice(2, 0); ability[1] = RollDice(2, 0);
         ability[2] = RollDice(1, 0); ability[3] = RollDice(2, 6);
         ability[4] = RollDice(1, 0); ability[5] = RollDice(2, 6);
         break;
-    case 10: // ãƒ¡ãƒªã‚¢
+    case 10: // ƒƒŠƒA
         dicenumber = 7;
         diceeffect = 0.8571;
         impurity = 0;
-        feature =  "[ç¹èŒ‚ã™ã‚‹ç”Ÿå‘½]";
+        feature =  "[”É–Î‚·‚é¶–½]";
         ability[0] = RollDice(1, 0); ability[1] = RollDice(1, 0);
         ability[2] = RollDice(1, 0); ability[3] = RollDice(2, 6);
         ability[4] = RollDice(1, 0); ability[5] = RollDice(1, 0);
         break;
-    case 11: // ãƒ†ã‚£ã‚¨ãƒ³ã‚¹
+    case 11: // ƒeƒBƒGƒ“ƒX
         dicenumber = 10;
         diceeffect = 0.6;
         impurity = 0;
-        feature = "[é€šã˜åˆã†æ„è­˜]";
+        feature = "[’Ê‚¶‡‚¤ˆÓ¯]";
         ability[0] = RollDice(2, 0); ability[1] = RollDice(2, 0);
         ability[2] = RollDice(1, 0); ability[3] = RollDice(1, 3);
         ability[4] = RollDice(2, 0); ability[5] = RollDice(2, 3);
         break;
-    case 12: // ãƒ¬ãƒ—ãƒ©ã‚«ãƒ¼ãƒ³
+    case 12: // ƒŒƒvƒ‰ƒJ[ƒ“
         dicenumber = 11;
         diceeffect = 0;
         impurity = 0;
-        feature = "[æš—è¦–][è¦‹ãˆã–ã‚‹æ‰‹][å§¿ãªãè·äºº]";
+        feature = "[ˆÃ‹][Œ©‚¦‚´‚éè][p‚È‚«El]";
         ability[0] = RollDice(2, 0); ability[1] = RollDice(1, 0);
         ability[2] = RollDice(2, 0); ability[3] = RollDice(2, 0);
         ability[4] = RollDice(2, 0); ability[5] = RollDice(2, 0);
         break;
     default:
-        std::cerr << "ã‚¨ãƒ©ãƒ¼: ç„¡åŠ¹ãªç¨®æ—ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹" << std::endl;
+        std::cerr << "ƒGƒ‰[: –³Œø‚Èí‘°ƒCƒ“ƒfƒbƒNƒX" << std::endl;
         dicenumber = 0;
         diceeffect = 0;
     }
@@ -550,13 +546,13 @@ void Tab2Panel::CalculateAttributes(int speciesIndex, int& dicenumber, int& dice
  }
 
 void Tab2Panel::CalculateAbilityValues(TrialResult& result) {
-    // æŠ€, ä½“, å¿ƒ + A~F ã«åŸºã¥ãèƒ½åŠ›å€¤ã‚’è¨ˆç®—
-    result.attributes[0] = result.born[0] + result.ability[0]; // å™¨ç”¨åº¦ = æŠ€ + A
-    result.attributes[1] = result.born[0] + result.ability[1]; // æ•æ·åº¦ = æŠ€ + B
-    result.attributes[2] = result.born[1] + result.ability[2]; // ç­‹åŠ› = ä½“ + C
-    result.attributes[3] = result.born[1] + result.ability[3]; // ç”Ÿå‘½åŠ› = ä½“ + D
-    result.attributes[4] = result.born[2] + result.ability[4]; // çŸ¥åŠ› = å¿ƒ + E
-    result.attributes[5] = result.born[2] + result.ability[5]; // ç²¾ç¥åŠ› = å¿ƒ + F
+    // ‹Z, ‘Ì, S + A~F ‚ÉŠî‚Ã‚«”\—Í’l‚ğŒvZ
+    result.attributes[0] = result.born[0] + result.ability[0]; // Ší—p“x = ‹Z + A
+    result.attributes[1] = result.born[0] + result.ability[1]; // •q·“x = ‹Z + B
+    result.attributes[2] = result.born[1] + result.ability[2]; // ‹Ø—Í = ‘Ì + C
+    result.attributes[3] = result.born[1] + result.ability[3]; // ¶–½—Í = ‘Ì + D
+    result.attributes[4] = result.born[2] + result.ability[4]; // ’m—Í = S + E
+    result.attributes[5] = result.born[2] + result.ability[5]; // ¸_—Í = S + F
 
     result.pretotal = 0;
     result.total = 0;
@@ -564,12 +560,12 @@ void Tab2Panel::CalculateAbilityValues(TrialResult& result) {
         result.bonuses[i] = result.attributes[i] / 6;
         result.pretotal += result.ability[i];
         result.total += result.attributes[i];
-        std::cout << "result.total (for loopä¸­): " << result.total << std::endl;
+        std::cout << "result.total (for loop’†): " << result.total << std::endl;
     }
 
-    // inté™¤ç®—ã®æ€§è³ªã‚’å¿œç”¨ã—ã¦å°æ•°ç¬¬äº”ä½ã‚’åˆ‡ã‚Šä¸Šã’
+    // intœZ‚Ì«¿‚ğ‰—p‚µ‚Ä¬”‘æŒÜˆÊ‚ğØ‚èã‚°
     int average = (result.pretotal*10000) / result.dicenumber;
-    // ã‚‚ã†ä¸€åº¦10^4ã§å‰²ã‚‹ã“ã¨ã§çµæœã‚’æ­£ã™
+    // ‚à‚¤ˆê“x10^4‚ÅŠ„‚é‚±‚Æ‚ÅŒ‹‰Ê‚ğ³‚·
     float average2 = average / 10000.0f;
     result.average = average2 - result.diceeffect;
 }
@@ -577,71 +573,71 @@ void Tab2Panel::CalculateAbilityValues(TrialResult& result) {
 
 
 void Tab2Panel::DisplayResults() {
-    // ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¿ã‚¤ãƒˆãƒ«ã®ä½œæˆ
+    // ƒ_ƒCƒAƒƒOƒ^ƒCƒgƒ‹‚Ìì¬
     wxString dialogTitle;
     if (!trialResults.empty()) {
-        dialogTitle = wxString::Format("è©¦è¡Œçµæœ: %s", trialResults[0].name);
+        dialogTitle = wxString::Format("sŒ‹‰Ê: %s", trialResults[0].name);
     }
     else {
-        dialogTitle = "è©¦è¡Œçµæœ";
+        dialogTitle = "sŒ‹‰Ê";
     }
 
-    // ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ä½œæˆ
+    // ƒ_ƒCƒAƒƒOƒEƒBƒ“ƒhƒE‚ğì¬
     wxDialog* resultDialog = new wxDialog(this, wxID_ANY, dialogTitle, wxDefaultPosition, wxSize(506, 450));
     wxBoxSizer* dialogSizer = new wxBoxSizer(wxVERTICAL);
 
-    // 3å›ã®è©¦è¡Œçµæœã‚’è¡¨ç¤º
+    // 3‰ñ‚ÌsŒ‹‰Ê‚ğ•\¦
     for (size_t i = 0; i < trialResults.size(); ++i) {
         const TrialResult& result = trialResults[i];
 
-        // è©¦è¡Œãƒ˜ãƒƒãƒ€ãƒ¼ã¨ãƒœã‚¿ãƒ³ã®ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
+        // sƒwƒbƒ_[‚Æƒ{ƒ^ƒ“‚ÌƒŒƒCƒAƒEƒg
         wxBoxSizer* headerSizer = new wxBoxSizer(wxHORIZONTAL);
 
-        // è©¦è¡Œãƒ˜ãƒƒãƒ€ãƒ¼ã‚’ä½œæˆ
+        // sƒwƒbƒ_[‚ğì¬
         wxStaticText* header = new wxStaticText(resultDialog, wxID_ANY,
-            wxString::Format("è©¦è¡Œ%d: %s", (int)(i + 1), result.species));
+            wxString::Format("s%d: %s", (int)(i + 1), result.species));
         headerSizer->Add(header, 1, wxALIGN_CENTER_VERTICAL | wxLEFT, 5);
 
-        // ã€Œã“ã®èƒ½åŠ›å€¤ã§æ–°è¦ä½œæˆã€ãƒœã‚¿ãƒ³
-        wxButton* createButton = new wxButton(resultDialog, wxID_ANY, "ã“ã®èƒ½åŠ›å€¤ã§æ–°è¦ä½œæˆ");
+        // u‚±‚Ì”\—Í’l‚ÅV‹Kì¬vƒ{ƒ^ƒ“
+        wxButton* createButton = new wxButton(resultDialog, wxID_ANY, "‚±‚Ì”\—Í’l‚ÅV‹Kì¬");
         createButton->Bind(wxEVT_BUTTON, [this, result, resultDialog](wxCommandEvent&) {
-            // tab1Panel ãŒæ­£ã—ã„ã‹ç¢ºèª
+            // tab1Panel ‚ª³‚µ‚¢‚©Šm”F
             if (tab1Panel) {
                 std::vector<int> characterData = {
-                    result.born[0], result.born[1], result.born[2],  // æŠ€ãƒ»ä½“ãƒ»å¿ƒ
-                    result.ability[0], result.ability[1], result.ability[2], result.ability[3], result.ability[4], result.ability[5], // Aï½F
+                    result.born[0], result.born[1], result.born[2],  // ‹ZE‘ÌES
+                    result.ability[0], result.ability[1], result.ability[2], result.ability[3], result.ability[4], result.ability[5], // A`F
                     result.impurity
                 };
                                 
                 tab1Panel->SetCharacterData(result.name, result.species, result.feature, characterData);
             }
             else {
-                wxMessageBox("Tab1PanelãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", "ã‚¨ãƒ©ãƒ¼", wxOK | wxICON_ERROR);
+                wxMessageBox("Tab1Panel‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", "ƒGƒ‰[", wxOK | wxICON_ERROR);
             }
 
-            // ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’é–‰ã˜ã‚‹å‰ã«ã‚¿ãƒ–ã‚’åˆ‡ã‚Šæ›¿ãˆãªã„
-            resultDialog->EndModal(wxID_OK);  // ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’é–‰ã˜ã‚‹
+            // ƒ_ƒCƒAƒƒO‚ğ•Â‚¶‚é‘O‚Éƒ^ƒu‚ğØ‚è‘Ö‚¦‚È‚¢
+            resultDialog->EndModal(wxID_OK);  // ƒ_ƒCƒAƒƒO‚ğ•Â‚¶‚é
             });
         headerSizer->Add(createButton, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, 10);
 
-        // è©¦è¡Œãƒ˜ãƒƒãƒ€ãƒ¼ã‚’ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã«è¿½åŠ 
+        // sƒwƒbƒ_[‚ğƒ_ƒCƒAƒƒO‚É’Ç‰Á
         dialogSizer->Add(headerSizer, 0, wxEXPAND | wxALL, 5);
 
-        // ã‚°ãƒªãƒƒãƒ‰ã‚’ä½œæˆ
+        // ƒOƒŠƒbƒh‚ğì¬
         wxGrid* grid = new wxGrid(resultDialog, wxID_ANY);
-        grid->CreateGrid(4, 6); // è¡Œæ•°ã¨åˆ—æ•°ã‚’å¤‰æ›´
+        grid->CreateGrid(4, 6); // s”‚Æ—ñ”‚ğ•ÏX
 
-        // åˆ—ã¨è¡Œã®ãƒ©ãƒ™ãƒ«ã‚’éè¡¨ç¤º
+        // —ñ‚Æs‚Ìƒ‰ƒxƒ‹‚ğ”ñ•\¦
         grid->SetColLabelSize(0);
         grid->SetRowLabelSize(0);
 
-        // ã‚»ãƒ«ã®çµåˆè¨­å®š
+        // ƒZƒ‹‚ÌŒ‹‡İ’è
         grid->SetCellSize(0, 0, 1, 2);
         grid->SetCellSize(0, 2, 1, 2);
         grid->SetCellSize(0, 4, 1, 2);
         grid->SetCellSize(3, 0, 1, 6);
 
-        // ã‚»ãƒ«ã®ä¸­å¤®å¯„ã›
+        // ƒZƒ‹‚Ì’†‰›Šñ‚¹
         int rows = grid->GetNumberRows();
         int cols = grid->GetNumberCols();
         for (int row = 0; row < rows; ++row) {
@@ -650,10 +646,10 @@ void Tab2Panel::DisplayResults() {
             }
         }
 
-        // çµæœã‚’ã‚°ãƒªãƒƒãƒ‰ã«ã‚»ãƒƒãƒˆ
-        grid->SetCellValue(0, 0, wxString::Format("æŠ€: %d", result.born[0]));
-        grid->SetCellValue(0, 2, wxString::Format("ä½“: %d", result.born[1]));
-        grid->SetCellValue(0, 4, wxString::Format("å¿ƒ: %d", result.born[2]));
+        // Œ‹‰Ê‚ğƒOƒŠƒbƒh‚ÉƒZƒbƒg
+        grid->SetCellValue(0, 0, wxString::Format("‹Z: %d", result.born[0]));
+        grid->SetCellValue(0, 2, wxString::Format("‘Ì: %d", result.born[1]));
+        grid->SetCellValue(0, 4, wxString::Format("S: %d", result.born[2]));
 
         grid->SetCellValue(1, 0, wxString::Format("A: %d", result.ability[0]));
         grid->SetCellValue(1, 1, wxString::Format("B: %d", result.ability[1]));
@@ -662,31 +658,31 @@ void Tab2Panel::DisplayResults() {
         grid->SetCellValue(1, 4, wxString::Format("E: %d", result.ability[4]));
         grid->SetCellValue(1, 5, wxString::Format("F: %d", result.ability[5]));
 
-        grid->SetCellValue(2, 0, wxString::Format("å™¨ç”¨: %d", result.attributes[0]));
-        grid->SetCellValue(2, 1, wxString::Format("æ•æ·: %d", result.attributes[1]));
-        grid->SetCellValue(2, 2, wxString::Format("ç­‹åŠ›: %d", result.attributes[2]));
-        grid->SetCellValue(2, 3, wxString::Format("ç”Ÿå‘½: %d", result.attributes[3]));
-        grid->SetCellValue(2, 4, wxString::Format("çŸ¥åŠ›: %d", result.attributes[4]));
-        grid->SetCellValue(2, 5, wxString::Format("ç²¾ç¥: %d", result.attributes[5]));
+        grid->SetCellValue(2, 0, wxString::Format("Ší—p: %d", result.attributes[0]));
+        grid->SetCellValue(2, 1, wxString::Format("•q·: %d", result.attributes[1]));
+        grid->SetCellValue(2, 2, wxString::Format("‹Ø—Í: %d", result.attributes[2]));
+        grid->SetCellValue(2, 3, wxString::Format("¶–½: %d", result.attributes[3]));
+        grid->SetCellValue(2, 4, wxString::Format("’m—Í: %d", result.attributes[4]));
+        grid->SetCellValue(2, 5, wxString::Format("¸_: %d", result.attributes[5]));
 
-        grid->SetCellValue(3, 0, wxString::Format("ãƒ€ã‚¤ã‚¹å¹³å‡: %.4f / èƒ½åŠ›å€¤åˆè¨ˆ: %d", result.average, result.total));
+        grid->SetCellValue(3, 0, wxString::Format("ƒ_ƒCƒX•½‹Ï: %.4f / ”\—Í’l‡Œv: %d", result.average, result.total));
 
-        grid->EnableEditing(false); // ç·¨é›†ä¸å¯ã«è¨­å®š
-        // ã‚°ãƒªãƒƒãƒ‰ã‚’ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã«è¿½åŠ 
+        grid->EnableEditing(false); // •ÒW•s‰Â‚Éİ’è
+        // ƒOƒŠƒbƒh‚ğƒ_ƒCƒAƒƒO‚É’Ç‰Á
         dialogSizer->Add(grid, 0, wxEXPAND | wxALL, 5);
     }
 
-    // é–‰ã˜ã‚‹ãƒœã‚¿ãƒ³
-    wxButton* closeButton = new wxButton(resultDialog, wxID_OK, "é–‰ã˜ã‚‹");
+    // •Â‚¶‚éƒ{ƒ^ƒ“
+    wxButton* closeButton = new wxButton(resultDialog, wxID_OK, "•Â‚¶‚é");
     dialogSizer->Add(closeButton, 0, wxALIGN_CENTER | wxALL, 10);
 
     resultDialog->SetSizer(dialogSizer);
     resultDialog->ShowModal();
 
-    // ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãŒé–‰ã˜ãŸå¾Œã«ã‚¿ãƒ–ã‚’åˆ‡ã‚Šæ›¿ãˆ
+    // ƒ_ƒCƒAƒƒO‚ª•Â‚¶‚½Œã‚Éƒ^ƒu‚ğØ‚è‘Ö‚¦
     if (notebook) {
-        notebook->SetSelection(0);  // Tab1Panel ã«åˆ‡ã‚Šæ›¿ãˆ
+        notebook->SetSelection(0);  // Tab1Panel ‚ÉØ‚è‘Ö‚¦
     }
 
-    resultDialog->Destroy();  // ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’é–‰ã˜ã‚‹éš›ã«ãƒ¡ãƒ¢ãƒªã‚’è§£æ”¾
+    resultDialog->Destroy();  // ƒ_ƒCƒAƒƒO‚ğ•Â‚¶‚éÛ‚Éƒƒ‚ƒŠ‚ğ‰ğ•ú
 }
