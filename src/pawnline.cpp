@@ -1,4 +1,8 @@
-﻿#include "pawnline.h"
+#pragma execution_character_set("utf-8")
+
+
+// UTF-8 encoding: あいうえお
+#include "pawnline.h"
 #include <wx/dcbuffer.h>
 
 // 色設定用配列

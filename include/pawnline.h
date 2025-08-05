@@ -1,3 +1,7 @@
+#pragma execution_character_set("utf-8")
+
+
+// UTF-8 encoding: ã‚ã„ã†ãˆãŠ
 #ifndef PAWNLINE_H
 #define PAWNLINE_H
 
@@ -6,7 +10,7 @@
 #include <wx/slider.h>
 #include <vector>
 
-// ‹î‚Ìî•ñ\‘¢‘Ì
+// é§’ã®æƒ…å ±æ§‹é€ ä½“
 struct Pawn {
     int position;
     wxString label;
