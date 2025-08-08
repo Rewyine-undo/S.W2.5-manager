@@ -6,7 +6,7 @@
 #include <wx/slider.h>
 #include <vector>
 
-// ‹î‚Ìî•ñ\‘¢‘Ì
+// é§’ã®æƒ…å ±æ§‹é€ ä½“
 struct Pawn {
     int position;
     wxString label;

@@ -1,3 +1,10 @@
-# すべての .cpp, .h ファイルを UTF-8 (LF) として扱う
-*.cpp text eol=lf working-tree-encoding=UTF-8
-*.h   text eol=lf working-tree-encoding=UTF-8
+# C++ソース・ヘッダーはLFで管理（テキスト扱い）
+*.cpp text eol=lf
+*.h text eol=lf
+
+# JSONもLFで管理
+*.json text eol=lf
+
+# バイナリファイルは改行コード変換しない
+*.png binary
+*.exe binary

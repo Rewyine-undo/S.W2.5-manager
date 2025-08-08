@@ -1,4 +1,4 @@
-﻿#include "pawnline.h"
+#include "pawnline.h"
 #include <wx/dcbuffer.h>
 
 // 色設定用配列

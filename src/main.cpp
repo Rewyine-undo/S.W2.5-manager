@@ -17,22 +17,22 @@
 
 using json = nlohmann::json;
 
-// •Û‘¶’Ê’m—p‚ÌŠÈˆÕƒpƒlƒ‹ƒNƒ‰ƒX
+// ä¿å­˜é€šçŸ¥ç”¨ã®ç°¡æ˜“ãƒ‘ãƒãƒ«ã‚¯ãƒ©ã‚¹
 class SaveNotificationPanel : public wxPanel {
 public:
     SaveNotificationPanel(wxWindow* parent, const wxString& message)
         : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxSize(190, 40),
             wxBORDER_SIMPLE | wxSTAY_ON_TOP), timer(this)
     {
-        SetBackgroundColour(wxColour(150, 200, 255, 128)); // –¾‚é‚¢Â
+        SetBackgroundColour(wxColour(150, 200, 255, 128)); // æ˜ã‚‹ã„é’
 
         m_label = new wxStaticText(this, wxID_ANY, message, wxPoint(10, 10));
         m_label->SetForegroundColour(*wxBLACK);
         m_label->SetFont(wxFont(12, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, ""));
-        m_label->SetForegroundColour(wxColour(255, 255, 255)); // ”’
+        m_label->SetForegroundColour(wxColour(255, 255, 255)); // ç™½
         Hide();
 
-        // ƒ^ƒCƒ}[‚ª~‚Ü‚Á‚½‚ç”ñ•\¦‚É‚·‚é
+        // ã‚¿ã‚¤ãƒãƒ¼ãŒæ­¢ã¾ã£ãŸã‚‰éè¡¨ç¤ºã«ã™ã‚‹
         Bind(wxEVT_TIMER, [this](wxTimerEvent&) {
             Hide();
             }, timer.GetId());
@@ -40,7 +40,7 @@ public:
 
     void ShowNotification(int milliseconds = 3000) {
         Show();
-        Raise();  // Å‘O–Ê‚É
+        Raise();  // æœ€å‰é¢ã«
         timer.StartOnce(milliseconds);
     }
 
@@ -57,41 +57,41 @@ private:
 class MainFrame : public wxFrame {
 public:
     MainFrame()
-        : wxFrame(nullptr, wxID_ANY, "ƒLƒƒƒ‰ƒNƒ^[ŠÇ—ƒAƒvƒŠ", wxDefaultPosition, wxSize(630, 800)),
-        notebook(nullptr), tab1Panel(nullptr), tab2Panel(nullptr), pawnLinePanel(nullptr)  // ƒƒ“ƒo•Ï”‚ğ‰Šú‰»
+        : wxFrame(nullptr, wxID_ANY, wxString::FromUTF8("ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ç®¡ç†ã‚¢ãƒ—ãƒª"), wxDefaultPosition, wxSize(630, 800)),
+        notebook(nullptr), tab1Panel(nullptr), tab2Panel(nullptr), pawnLinePanel(nullptr)  // ãƒ¡ãƒ³ãƒå¤‰æ•°ã‚’åˆæœŸåŒ–
     {
-        // wxNotebookiƒ^ƒuj‚ğì¬
+        // wxNotebookï¼ˆã‚¿ãƒ–ï¼‰ã‚’ä½œæˆ
         notebook = new wxNotebook(this, wxID_ANY);
 
-        // Tab1Panel ‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğæ‚Éì¬
+        // Tab1Panel ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å…ˆã«ä½œæˆ
         tab1Panel = new Tab1Panel(notebook);
-        notebook->AddPage(tab1Panel, "ƒf[ƒ^•\¦");
+        notebook->AddPage(tab1Panel, wxString::FromUTF8("ãƒ‡ãƒ¼ã‚¿è¡¨ç¤º"));
 
-        // Tab2Panel ‚ğì¬‚µA Tab1Panel ‚ğ“n‚·
+        // Tab2Panel ã‚’ä½œæˆã—ã€ Tab1Panel ã‚’æ¸¡ã™
         tab2Panel = new Tab2Panel(notebook, notebook, tab1Panel);
-        notebook->AddPage(tab2Panel, "”\—Íì¬");
+        notebook->AddPage(tab2Panel, wxString::FromUTF8("èƒ½åŠ›ä½œæˆ"));
 
         pawnLinePanel = new DynamicPawnPanel(notebook);
-        notebook->AddPage(pawnLinePanel, "ã‹‰í“¬(GMŒü‚¯)");
+        notebook->AddPage(pawnLinePanel, wxString::FromUTF8("ä¸Šç´šæˆ¦é—˜(GMå‘ã‘)"));
 
 
-        // ƒƒjƒ…[ƒo[‚ğì¬
+        // ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒãƒ¼ã‚’ä½œæˆ
         wxMenuBar* menuBar = new wxMenuBar();
         wxMenu* fileMenu = new wxMenu();
-        fileMenu->Append(wxID_OPEN, "ƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ş(Ctrl+F)");
-        fileMenu->Append(wxID_SAVEAS, "–¼‘O‚ğ•t‚¯‚Äƒtƒ@ƒCƒ‹‚ğ•Û‘¶(Ctrl+shift+S)");
-        fileMenu->Append(wxID_SAVE, "ƒtƒ@ƒCƒ‹‚ğã‘‚«•Û‘¶(Ctrl+S)");
-        fileMenu->Append(wxID_EXIT, "I—¹");
-        menuBar->Append(fileMenu, "ƒtƒ@ƒCƒ‹");
+        fileMenu->Append(wxID_OPEN, wxString::FromUTF8("ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚€(Ctrl+F)"));
+        fileMenu->Append(wxID_SAVEAS, wxString::FromUTF8("åå‰ã‚’ä»˜ã‘ã¦ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¿å­˜(Ctrl+shift+S)"));
+        fileMenu->Append(wxID_SAVE, wxString::FromUTF8("ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¸Šæ›¸ãä¿å­˜(Ctrl+S)"));
+        fileMenu->Append(wxID_EXIT, wxString::FromUTF8("çµ‚äº†"));
+        menuBar->Append(fileMenu, wxString::FromUTF8("ãƒ•ã‚¡ã‚¤ãƒ«"));
         SetMenuBar(menuBar);
 
-        // ƒCƒxƒ“ƒgƒnƒ“ƒhƒ‰‚ğİ’è
+        // ã‚¤ãƒ™ãƒ³ãƒˆãƒãƒ³ãƒ‰ãƒ©ã‚’è¨­å®š
         Bind(wxEVT_MENU, &MainFrame::OnOpenFile, this, wxID_OPEN);
         Bind(wxEVT_MENU, &MainFrame::OnSaveFile, this, wxID_SAVEAS);
         Bind(wxEVT_MENU, &MainFrame::OnSave, this, wxID_SAVE);
         Bind(wxEVT_MENU, &MainFrame::OnExit, this, wxID_EXIT);
 
-        // ƒVƒ‡[ƒgƒJƒbƒgƒL[İ’è
+        // ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼è¨­å®š
         wxAcceleratorEntry entries[3];
         entries[0].Set(wxACCEL_CTRL, (int)'F', wxID_OPEN);
         entries[1].Set(wxACCEL_CTRL, (int)'S', wxID_SAVE);
@@ -99,8 +99,8 @@ public:
         wxAcceleratorTable accel(3, entries);
         SetAcceleratorTable(accel);
 
-        // ’Ê’mƒpƒlƒ‹‚Ìì¬‚Æ‰Šú”ñ•\¦
-        notificationPanel = new SaveNotificationPanel(this, "•Û‘¶Š®—¹");
+        // é€šçŸ¥ãƒ‘ãƒãƒ«ã®ä½œæˆã¨åˆæœŸéè¡¨ç¤º
+        notificationPanel = new SaveNotificationPanel(this, wxString::FromUTF8("ä¿å­˜å®Œäº†"));
         notificationPanel->SetPosition(wxPoint(GetClientSize().GetWidth() - 220, 10));
         notificationPanel->Hide();
 
@@ -109,17 +109,17 @@ public:
 
 
 private:
-    wxNotebook* notebook;   // wxNotebook ‚ğƒƒ“ƒo•Ï”‚Æ‚µ‚ÄŠÇ—
-    Tab1Panel* tab1Panel;   // Tab1Panel ‚Ö‚Ìƒ|ƒCƒ“ƒ^
-    Tab2Panel* tab2Panel;   // Tab2Panel ‚Ö‚Ìƒ|ƒCƒ“ƒ^
-    DynamicPawnPanel* pawnLinePanel; // pawnLinePanel ‚Ö‚Ìƒ|ƒCƒ“ƒ^
-    wxString currentFilePath; //  ƒtƒ@ƒCƒ‹ƒpƒX‚ğ•Û‘¶‚·‚é•Ï”
+    wxNotebook* notebook;   // wxNotebook ã‚’ãƒ¡ãƒ³ãƒå¤‰æ•°ã¨ã—ã¦ç®¡ç†
+    Tab1Panel* tab1Panel;   // Tab1Panel ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+    Tab2Panel* tab2Panel;   // Tab2Panel ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+    DynamicPawnPanel* pawnLinePanel; // pawnLinePanel ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+    wxString currentFilePath; //  ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 
-    SaveNotificationPanel* notificationPanel; // ’Ê’m—pƒpƒlƒ‹
+    SaveNotificationPanel* notificationPanel; // é€šçŸ¥ç”¨ãƒ‘ãƒãƒ«
 
-    // JSONƒtƒ@ƒCƒ‹‚ğŠJ‚­
+    // JSONãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
     void OnOpenFile(wxCommandEvent& event) {
-        wxFileDialog openFileDialog(this, "JSONƒtƒ@ƒCƒ‹‚ğŠJ‚­", "", "", "JSONƒtƒ@ƒCƒ‹ (*.json)|*.json", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+        wxFileDialog openFileDialog(this, wxString::FromUTF8("JSONãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã"),  "", "", wxString::FromUTF8("JSONãƒ•ã‚¡ã‚¤ãƒ« (*.json)|*.json"), wxFD_OPEN | wxFD_FILE_MUST_EXIST);
         if (openFileDialog.ShowModal() == wxID_CANCEL) {
             return;
         }
@@ -127,7 +127,7 @@ private:
         wxString filePath = openFileDialog.GetPath();
         std::ifstream file(filePath.ToStdString());
         if (!file) {
-            wxMessageBox("ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ‚Å‚µ‚½", "ƒGƒ‰[", wxOK | wxICON_ERROR);
+            wxMessageBox(wxString::FromUTF8("ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“ã§ã—ãŸ"), wxString::FromUTF8("ã‚¨ãƒ©ãƒ¼"), wxOK | wxICON_ERROR);
             return;
         }
 
@@ -135,23 +135,23 @@ private:
         file >> jsonData;
         file.close();
 
-        // Tab1Panel‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğæ“¾‚µALoadFromJson‚ğŒÄ‚Ño‚µ‚Äƒf[ƒ^‚ğƒZƒbƒg
+        // Tab1Panelã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å–å¾—ã—ã€LoadFromJsonã‚’å‘¼ã³å‡ºã—ã¦ãƒ‡ãƒ¼ã‚¿ã‚’ã‚»ãƒƒãƒˆ
         if (tab1Panel) {
-            tab1Panel->LoadFromJson(filePath);  // jsonData‚ğ“n‚µ‚ÄƒZƒbƒg
+            tab1Panel->LoadFromJson(filePath);  // jsonDataã‚’æ¸¡ã—ã¦ã‚»ãƒƒãƒˆ
         }
         else {
-            wxMessageBox("Tab1Panel‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½", "ƒGƒ‰[", wxOK | wxICON_ERROR);
+            wxMessageBox(wxString::FromUTF8("Tab1Panelã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸ"), wxString::FromUTF8("ã‚¨ãƒ©ãƒ¼"), wxOK | wxICON_ERROR);
         }
 
-        currentFilePath = filePath; //  V‚µ‚¢ƒtƒ@ƒCƒ‹ƒpƒX‚ğ•Û‘¶
-        notificationPanel->SetMessage("ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İŠ®—¹");
+        currentFilePath = filePath; //  æ–°ã—ã„ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚’ä¿å­˜
+        notificationPanel->SetMessage(wxString::FromUTF8("ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿å®Œäº†"));
         notificationPanel->ShowNotification();
-        //wxMessageBox("ƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚İ‚Ü‚µ‚½:\n" + wxString(jsonData.dump(4)), "¬Œ÷", wxOK | wxICON_INFORMATION);
+        //wxMessageBox(wxString::FromUTF8("ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã¿ã¾ã—ãŸ:\n") + wxString(jsonData.dump(4)), wxString::FromUTF8("æˆåŠŸ"), wxOK | wxICON_INFORMATION);
     }
 
-    // JSONƒtƒ@ƒCƒ‹‚ğ•Û‘¶
+    // JSONãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¿å­˜
     void OnSaveFile(wxCommandEvent& event) {
-        wxFileDialog saveFileDialog(this, "–¼‘O‚ğ•t‚¯‚Ä•Û‘¶", "", "V‹KƒLƒƒƒ‰ƒNƒ^[", "JSONƒtƒ@ƒCƒ‹ (*.json)|*.json", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+        wxFileDialog saveFileDialog(this, wxString::FromUTF8("åå‰ã‚’ä»˜ã‘ã¦ä¿å­˜"), "", wxString::FromUTF8("æ–°è¦ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼"), wxString::FromUTF8("JSONãƒ•ã‚¡ã‚¤ãƒ« (*.json)|*.json"), wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
         if (saveFileDialog.ShowModal() == wxID_CANCEL) {
             return;
         }
@@ -159,38 +159,38 @@ private:
         wxString filePath = saveFileDialog.GetPath();
         tab1Panel->SaveToJson(filePath);
 
-        // •Û‘¶‚ª¬Œ÷‚µ‚½‚©‚ğ”»’è
+        // ä¿å­˜ãŒæˆåŠŸã—ãŸã‹ã‚’åˆ¤å®š
         if (!tab1Panel->SaveToJson(filePath)) {
-            wxMessageBox("ƒtƒ@ƒCƒ‹‚Ì•Û‘¶‚É¸”s‚µ‚Ü‚µ‚½", "ƒGƒ‰[", wxOK | wxICON_ERROR);
+            wxMessageBox(wxString::FromUTF8("ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸ"), wxString::FromUTF8("ã‚¨ãƒ©ãƒ¼"), wxOK | wxICON_ERROR);
             return;
             
         }
 
-        currentFilePath = filePath; //  V‚µ‚¢ƒtƒ@ƒCƒ‹ƒpƒX‚ğ•Û‘¶
-        notificationPanel->SetMessage("–¼‘O‚ğ•t‚¯‚Ä•Û‘¶Š®—¹");
+        currentFilePath = filePath; //  æ–°ã—ã„ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚’ä¿å­˜
+        notificationPanel->SetMessage(wxString::FromUTF8("åå‰ã‚’ä»˜ã‘ã¦ä¿å­˜å®Œäº†"));
         notificationPanel->ShowNotification();
     }
 
 
     void OnSave(wxCommandEvent& event) {
         if (currentFilePath.IsEmpty()) {
-            // ƒtƒ@ƒCƒ‹ƒpƒX‚ª–¢İ’è‚È‚çu–¼‘O‚ğ•t‚¯‚Ä•Û‘¶v‚ğÀs
+            // ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ãŒæœªè¨­å®šãªã‚‰ã€Œåå‰ã‚’ä»˜ã‘ã¦ä¿å­˜ã€ã‚’å®Ÿè¡Œ
             OnSaveFile(event);
         }
         else {
             
             if (!tab1Panel->SaveToJson(currentFilePath)) {
-                wxMessageBox("ƒtƒ@ƒCƒ‹‚Ì•Û‘¶‚É¸”s‚µ‚Ü‚µ‚½", "ƒGƒ‰[", wxOK | wxICON_ERROR);
+                wxMessageBox(wxString::FromUTF8("ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸ"), wxString::FromUTF8("ã‚¨ãƒ©ãƒ¼"), wxOK | wxICON_ERROR);
             }
-            // Šù‘¶‚Ìƒtƒ@ƒCƒ‹‚Éã‘‚«•Û‘¶
-            notificationPanel->SetMessage("ã‘‚«•Û‘¶Š®—¹");
+            // æ—¢å­˜ã®ãƒ•ã‚¡ã‚¤ãƒ«ã«ä¸Šæ›¸ãä¿å­˜
+            notificationPanel->SetMessage(wxString::FromUTF8("ä¸Šæ›¸ãä¿å­˜å®Œäº†"));
             notificationPanel->ShowNotification();
         }
 
 
     }
 
-    // ƒAƒvƒŠ‚ğI—¹
+    // ã‚¢ãƒ—ãƒªã‚’çµ‚äº†
     void OnExit(wxCommandEvent& event) {
         Close(true);
     }
