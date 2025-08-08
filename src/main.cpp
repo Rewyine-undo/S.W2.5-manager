@@ -73,7 +73,7 @@ public:
 
         pawnLinePanel = new DynamicPawnPanel(notebook);
         notebook->AddPage(pawnLinePanel, wxString::FromUTF8("上級戦闘(GM向け)"));
-
+        
 
         // メニューバーを作成
         wxMenuBar* menuBar = new wxMenuBar();
@@ -104,6 +104,10 @@ public:
         notificationPanel->SetPosition(wxPoint(GetClientSize().GetWidth() - 220, 10));
         notificationPanel->Hide();
 
+        wxBoxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
+        topSizer->Add(notebook, 1, wxEXPAND | wxALL, 5);
+        SetSizer(topSizer);
+        Layout();
 
     }
 
