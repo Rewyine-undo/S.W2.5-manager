@@ -778,6 +778,7 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
 
 
     SetSizer(sizer);
+    Layout();
     FitInside();
 }
 
