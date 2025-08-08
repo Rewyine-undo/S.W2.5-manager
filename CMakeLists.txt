@@ -1,24 +1,25 @@
 cmake_minimum_required(VERSION 3.10)
 project(SW25Manager)
 
-# C++17 を使う（必要に応じて変更）
+# C++17を使う
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# ヘッダファイルの場所
-include_directories(include)
-
-# wxWidgets を探す（coreとbaseを使う）
+# wxWidgetsを探す（必要なコンポーネントを指定）
 find_package(wxWidgets REQUIRED COMPONENTS core base)
 
-# wxWidgets の include / link を有効にする
-include(${wxWidgets_USE_FILE})
-
-# ソースファイルとヘッダファイルを収集
+# ソース・ヘッダファイルを収集（小規模ならfile(GLOB)でOK）
 file(GLOB SRC_FILES src/*.cpp)
 file(GLOB HEADER_FILES include/*.h)
 
-# 実行ファイルを作成
+# 実行ファイルの作成
 add_executable(SW25Manager ${SRC_FILES} ${HEADER_FILES})
 
-# wxWidgets ライブラリをリンク
-target_link_libraries(SW25Manager ${wxWidgets_LIBRARIES})
+# インクルードディレクトリをターゲットに追加
+target_include_directories(SW25Manager PRIVATE include ${wxWidgets_INCLUDE_DIRS})
+
+# wxWidgetsの定義をコンパイル時に追加
+target_compile_definitions(SW25Manager PRIVATE ${wxWidgets_DEFINITIONS})
+
+# wxWidgetsライブラリをリンク
+target_link_libraries(SW25Manager PRIVATE ${wxWidgets_LIBRARIES})
