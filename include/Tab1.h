@@ -4,6 +4,7 @@
 #include <wx/wx.h>
 #include <wx/panel.h>
 #include <wx/tglbtn.h>
+#include <wx/spinctrl.h>
 #include <wx/scrolwin.h>
 
 class Tab2Panel;  // 前方宣言

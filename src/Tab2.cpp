@@ -3,6 +3,8 @@
 #include "utility.h"
 #include <wx/wx.h>
 #include <wx/spinctrl.h>
+#include <wx/scrolwin.h>
+#include <wx/stattext.h>
 #include <wx/grid.h>
 #include <random>
 #include <vector>

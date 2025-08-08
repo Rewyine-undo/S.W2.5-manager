@@ -1,5 +1,7 @@
+#include <wx/wx.h>
 #include "pawnline.h"
 #include <wx/dcbuffer.h>
+#include <wx/stattext.h>
 
 // 色設定用配列
 const wxColour enemyColors[] = { *wxRED, *wxCYAN, *wxLIGHT_GREY };
@@ -71,9 +73,9 @@ NameSliderBlock::NameSliderBlock(wxWindow* parent, bool isEnemy, std::function<v
     auto* sizer = new wxBoxSizer(wxHORIZONTAL);
 
     nameCtrl = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(110, -1));
-    valueLabel = new wxStaticText(this, wxID_ANY, "0", wxDefaultPosition, wxSize(30, -1), wxALIGN_CENTER);
+    valueLabel = new wxStaticText(this, wxID_ANY, wxString::FromUTF8("0"), wxDefaultPosition, wxSize(30, -1), wxALIGN_CENTER);
     slider = new wxSlider(this, wxID_ANY, 0, -15, 15, wxDefaultPosition, wxSize(100, -1));
-    wxButton* deleteBtn = new wxButton(this, wxID_ANY, "削除", wxDefaultPosition, wxSize(40, -1));
+    wxButton* deleteBtn = new wxButton(this, wxID_ANY, wxString::FromUTF8("削除"), wxDefaultPosition, wxSize(40, -1));
 
     sizer->Add(nameCtrl, 0, wxALL, 1);
     sizer->Add(valueLabel, 0, wxALL | wxALIGN_CENTER_VERTICAL, 1); // ← 中間に追加
@@ -115,7 +117,7 @@ wxColour NameSliderBlock::GetColor() const {
 
 void NameSliderBlock::OnSliderChanged(wxCommandEvent& event)
 {
-    valueLabel->SetLabel(wxString::Format("%d", slider->GetValue()));
+    valueLabel->SetLabel(wxString::Format(wxString::FromUTF8("%d"), slider->GetValue()));
 }
 
 
@@ -129,8 +131,8 @@ DynamicPawnPanel::DynamicPawnPanel(wxWindow* parent) : wxPanel(parent) {
     mainSizer->Add(linePanel, 0, wxEXPAND | wxALL, 5);
 
     auto* buttonSizer = new wxBoxSizer(wxHORIZONTAL);
-    auto* addEnemyBtn = new wxButton(this, wxID_ANY, "味方を追加"); // なんとなく見栄えが良いので
-    auto* addAllyBtn = new wxButton(this, wxID_ANY, "敵を追加"); // 味方が上で敵が下
+    auto* addEnemyBtn = new wxButton(this, wxID_ANY, wxString::FromUTF8("味方を追加")); // なんとなく見栄えが良いので
+    auto* addAllyBtn = new wxButton(this, wxID_ANY, wxString::FromUTF8("敵を追加")); // 味方が上で敵が下
     buttonSizer->Add(addEnemyBtn, 0, wxALL, 5);
     buttonSizer->Add(addAllyBtn, 0, wxALL, 5);
     mainSizer->Add(buttonSizer, 0, wxALIGN_CENTER);

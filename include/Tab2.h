@@ -5,6 +5,7 @@ class Tab1Panel;  // 前方宣言
 
 #include <wx/wx.h>
 #include <wx/spinctrl.h>
+#include <wx/scrolwin.h>
 #include <wx/grid.h>
 #include <wx/notebook.h>
 #include <map>
