@@ -430,7 +430,7 @@ void Tab2Panel::OnCreateButtonClicked(wxCommandEvent&) {
     }
     
 
-void Tab2Panel::CalculateAttributes(int speciesIndex, int& dicenumber, int& diceeffect, int* ability,int& impurity, std::string& feature) {
+void Tab2Panel::CalculateAttributes(int speciesIndex, int& dicenumber, double& diceeffect, int* ability,int& impurity, std::string& feature) {
     // 種族に応じてA~Fを計算 (リストボックスのインデックスと対応)
     switch (speciesIndex) {
     case 1: // 人間

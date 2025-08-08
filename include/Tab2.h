@@ -25,7 +25,7 @@ struct TrialResult {
     int total; // 能力値合計
     int pretotal; // ダイス目合計
     int dicenumber; // ダイス数
-    int diceeffect; // 固定値によるダイス平均への補正
+    double diceeffect; // 固定値によるダイス平均への補正
     float average; // 能力値平均
     
 
@@ -61,7 +61,7 @@ private:
     void InitializeSpeciesData();
     void OnSpeciesSelected(wxCommandEvent & event);
     void OnCreateButtonClicked(wxCommandEvent&);
-    void CalculateAttributes(int speciesIndex, int& dicenumber, int& diceeffect, int* ability, int& impurity, std::string& feature);
+    void CalculateAttributes(int speciesIndex, int& dicenumber, double& diceeffect, int* ability, int& impurity, std::string& feature);
     void CalculateAbilityValues(TrialResult& result);
     void DisplayResults();
 };

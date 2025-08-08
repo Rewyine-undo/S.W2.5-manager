@@ -293,7 +293,7 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
         
         subtableSizer->Add(tableradioA[i], 0, wxALIGN_CENTER );
         subtableSizer->Add(tableradioB[i], 0, wxALIGN_CENTER );
-        tableSizer->Add(subtableSizer, 0, wxEXPAND | wxTOP | wxBOTTOM, 4.5);
+        tableSizer->Add(subtableSizer, 0, wxEXPAND | wxTOP | wxBOTTOM, 4);
         // イベントを登録
         tableradioA[i]->Bind(wxEVT_RADIOBUTTON, &Tab1Panel::Updateexp, this);
         tableradioB[i]->Bind(wxEVT_RADIOBUTTON, &Tab1Panel::Updateexp, this);
@@ -492,7 +492,7 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
     for (int i = 0; i < 10; ++i) {
         // チェックボックスを追加
         speakcheckBoxes[i] = new wxCheckBox(this, wxID_ANY, "", wxDefaultPosition, wxSize(-1, -1));
-        speakSizer->Add(speakcheckBoxes[i], 0, wxCENTER | wxTOP | wxBOTTOM, 4.5);
+        speakSizer->Add(speakcheckBoxes[i], 0, wxCENTER | wxTOP | wxBOTTOM, 4);
     }
     speakcheckBoxes[0]->SetValue(true);
 
@@ -504,7 +504,7 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
     for (int i = 0; i < 10; ++i) {
         // チェックボックスを追加
         readcheckBoxes[i] = new wxCheckBox(this, wxID_ANY, "", wxDefaultPosition, wxSize(-1, -1));
-        readSizer->Add(readcheckBoxes[i], 0, wxCENTER | wxTOP | wxBOTTOM, 4.5);
+        readSizer->Add(readcheckBoxes[i], 0, wxCENTER | wxTOP | wxBOTTOM, 4);
     }
     readcheckBoxes[0]->SetValue(true);
 
