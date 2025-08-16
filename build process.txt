@@ -1,0 +1,26 @@
+1. Homebrewのインストール:次のコマンドを実行
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+2. cmakeのインストール:次のコマンドを実行
+brew install cmake
+
+3. WxWidgets-3.2.6のインストール:以下のコマンドの()内を自身の好きなように変更して実行
+brew tap-new (任意の名前、githubのユーザー名など)/wxwidgets
+brew extract wxwidgets (任意の名前、githubのユーザー名など)/wxwidgets --version=3.2.6
+brew install (任意の名前、githubのユーザー名など)/wxwidgets/wxwidgets@3.2.6
+
+4. WxWidgetsのバージョン確認(スキップしてもOK)：次のコマンドを実行
+brew list wxwidgets@3.2.6
+wx-config --version
+実行後に3.2.6がでればOK
+
+5. クローンしたディレクトリに移動:以下のコマンドの()内を自身の環境に合わせて実行
+cd (このテキストが保存されているディレクトリ)
+
+6. S.W2.5-managerのbuildおよび実行:以下のコマンドを実行
+mkdir build
+cd build
+cmake ..
+make
+./ SW25Manager 
