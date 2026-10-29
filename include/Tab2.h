@@ -1,3 +1,4 @@
+// キャラクター能力値作成タブ
 #ifndef TAB2_H
 #define TAB2_H
 
