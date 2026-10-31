@@ -1,12 +1,13 @@
+
 cmake_minimum_required(VERSION 3.10)
 project(SW25Manager)
 
-# C++17を使う
+# C++17
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # wxWidgetsを探す
-find_package(wxWidgets REQUIRED COMPONENTS core base)
+find_package(wxWidgets REQUIRED COMPONENTS core base richtext)
 
 # ソース・ヘッダファイルを収集
 file(GLOB SRC_FILES src/*.cpp)
@@ -35,5 +36,4 @@ target_link_libraries(
     SW25Manager
     PRIVATE
     ${wxWidgets_LIBRARIES}
-    /opt/homebrew/lib/libwx_osx_cocoau_richtext-3.2.dylib
 )

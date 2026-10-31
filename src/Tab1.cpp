@@ -1825,13 +1825,14 @@ void Tab1Panel::Updatehp(wxCommandEvent& event) {
             int slashPos = talent.Find('/');
                 if (slashPos != wxNOT_FOUND) {
                     wxString talentType = trimSpaces(talent.Mid(slashPos + 1));
-
-                    if (talentType == armorType) {
-                        if (talent.Contains(wxString::FromUTF8("防具習熟A"))) {
-                            tarmor += 1;
-                        }
-                        else if (talent.Contains(wxString::FromUTF8("防具習熟S"))) {
-                            tarmor += 2;
+                    for (int i = 0; i < 3; ++i) {
+                        if (talentType == armorType[i]) {
+                            if (talent.Contains(wxString::FromUTF8("防具習熟A"))) {
+                                tarmor += 1;
+                            }
+                            else if (talent.Contains(wxString::FromUTF8("防具習熟S"))) {
+                                tarmor += 2;
+                            }
                         }
                     }
                 }
@@ -2235,13 +2236,14 @@ void Tab1Panel::RebuildStatusDetailUI(){
             int slashPos = talent.Find('/');
                 if (slashPos != wxNOT_FOUND) {
                     wxString talentType = trimSpaces(talent.Mid(slashPos + 1));
-
-                    if (talentType == weaponType) {
-                        if (talent.Contains(wxString::FromUTF8("武器習熟A"))) {
-                            weapondamage += 1;
-                        }
-                        else if (talent.Contains(wxString::FromUTF8("武器習熟S"))) {
-                            weapondamage += 2;
+                    for (int i = 0; i < 6; ++i) {
+                        if (talentType == weaponType[i]) {
+                            if (talent.Contains(wxString::FromUTF8("武器習熟A"))) {
+                                weapondamage += 1;
+                            }
+                            else if (talent.Contains(wxString::FromUTF8("武器習熟S"))) {
+                                weapondamage += 2;
+                            }
                         }
                     }
                 }
