@@ -4,21 +4,39 @@ name: Windows Build
 on:
   workflow_dispatch:
 
+  push:
+    branches:
+      - master
+
 jobs:
   build:
     runs-on: windows-2022
 
     steps:
+      # Get source code
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Setup MSVC
       - name: Setup MSVC
         uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: x64
 
-      - name: Test Runner
+      # Configure CMake
+      - name: Configure
         run: |
-          echo "Windows Runner is working!"
-          cmake --version
-          cl
+          cmake -S . -B build -A x64
+
+      # Build
+      - name: Build
+        run: |
+          cmake --build build --config Release --parallel
+
+      # Upload executable
+      - name: Upload EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: SW25Manager-Windows-x64
+          path: build/Release/SW25Manager.exe
+          if-no-files-found: error
