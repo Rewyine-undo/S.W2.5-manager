@@ -1,0 +1,17 @@
+name: Windows Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Test Runner
+        run: |
+          echo "Windows Runner is working!"
+          cmake --version
+          cl
