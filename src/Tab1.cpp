@@ -2322,9 +2322,9 @@ void Tab1Panel::RebuildStatusDetailUI(){
             AddOtherSkillRow(
                 className,
                 lv[i],
-                wxString::FromUTF8("%d", tech[i]),
-                wxString::FromUTF8("%d", mov[i]),
-                wxString::FromUTF8("%d", sage[i])
+                wxString::Fromat("%d", tech[i]),
+                wxString::Fromat("%d", mov[i]),
+                wxString::Fromat("%d", sage[i])
             );
         }
         // 探索技能(セージ)
@@ -2335,9 +2335,9 @@ void Tab1Panel::RebuildStatusDetailUI(){
             AddOtherSkillRow(
                 className,
                 lv[i],
-                wxString::FromUTF8(""),  // 技巧は空欄
-                wxString::FromUTF8(""),  // 運動は空欄
-                wxString::FromUTF8("%d", sage[i])
+                wxString::Fromat(""),  // 技巧は空欄
+                wxString::Fromat(""),  // 運動は空欄
+                wxString::Fromat("%d", sage[i])
             );
         }
         // 探索技能(ライダー)
@@ -2349,9 +2349,9 @@ void Tab1Panel::RebuildStatusDetailUI(){
             AddOtherSkillRow(
                 className,
                 lv[i],
-                wxString::FromUTF8(""),
-                wxString::FromUTF8("%d", mov[i]),
-                wxString::FromUTF8("%d", sage[i])
+                wxString::Fromat(""),
+                wxString::Fromat("%d", mov[i]),
+                wxString::Fromat("%d", sage[i])
             );
         }
     }   

@@ -391,7 +391,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
         wxSize(15, -1),
         wxALIGN_CENTER),
         1,
-        wxALIGN_LEFT | wxALL,
+        wxALIGN_CENTER | wxALL,
         5
     );
 
@@ -418,7 +418,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     totalSizer->Add(
         experienceTotalValue,
         1,
-        wxALIGN_CENTER_VERTICAL| wxALIGN_RIGHT | wxALL,
+        wxALIGN_CENTER_VERTICAL| wxALIGN_CENTER | wxALL,
         2
     );
 
@@ -434,7 +434,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     totalSizer->Add(
         moneyTotalValue,
         1,
-        wxALIGN_CENTER_VERTICAL| wxALIGN_RIGHT | wxALL,
+        wxALIGN_CENTER_VERTICAL| wxALIGN_CENTER | wxALL,
         2
     );
 
@@ -450,7 +450,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     totalSizer->Add(
         honorTotalValue,
         1,
-        wxALIGN_CENTER_VERTICAL| wxALIGN_RIGHT | wxALL,
+        wxALIGN_CENTER_VERTICAL| wxALIGN_CENTER | wxALL,
         2
     );
 
@@ -466,7 +466,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     totalSizer->Add(
         growthTotalValue,
         1,
-        wxALIGN_CENTER_VERTICAL| wxALIGN_RIGHT | wxALL,
+        wxALIGN_CENTER_VERTICAL| wxALIGN_CENTER | wxALL,
         2
     );
 
@@ -534,13 +534,13 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     wxBoxSizer* subbuttonSizer = new wxBoxSizer(wxVERTICAL);
 
     wxButton* minusButton = new wxButton(
-        historyWindow ,
+        historyWindow,
         wxID_ANY,
-        wxString::FromUTF8("-"),
+        "-",
         wxDefaultPosition,
-        wxSize(80, 30),
-        wxALIGN_CENTER
+        wxSize(80, 30)
     );
+
     minusButton->Bind(
         wxEVT_BUTTON,
         [this](wxCommandEvent&)
@@ -550,13 +550,13 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     );
 
     wxButton* plusButton = new wxButton(
-        historyWindow ,
+        historyWindow,
         wxID_ANY,
-        wxString::FromUTF8("+"),
+        "+",
         wxDefaultPosition,
-        wxSize(80, 30),
-        wxALIGN_CENTER
+        wxSize(80, 30)
     );
+
     plusButton->Bind(
         wxEVT_BUTTON,
         [this](wxCommandEvent&)
@@ -567,11 +567,14 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
 
     subbuttonSizer->Add(
         plusButton,
+        0,
         wxALIGN_CENTER | wxALL,
         10
     );
+
     subbuttonSizer->Add(
         minusButton,
+        0,
         wxALIGN_CENTER | wxALL,
         10
     );
@@ -691,7 +694,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     moneyLabel = new wxStaticText(
         transactionWindow,
         wxID_ANY,
-        wxString::FromUTF8("所持金：0")
+        wxString::Fromat("所持金：0")
     );
     // 注釈
     wxStaticText* moneycomment = new wxStaticText(transactionWindow, wxID_ANY, wxString::FromUTF8("(例) 冒険者セット :: -100"));
