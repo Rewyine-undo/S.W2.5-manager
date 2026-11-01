@@ -1006,6 +1006,23 @@ void Tab3Panel::AddSessionRow()
     // 先頭のヘッダー1行 + 既存の入力行
     std::size_t insertIndex =
         COLUMN_COUNT * (1 + tableInputs.size());
+    
+    // No.列 + 入力8列の最小幅 [px]
+    const int columnMinWidths[COLUMN_COUNT] = {
+        8,   // No.
+        50,  // 日付
+        80,  // タイトル
+        50,  // 経験値
+        50,  // お金
+        50,  // 名誉点
+        60,  // 成長点
+        60,  // マテカ収支
+        60   // 備考など
+    };
+    auto SetColumnWidth = [&](wxWindow* window, int col) {
+        window->SetMinSize(wxSize(columnMinWidths[col], -1));
+        window->SetMaxSize(wxSize(columnMinWidths[col], -1));
+    };
 
     wxStaticText* numberText = new wxStaticText(
         historyWindow,
@@ -1017,6 +1034,7 @@ void Tab3Panel::AddSessionRow()
     );
 
     rowNumberTexts.push_back(numberText);
+    SetColumnWidth(numberText, 0);
 
     tableSizer->Insert(
         insertIndex++,
@@ -1047,6 +1065,7 @@ void Tab3Panel::AddSessionRow()
         );
 
         rowInputs.push_back(input);
+        SetColumnWidth(input, col + 1);
 
         tableSizer->Insert(
             insertIndex++,
@@ -1120,10 +1139,28 @@ void Tab3Panel::RemoveSessionRow()
 // 行番号の降り直し
 void Tab3Panel::UpdateSessionRowNumbers()
 {
+    // No.列 + 入力8列の最小幅 [px]
+    const int columnMinWidths[COLUMN_COUNT] = {
+        8,   // No.
+        50,  // 日付
+        80,  // タイトル
+        50,  // 経験値
+        50,  // お金
+        50,  // 名誉点
+        60,  // 成長点
+        60,  // マテカ収支
+        60   // 備考など
+    };
+    auto SetColumnWidth = [&](wxWindow* window, int col) {
+        window->SetMinSize(wxSize(columnMinWidths[col], -1));
+        window->SetMaxSize(wxSize(columnMinWidths[col], -1));
+    };
+
     for (std::size_t i = 0; i < rowNumberTexts.size(); ++i)
     {
         rowNumberTexts[i]->SetLabel(
             wxString::Format(wxT("%d"), static_cast<int>(i + 1))
         );
+        SetColumnWidth(rowNumberTexts[i], 0);
     }
 }
