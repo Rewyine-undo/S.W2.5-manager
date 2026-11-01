@@ -428,7 +428,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     experienceTotalValue = new wxStaticText(
         historyWindow,
         wxID_ANY,
-        "0",
+        wxString::Format("0"),
         wxDefaultPosition,
         wxDefaultSize,
         wxALIGN_RIGHT
@@ -447,7 +447,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     moneyTotalValue = new wxStaticText(
         historyWindow,
         wxID_ANY,
-        "0",
+        wxString::Format("0"),
         wxDefaultPosition,
         wxDefaultSize,
         wxALIGN_RIGHT
@@ -466,7 +466,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     honorTotalValue = new wxStaticText(
         historyWindow,
         wxID_ANY,
-        "0",
+        wxString::Format("0"),
         wxDefaultPosition,
         wxDefaultSize,
         wxALIGN_RIGHT
@@ -485,7 +485,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     growthTotalValue = new wxStaticText(
         historyWindow,
         wxID_ANY,
-        "0",
+        wxString::Format("0"),
         wxDefaultPosition,
         wxDefaultSize,
         wxALIGN_RIGHT
@@ -558,7 +558,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     wxButton* minusButton = new wxButton(
         historyWindow,
         wxID_ANY,
-        "-",
+        wxString::FromUTF8("-"),
         wxDefaultPosition,
         wxSize(80, 30)
     );
@@ -574,7 +574,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     wxButton* plusButton = new wxButton(
         historyWindow,
         wxID_ANY,
-        "+",
+        wxString::FromUTF8("+"),
         wxDefaultPosition,
         wxSize(80, 30)
     );
@@ -716,7 +716,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     moneyLabel = new wxStaticText(
         transactionWindow,
         wxID_ANY,
-        wxString::Format("所持金：0")
+        wxString::FromUTF8("所持金：0")
     );
     // 注釈
     wxStaticText* moneycomment = new wxStaticText(transactionWindow, wxID_ANY, wxString::FromUTF8("(例) 冒険者セット :: -100"));
@@ -727,7 +727,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     moneyHistory = new wxTextCtrl(
         transactionWindow,
         wxID_ANY,
-        "",
+        wxString::FromUTF8(""),
         wxDefaultPosition,
         wxSize(-1, 200),
         wxTE_MULTILINE | wxTE_DONTWRAP
