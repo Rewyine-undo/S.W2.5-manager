@@ -276,7 +276,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     };
     auto SetColumnWidth = [&](wxWindow* window, int col) {
         window->SetMinSize(wxSize(columnMinWidths[col], -1));
-        // window->SetMaxSize(wxSize(columnMinWidths[col], -1));
+        window->SetMaxSize(wxSize(columnMinWidths[col], -1));
     };
 
     // 1列目は行番号なのでラベル
