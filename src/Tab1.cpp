@@ -2336,8 +2336,8 @@ void Tab1Panel::RebuildStatusDetailUI(){
             AddOtherSkillRow(
                 className,
                 lv[i],
-                wxString::Format(""),  // 技巧は空欄
-                wxString::Format(""),  // 運動は空欄
+                wxString(""),  // 技巧は空欄
+                wxString(""),  // 運動は空欄
                 wxString::Format("%d", sage[i])
             );
         }
@@ -2350,7 +2350,7 @@ void Tab1Panel::RebuildStatusDetailUI(){
             AddOtherSkillRow(
                 className,
                 lv[i],
-                wxString::Format(""),
+                wxString(""),
                 wxString::Format("%d", mov[i]),
                 wxString::Format("%d", sage[i])
             );

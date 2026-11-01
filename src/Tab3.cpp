@@ -524,7 +524,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
 
 
     historySizer->Add(
-        totalSizer, 0, wxEXPAND | wxLEFT | wxRIGHT, 5
+        totalSizer, 0, wxEXPAND | wxALL, 5
     );
 
     // ==================================================
