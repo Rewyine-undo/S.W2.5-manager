@@ -716,6 +716,7 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
     levelTextBox->Bind(wxEVT_TEXT, &Tab1Panel::Updatehp, this);
     levelSizer->Add(levelTextBox, 0, wxALIGN_CENTER);
 
+    
     warningText = new wxStaticText(skillWindow, wxID_ANY, wxString::FromUTF8("取得経験値を超過しています！"), wxPoint(10, 10));
     warningText->Bind(wxEVT_TEXT, &Tab1Panel::OnCompareValues, this);
     warningText->SetForegroundColour(*wxRED); // 赤色に設定

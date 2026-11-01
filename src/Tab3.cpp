@@ -153,6 +153,7 @@ void ParseMateca(const wxString& input, std::array<std::array<long long, 4>, 5>&
 
 } // namespace
 
+
 // コンストラクタ
 Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     : wxScrolledWindow(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxVSCROLL), tab1Panel(tab1Panel)
