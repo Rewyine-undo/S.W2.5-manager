@@ -879,12 +879,12 @@ void Tab3Panel::UpdateSessionTotals()
         ParseMateca(row[6]->GetValue(), matecaTotals);
     }
 
-    experienceTotalValue->SetLabel(wxString::Format("%lld", experienceSum));
-    moneyTotalValue->SetLabel(wxString::Format("%lld", sessionMoneySum));
-    honorTotalValue->SetLabel(wxString::Format("%lld", honorSum));
+    experienceTotalValue->SetLabel(wxString::Format(wxT("%lld"), experienceSum));
+    moneyTotalValue->SetLabel(wxString::Format(wxT("%lld"), sessionMoneySum));
+    honorTotalValue->SetLabel(wxString::Format(wxT("%lld"), honorSum));
     long long totalGrowthCount = 0;
     for (long long count : growthTotals) totalGrowthCount += count;
-    growthTotalValue->SetLabel(wxString::Format("%lld", totalGrowthCount));
+    growthTotalValue->SetLabel(wxString::Format(wxT("%lld"), totalGrowthCount));
 
     // 収支履歴の全行を再計算し、所持金を履歴由来の値で置き換える。
     const wxString moneyWxText = moneyHistory->GetValue();
@@ -894,7 +894,7 @@ void Tab3Panel::UpdateSessionTotals()
     moneyUtf8.data() ? moneyUtf8.data() : "";
     const long long transactionMoney =
     CalculateMoney(moneyText, baseMoney);
-    moneyLabel->SetLabel(wxString::Format("所持金：%lld", transactionMoney));
+    moneyLabel->SetLabel(wxString::Format(wxT("所持金：%lld"), transactionMoney));
 
     // Tab1Panel の各 SpinCtrl に合計値を反映
     if (tab1Panel != nullptr)
