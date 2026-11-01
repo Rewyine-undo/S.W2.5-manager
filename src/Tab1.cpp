@@ -1640,7 +1640,7 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
 
 
 void Tab1Panel::SetCharacterData(const wxString& name, const wxString& species, const wxString& feature, const std::vector<int>& data){
-    if (data.size() < 5) return;  // データ数が足りなければ何もしない
+    if (data.size() < 10) return;  // データ数が足りなければ何もしない
 
     nameTextBox->SetValue(name);
     speciesTextBox->SetValue(species);

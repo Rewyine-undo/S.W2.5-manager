@@ -262,6 +262,22 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
         wxString::FromUTF8("マテカ収支"),
         wxString::FromUTF8("補遺")
     };
+    // No.列 + 入力8列の最小幅 [px]
+    const int columnMinWidths[COLUMN_COUNT] = {
+        8,   // No.
+        50,  // 日付
+        80,  // タイトル
+        50,  // 経験値
+        50,  // お金
+        50,  // 名誉点
+        60,  // 成長点
+        60,  // マテカ収支
+        60   // 備考など
+    };
+    auto SetColumnWidth = [&](wxWindow* window, int col) {
+        window->SetMinSize(wxSize(columnMinWidths[col], -1));
+        // window->SetMaxSize(wxSize(columnMinWidths[col], -1));
+    };
 
     // 1列目は行番号なのでラベル
     wxStaticText* numberHeader = new wxStaticText(
@@ -272,6 +288,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
         wxSize(10, -1),
         wxALIGN_CENTER
     );
+    SetColumnWidth(numberHeader, 0);
 
     tableSizer->Add(
         numberHeader,
@@ -291,6 +308,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
             wxDefaultSize,
             wxALIGN_CENTER
         );
+        SetColumnWidth(label, col + 1);
 
         tableSizer->Add(
             label,
@@ -320,6 +338,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
         );
 
         rowNumberTexts.push_back(rowNumber);
+        SetColumnWidth(rowNumber, 0);
 
         tableSizer->Add(
             rowNumber,
@@ -351,6 +370,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
             );
 
             rowInputs.push_back(textBox);
+            SetColumnWidth(textBox, col + 1);
 
             tableSizer->Add(
                 textBox,
@@ -367,59 +387,59 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     historySizer->Add(
         tableSizer,
         0,
-        wxEXPAND | wxALL,
+        wxALIGN_LEFT | wxALL,
         5
     );
 
+    
     // ==================================================
-    // 取得合計：別表の9列の最後尾に配置
+    // 取得合計：表本体と同じ tableSizer に追加
     // ==================================================
-    // 合計表示：同じく9列
-    wxFlexGridSizer* totalSizer = new wxFlexGridSizer(
-        0,                  // 行数は自動
-        COLUMN_COUNT,      // 9列
-        1,                  // 縦方向の間隔
-        1                   // 横方向の間隔
-    );
-    // 各列を伸縮可能にする
-    for (int col = 0; col < COLUMN_COUNT; ++col) {
-        totalSizer->AddGrowableCol(col, 1);
-    }
 
     // 合計：1列目
-    totalSizer->Add(experienceTotalValue = new wxStaticText(
-            historyWindow, wxID_ANY, "計", wxDefaultPosition,
-        wxSize(15, -1),
-        wxALIGN_CENTER),
+    wxStaticText* totalLabel = new wxStaticText(
+        historyWindow,
+        wxID_ANY,
+        "計",
+        wxDefaultPosition,
+        wxDefaultSize,
+        wxALIGN_LEFT
+    );
+
+    tableSizer->Add(
+        totalLabel,
         1,
-        wxALIGN_CENTER | wxALL,
+        wxEXPAND | wxALL,
         5
     );
 
     // No.、日付、タイトルの3列は空欄
     for (int col = 1; col < 3; ++col)
     {
-        totalSizer->Add(
+        tableSizer->Add(
             new wxStaticText(historyWindow, wxID_ANY, ""),
             1,
             wxEXPAND | wxALL,
             2
         );
     }
-    
+
     // 経験値合計：4列目
     experienceTotalValue = new wxStaticText(
         historyWindow,
         wxID_ANY,
-        "0"
+        "0",
+        wxDefaultPosition,
+        wxDefaultSize,
+        wxALIGN_RIGHT
     );
 
     totalRowCells.push_back(experienceTotalValue);
 
-    totalSizer->Add(
+    tableSizer->Add(
         experienceTotalValue,
         1,
-        wxALIGN_CENTER_VERTICAL| wxALIGN_CENTER | wxALL,
+        wxEXPAND | wxALIGN_CENTER_VERTICAL | wxALL,
         2
     );
 
@@ -427,15 +447,18 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     moneyTotalValue = new wxStaticText(
         historyWindow,
         wxID_ANY,
-        "0"
+        "0",
+        wxDefaultPosition,
+        wxDefaultSize,
+        wxALIGN_RIGHT
     );
 
     totalRowCells.push_back(moneyTotalValue);
 
-    totalSizer->Add(
+    tableSizer->Add(
         moneyTotalValue,
         1,
-        wxALIGN_CENTER_VERTICAL| wxALIGN_CENTER | wxALL,
+        wxEXPAND | wxALIGN_CENTER_VERTICAL | wxALL,
         2
     );
 
@@ -443,15 +466,18 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     honorTotalValue = new wxStaticText(
         historyWindow,
         wxID_ANY,
-        "0"
+        "0",
+        wxDefaultPosition,
+        wxDefaultSize,
+        wxALIGN_RIGHT
     );
 
     totalRowCells.push_back(honorTotalValue);
 
-    totalSizer->Add(
+    tableSizer->Add(
         honorTotalValue,
         1,
-        wxALIGN_CENTER_VERTICAL| wxALIGN_CENTER | wxALL,
+        wxEXPAND | wxALIGN_CENTER_VERTICAL | wxALL,
         2
     );
 
@@ -459,22 +485,25 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     growthTotalValue = new wxStaticText(
         historyWindow,
         wxID_ANY,
-        "0"
+        "0",
+        wxDefaultPosition,
+        wxDefaultSize,
+        wxALIGN_RIGHT
     );
 
     totalRowCells.push_back(growthTotalValue);
 
-    totalSizer->Add(
+    tableSizer->Add(
         growthTotalValue,
         1,
-        wxALIGN_CENTER_VERTICAL| wxALIGN_CENTER | wxALL,
+        wxEXPAND | wxALIGN_CENTER_VERTICAL | wxALL,
         2
     );
 
     // マテカ収支、補遺の2列は空欄
     for (int col = 0; col < 2; ++col)
     {
-        totalSizer->Add(
+        tableSizer->Add(
             new wxStaticText(historyWindow, wxID_ANY, ""),
             1,
             wxEXPAND | wxALL,
@@ -482,31 +511,27 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
         );
     }
 
-    // // ==================================================
-    // // 下側のラベル
-    // // ==================================================
-    // 最後にラベル
+    // ==================================================
+    // 下側のラベル
+    // ==================================================
+
     wxStaticText* bottomHeader = new wxStaticText(
-        historyWindow ,
+        historyWindow,
         wxID_ANY,
-        wxString::FromUTF8("   "),
-        wxDefaultPosition,
-        wxSize(10, -1),
-        wxALIGN_CENTER
+        ""
     );
 
-    totalSizer->Add(
+    tableSizer->Add(
         bottomHeader,
         1,
-        wxALIGN_LEFT,
+        wxEXPAND | wxALL,
         2
     );
 
-    // 2～9列目
-    for (int col = 0; col < INPUT_COLUMN_COUNT; ++col) {
-
+    for (int col = 0; col < INPUT_COLUMN_COUNT; ++col)
+    {
         wxStaticText* label = new wxStaticText(
-            historyWindow ,
+            historyWindow,
             wxID_ANY,
             labels[col],
             wxDefaultPosition,
@@ -514,18 +539,14 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
             wxALIGN_CENTER
         );
 
-        totalSizer->Add(
+        tableSizer->Add(
             label,
             1,
-            wxALIGN_CENTER | wxALL,
+            wxEXPAND | wxALIGN_CENTER | wxALL,
             5
         );
     }
 
-
-    historySizer->Add(
-        totalSizer, 0, wxEXPAND | wxALL, 5
-    );
 
     // ==================================================
     // ＋ / － ボタン
@@ -979,8 +1000,12 @@ void Tab3Panel::OnMoneyHistoryChanged(wxCommandEvent& event)
 // 行追加関数
 void Tab3Panel::AddSessionRow()
 {
-    // 行番号
     int rowNumber = static_cast<int>(tableInputs.size()) + 1;
+
+    // 合計行より前に挿入する位置
+    // 先頭のヘッダー1行 + 既存の入力行
+    std::size_t insertIndex =
+        COLUMN_COUNT * (1 + tableInputs.size());
 
     wxStaticText* numberText = new wxStaticText(
         historyWindow,
@@ -989,21 +1014,21 @@ void Tab3Panel::AddSessionRow()
         wxDefaultPosition,
         wxDefaultSize,
         wxALIGN_CENTER
-        );
+    );
 
     rowNumberTexts.push_back(numberText);
 
-    tableSizer->Add(
+    tableSizer->Insert(
+        insertIndex++,
         numberText,
         1,
         wxEXPAND | wxALIGN_LEFT | wxALL,
         5
     );
 
-    // 入力欄8個
     std::vector<wxTextCtrl*> rowInputs;
 
-    for (int col = 0; col < 8; ++col)
+    for (int col = 0; col < INPUT_COLUMN_COUNT; ++col)
     {
         wxTextCtrl* input = new wxTextCtrl(
             historyWindow,
@@ -1013,7 +1038,6 @@ void Tab3Panel::AddSessionRow()
             wxDefaultSize
         );
 
-        // 入力変更時に合計を再計算
         input->Bind(
             wxEVT_TEXT,
             [this](wxCommandEvent&)
@@ -1024,7 +1048,8 @@ void Tab3Panel::AddSessionRow()
 
         rowInputs.push_back(input);
 
-        tableSizer->Add(
+        tableSizer->Insert(
+            insertIndex++,
             input,
             1,
             wxEXPAND | wxALL,
@@ -1034,17 +1059,16 @@ void Tab3Panel::AddSessionRow()
 
     tableInputs.push_back(rowInputs);
 
-    // レイアウトと合計を更新
     tableSizer->Layout();
     historySizer->Layout();
     historyWindow->FitInside();
 
     UpdateSessionTotals();
 
-    // 外側の親ウィンドウもレイアウトする
     Layout();
     FitInside();
 }
+
 // 行削除関数
 void Tab3Panel::RemoveSessionRow()
 {
