@@ -34,9 +34,11 @@ jobs:
           cmake --build build --config Release --parallel
 
       # Upload executable
-      - name: Upload EXE
+      - name: Upload EXE and PDB
         uses: actions/upload-artifact@v4
         with:
-          name: SW25Manager-Windows-x64
-          path: build/Release/SW25Manager.exe
+          name: SW25Manager-Windows-x64-DebugInfo
+          path: |
+            build/Release/SW25Manager.exe
+            build/Release/SW25Manager.pdb
           if-no-files-found: error
