@@ -716,7 +716,7 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
     levelTextBox->Bind(wxEVT_TEXT, &Tab1Panel::Updatehp, this);
     levelSizer->Add(levelTextBox, 0, wxALIGN_CENTER);
 
-    
+
     warningText = new wxStaticText(skillWindow, wxID_ANY, wxString::FromUTF8("取得経験値を超過しています！"), wxPoint(10, 10));
     warningText->Bind(wxEVT_TEXT, &Tab1Panel::OnCompareValues, this);
     warningText->SetForegroundColour(*wxRED); // 赤色に設定
@@ -2323,9 +2323,9 @@ void Tab1Panel::RebuildStatusDetailUI(){
             AddOtherSkillRow(
                 className,
                 lv[i],
-                wxString::Fromat("%d", tech[i]),
-                wxString::Fromat("%d", mov[i]),
-                wxString::Fromat("%d", sage[i])
+                wxString::Format("%d", tech[i]),
+                wxString::Format("%d", mov[i]),
+                wxString::Format("%d", sage[i])
             );
         }
         // 探索技能(セージ)
@@ -2336,9 +2336,9 @@ void Tab1Panel::RebuildStatusDetailUI(){
             AddOtherSkillRow(
                 className,
                 lv[i],
-                wxString::Fromat(""),  // 技巧は空欄
-                wxString::Fromat(""),  // 運動は空欄
-                wxString::Fromat("%d", sage[i])
+                wxString::Format(""),  // 技巧は空欄
+                wxString::Format(""),  // 運動は空欄
+                wxString::Format("%d", sage[i])
             );
         }
         // 探索技能(ライダー)
@@ -2350,9 +2350,9 @@ void Tab1Panel::RebuildStatusDetailUI(){
             AddOtherSkillRow(
                 className,
                 lv[i],
-                wxString::Fromat(""),
-                wxString::Fromat("%d", mov[i]),
-                wxString::Fromat("%d", sage[i])
+                wxString::Format(""),
+                wxString::Format("%d", mov[i]),
+                wxString::Format("%d", sage[i])
             );
         }
     }   

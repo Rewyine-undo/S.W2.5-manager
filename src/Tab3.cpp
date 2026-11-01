@@ -695,7 +695,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     moneyLabel = new wxStaticText(
         transactionWindow,
         wxID_ANY,
-        wxString::Fromat("所持金：0")
+        wxString::Format("所持金：0")
     );
     // 注釈
     wxStaticText* moneycomment = new wxStaticText(transactionWindow, wxID_ANY, wxString::FromUTF8("(例) 冒険者セット :: -100"));
