@@ -252,14 +252,14 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     // ==================================================
 
     const wxString labels[INPUT_COLUMN_COUNT] = {
-        "日付",
-        "タイトル",
-        "経験値",
-        "金収支",
-        "名誉点",
-        "成長",
-        "マテカ収支",
-        "補遺"
+        wxT("日付"),
+        wxT("タイトル"),
+        wxT("経験値"),
+        wxT("金収支"),
+        wxT("名誉点"),
+        wxT("成長"),
+        wxT("マテカ収支"),
+        wxT("補遺")
     };
 
     // 1列目は行番号なのでラベル
@@ -294,7 +294,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
         tableSizer->Add(
             label,
             1,
-            wxEXPAND | wxALIGN_CENTER | wxALL,
+            wxALIGN_CENTER | wxALL,
             5
         );
     }
@@ -391,7 +391,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
         wxSize(15, -1),
         wxALIGN_CENTER),
         1,
-        wxEXPAND | wxALIGN_LEFT | wxALL,
+        wxALIGN_CENTER | wxALL,
         5
     );
 
@@ -497,7 +497,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     totalSizer->Add(
         bottomHeader,
         1,
-        wxEXPAND | wxALIGN_LEFT,
+        wxALIGN_LEFT,
         2
     );
 
@@ -516,7 +516,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
         totalSizer->Add(
             label,
             1,
-            wxEXPAND | wxALIGN_CENTER | wxALL,
+            wxALIGN_CENTER | wxALL,
             5
         );
     }
@@ -580,11 +580,11 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     wxBoxSizer* commentSizer = new wxBoxSizer(wxVERTICAL);
 
     wxStaticText* historycomment = new wxStaticText(historyWindow, wxID_ANY, wxString::FromUTF8("(例1) 経験値: 1000+50*1, 金収支: 2000-600, 名誉点: 20"));
-    historycomment->SetForegroundColour(*wxCYAN); // 赤色に設定
+    historycomment->SetForegroundColour(*wxPURPLE); // 赤色に設定
     wxStaticText* historycomment2 = new wxStaticText(historyWindow, wxID_ANY, wxString::FromUTF8("　　　経験値、金収支、名誉点は四則演算が有効"));
     historycomment2->SetForegroundColour(*wxRED); // 赤色に設定
     wxStaticText* historycomment3 = new wxStaticText(historyWindow, wxID_ANY, wxString::FromUTF8("(例2) 成長: 器1生2, マテカ収支: -緑A3+赤B1"));
-    historycomment3->SetForegroundColour(*wxCYAN); // 赤色に設定
+    historycomment3->SetForegroundColour(*wxPURPLE); // 赤色に設定
     wxStaticText* historycomment4 = new wxStaticText(historyWindow, wxID_ANY, wxString::FromUTF8("　　　成長は「器・敏・筋・生・知・精」の後に数字を入れて成長回数を調整可能"));
     historycomment4->SetForegroundColour(*wxRED); // 赤色に設定
     wxStaticText* historycomment5 = new wxStaticText(historyWindow, wxID_ANY, wxString::FromUTF8("　　　マテカ収支は「赤~金」「B~SS」の前に「+/-」を組み合わせる"));
@@ -638,7 +638,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     historySizer->Add(
         buttonSizer,
         0,
-        wxALIGN_CENTER | wxTOP |wxBOTTOM,
+        wxALIGN_LEFT | wxTOP |wxBOTTOM,
         10
     );
 
@@ -691,7 +691,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     moneyLabel = new wxStaticText(
         transactionWindow,
         wxID_ANY,
-        "所持金：0"
+        wxT("所持金：0")
     );
     // 注釈
     wxStaticText* moneycomment = new wxStaticText(transactionWindow, wxID_ANY, wxString::FromUTF8("(例) 冒険者セット :: -100"));
@@ -1095,7 +1095,7 @@ void Tab3Panel::UpdateSessionRowNumbers()
     for (std::size_t i = 0; i < rowNumberTexts.size(); ++i)
     {
         rowNumberTexts[i]->SetLabel(
-            wxString::Format("%d", static_cast<int>(i + 1))
+            wxString::Format(wxT("%d"), static_cast<int>(i + 1))
         );
     }
 }
