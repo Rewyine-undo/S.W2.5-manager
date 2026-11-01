@@ -387,11 +387,11 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
 
     // 合計：1列目
     totalSizer->Add(experienceTotalValue = new wxStaticText(
-            historyWindow, wxID_ANY, "合計", wxDefaultPosition,
+            historyWindow, wxID_ANY, "計", wxDefaultPosition,
         wxSize(15, -1),
         wxALIGN_CENTER),
         1,
-        wxALIGN_CENTER | wxALL,
+        wxALIGN_LEFT | wxALL,
         5
     );
 
@@ -580,11 +580,11 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     wxBoxSizer* commentSizer = new wxBoxSizer(wxVERTICAL);
 
     wxStaticText* historycomment = new wxStaticText(historyWindow, wxID_ANY, wxString::FromUTF8("(例1) 経験値: 1000+50*1, 金収支: 2000-600, 名誉点: 20"));
-    historycomment->SetForegroundColour(*wxPURPLE); // 赤色に設定
+    historycomment->SetForegroundColour(wxColour(100, 0, 250)); // 紫色に設定
     wxStaticText* historycomment2 = new wxStaticText(historyWindow, wxID_ANY, wxString::FromUTF8("　　　経験値、金収支、名誉点は四則演算が有効"));
     historycomment2->SetForegroundColour(*wxRED); // 赤色に設定
     wxStaticText* historycomment3 = new wxStaticText(historyWindow, wxID_ANY, wxString::FromUTF8("(例2) 成長: 器1生2, マテカ収支: -緑A3+赤B1"));
-    historycomment3->SetForegroundColour(*wxPURPLE); // 赤色に設定
+    historycomment3->SetForegroundColour(wxColour(100, 0, 250)); // 紫色に設定
     wxStaticText* historycomment4 = new wxStaticText(historyWindow, wxID_ANY, wxString::FromUTF8("　　　成長は「器・敏・筋・生・知・精」の後に数字を入れて成長回数を調整可能"));
     historycomment4->SetForegroundColour(*wxRED); // 赤色に設定
     wxStaticText* historycomment5 = new wxStaticText(historyWindow, wxID_ANY, wxString::FromUTF8("　　　マテカ収支は「赤~金」「B~SS」の前に「+/-」を組み合わせる"));
@@ -695,9 +695,9 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     );
     // 注釈
     wxStaticText* moneycomment = new wxStaticText(transactionWindow, wxID_ANY, wxString::FromUTF8("(例) 冒険者セット :: -100"));
-    moneycomment->SetForegroundColour(*wxCYAN); // 赤色に設定
+    moneycomment->SetForegroundColour(wxColour(100, 0, 250)); // 紫色に設定
     wxStaticText* moneycomment2 = new wxStaticText(transactionWindow, wxID_ANY, wxString::FromUTF8("       冒険者セット売却 :: +50"));
-    moneycomment2->SetForegroundColour(*wxCYAN); // 赤色に設定
+    moneycomment2->SetForegroundColour(wxColour(100, 0, 250)); // 紫色に設定
 
     moneyHistory = new wxTextCtrl(
         transactionWindow,

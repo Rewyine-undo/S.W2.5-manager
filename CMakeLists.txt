@@ -1,14 +1,76 @@
-cmake_minimum_required(VERSION 3.10)
-project(SW25Manager)
 
-# C++17を使う
+cmake_minimum_required(VERSION 3.15)
+
+cmake_policy(SET CMP0091 NEW)
+
+project(SW25Manager LANGUAGES C CXX)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# wxWidgetsを探す
-find_package(wxWidgets REQUIRED COMPONENTS core base)
+# ==========================================
+# Windows 用設定
+# ==========================================
+if(WIN32)
 
-# ソース・ヘッダファイルを収集
+    # MSVC のランタイムを静的リンク (/MT)
+    set(CMAKE_MSVC_RUNTIME_LIBRARY
+        "MultiThreaded$<$<CONFIG:Debug>:Debug>"
+    )
+
+    include(FetchContent)
+
+    # wxWidgets のビルド設定
+    set(wxBUILD_SHARED OFF CACHE BOOL "" FORCE)
+    set(wxBUILD_USE_STATIC_RUNTIME ON CACHE BOOL "" FORCE)
+    set(wxBUILD_SAMPLES OFF CACHE STRING "" FORCE)
+    set(wxBUILD_TESTS OFF CACHE STRING "" FORCE)
+
+    # wxWidgets 3.2.6 を取得
+    FetchContent_Declare(
+        wxWidgets
+        GIT_REPOSITORY https://github.com/wxWidgets/wxWidgets.git
+        GIT_TAG v3.2.6
+        GIT_SHALLOW TRUE
+    )
+
+    FetchContent_MakeAvailable(wxWidgets)
+
+    # nlohmann/json を取得
+    FetchContent_Declare(
+        nlohmann_json
+        GIT_REPOSITORY https://github.com/nlohmann/json.git
+        GIT_TAG v3.11.3
+        GIT_SHALLOW TRUE
+    )
+
+    FetchContent_MakeAvailable(nlohmann_json)
+
+    set(WX_LIBS
+        wx::core
+        wx::base
+        wx::richtext
+    )
+
+# ==========================================
+# macOS 用設定
+# ==========================================
+else()
+
+    find_package(
+        wxWidgets REQUIRED
+        COMPONENTS core base richtext
+    )
+
+    set(WX_LIBS ${wxWidgets_LIBRARIES})
+    set(WX_INCLUDES ${wxWidgets_INCLUDE_DIRS})
+    set(WX_DEFS ${wxWidgets_DEFINITIONS})
+
+endif()
+
+# ==========================================
+# ソースファイル
+# ==========================================
 file(GLOB SRC_FILES src/*.cpp)
 file(GLOB HEADER_FILES include/*.h)
 
@@ -55,6 +117,40 @@ target_compile_definitions(
 target_link_libraries(
     SW25Manager
     PRIVATE
-    ${wxWidgets_LIBRARIES}
-    /opt/homebrew/lib/libwx_osx_cocoau_richtext-3.2.dylib
+    ${WX_LIBS}
 )
+
+if(WIN32)
+    target_link_libraries(
+        SW25Manager
+        PRIVATE
+        nlohmann_json::nlohmann_json
+    )
+endif()
+
+# ==========================================
+# MSVC 設定
+# ==========================================
+if(MSVC)
+
+    # ソースコード・実行時文字列をUTF-8として扱う
+    target_compile_options(
+        SW25Manager
+        PRIVATE
+        /utf-8
+    )
+
+    # Release ビルドでも PDB を生成
+    target_compile_options(
+        SW25Manager
+        PRIVATE
+        "$<$<CONFIG:Release>:/Zi>"
+    )
+
+    target_link_options(
+        SW25Manager
+        PRIVATE
+        "$<$<CONFIG:Release>:/DEBUG>"
+    )
+
+endif()

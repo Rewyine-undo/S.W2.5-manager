@@ -1824,7 +1824,7 @@ void Tab1Panel::Updatehp(wxCommandEvent& event) {
             wxString talent = trimSpaces(wxString::FromUTF8(talentName));
             int slashPos = talent.Find('/');
                 if (slashPos != wxNOT_FOUND) {
-                    wxString talentType = trimSpaces(talent.Mid(slashPos + 1));
+                    wxString talentType = trimSpaces(wxString::FromUTF8(talent.Mid(slashPos + 1)));
                     for (int i = 0; i < 3; ++i) {
                         if (talentType == armorType[i]) {
                             if (talent.Contains(wxString::FromUTF8("防具習熟A"))) {
@@ -2235,7 +2235,7 @@ void Tab1Panel::RebuildStatusDetailUI(){
             wxString talent = trimSpaces(wxString::FromUTF8(talentName));
             int slashPos = talent.Find('/');
                 if (slashPos != wxNOT_FOUND) {
-                    wxString talentType = trimSpaces(talent.Mid(slashPos + 1));
+                    wxString talentType = trimSpaces(wxString::FromUTF8(talent.Mid(slashPos + 1)));
                     for (int i = 0; i < 6; ++i) {
                         if (talentType == weaponType[i]) {
                             if (talent.Contains(wxString::FromUTF8("武器習熟A"))) {
