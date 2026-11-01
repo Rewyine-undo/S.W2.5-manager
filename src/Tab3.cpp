@@ -252,14 +252,14 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     // ==================================================
 
     const wxString labels[INPUT_COLUMN_COUNT] = {
-        wxT("日付"),
-        wxT("タイトル"),
-        wxT("経験値"),
-        wxT("金収支"),
-        wxT("名誉点"),
-        wxT("成長"),
-        wxT("マテカ収支"),
-        wxT("補遺")
+        wxString::FromUTF8("日付"),
+        wxString::FromUTF8("タイトル"),
+        wxString::FromUTF8("経験値"),
+        wxString::FromUTF8("金収支"),
+        wxString::FromUTF8("名誉点"),
+        wxString::FromUTF8("成長"),
+        wxString::FromUTF8("マテカ収支"),
+        wxString::FromUTF8("補遺")
     };
 
     // 1列目は行番号なのでラベル
@@ -691,7 +691,7 @@ Tab3Panel::Tab3Panel(wxWindow* parent, Tab1Panel* tab1Panel)
     moneyLabel = new wxStaticText(
         transactionWindow,
         wxID_ANY,
-        wxT("所持金：0")
+        wxString::FromUTF8("所持金：0")
     );
     // 注釈
     wxStaticText* moneycomment = new wxStaticText(transactionWindow, wxID_ANY, wxString::FromUTF8("(例) 冒険者セット :: -100"));

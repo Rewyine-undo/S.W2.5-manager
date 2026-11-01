@@ -247,7 +247,7 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
 
         // スピンボタンを追加
         growthSpinCtrl[i] = new wxSpinCtrl(statusWindow, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(50, -1), wxSP_ARROW_KEYS, 0, 99, 0);
-        growthSizer->Add(growthSpinCtrl[i], 0, wxALIGN_LEFT| wxBOTTOM, 5);  // 中央揃えではなく左揃え
+        growthSizer->Add(growthSpinCtrl[i], 0, wxALIGN_LEFT);  // 中央揃えではなく左揃え
         growthSpinCtrl[i]->Bind(wxEVT_SPINCTRL, &Tab1Panel::abilityChange, this);
     }
 
@@ -672,7 +672,7 @@ Tab1Panel::Tab1Panel(wxWindow* parent)
     for (int i = 0; i < 6; ++i) {
         // スピンボタンを追加
         techlevelSpinCtrl[i] = new wxSpinCtrl(skillWindow, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(40, -1), wxSP_ARROW_KEYS, 0, 15, 0);
-        techlevelSizer->Add(techlevelSpinCtrl[i], 0, wxALIGN_LEFT| wxTOP | wxBOTTOM, 2);  // 中央揃えではなく左揃え
+        techlevelSizer->Add(techlevelSpinCtrl[i], 0, wxALIGN_LEFT| wxTOP | wxBOTTOM, 1);  // 中央揃えではなく左揃え
         techlevelSpinCtrl[i]->Bind(wxEVT_SPINCTRL, &Tab1Panel::OnSpinCtrlChange, this);
      }
 
@@ -1826,7 +1826,7 @@ void Tab1Panel::Updatehp(wxCommandEvent& event) {
                 if (slashPos != wxNOT_FOUND) {
                     wxString talentType = trimSpaces(wxString::FromUTF8(talent.Mid(slashPos + 1)));
                     for (int i = 0; i < 3; ++i) {
-                        if (talentType == armorType[i]) {
+                        if (armorType[i].find(talentType) != std::string::npos) {
                             if (talent.Contains(wxString::FromUTF8("防具習熟A"))) {
                                 tarmor += 1;
                             }
@@ -2237,7 +2237,7 @@ void Tab1Panel::RebuildStatusDetailUI(){
                 if (slashPos != wxNOT_FOUND) {
                     wxString talentType = trimSpaces(wxString::FromUTF8(talent.Mid(slashPos + 1)));
                     for (int i = 0; i < 6; ++i) {
-                        if (talentType == weaponType[i]) {
+                        if (weaponType[i].find(talentType) != std::string::npos) { 
                             if (talent.Contains(wxString::FromUTF8("武器習熟A"))) {
                                 weapondamage += 1;
                             }
@@ -2322,9 +2322,9 @@ void Tab1Panel::RebuildStatusDetailUI(){
             AddOtherSkillRow(
                 className,
                 lv[i],
-                wxString::Format("%d", tech[i]),
-                wxString::Format("%d", mov[i]),
-                wxString::Format("%d", sage[i])
+                wxString::FromUTF8("%d", tech[i]),
+                wxString::FromUTF8("%d", mov[i]),
+                wxString::FromUTF8("%d", sage[i])
             );
         }
         // 探索技能(セージ)
@@ -2335,9 +2335,9 @@ void Tab1Panel::RebuildStatusDetailUI(){
             AddOtherSkillRow(
                 className,
                 lv[i],
-                wxString(""),  // 技巧は空欄
-                wxString(""),  // 運動は空欄
-                wxString::Format("%d", sage[i])
+                wxString::FromUTF8(""),  // 技巧は空欄
+                wxString::FromUTF8(""),  // 運動は空欄
+                wxString::FromUTF8("%d", sage[i])
             );
         }
         // 探索技能(ライダー)
@@ -2349,9 +2349,9 @@ void Tab1Panel::RebuildStatusDetailUI(){
             AddOtherSkillRow(
                 className,
                 lv[i],
-                wxString(""),
-                wxString::Format("%d", mov[i]),
-                wxString::Format("%d", sage[i])
+                wxString::FromUTF8(""),
+                wxString::FromUTF8("%d", mov[i]),
+                wxString::FromUTF8("%d", sage[i])
             );
         }
     }   
@@ -2401,22 +2401,22 @@ void Tab1Panel::RebuildSkillDetailUI(){
     }
 
    const std::vector<wxString> skillNames = {
-        "ファイター",
-        "グラップラー",
-        "フェンサー",
-        "シューター",
-        "ソーサラー",
-        "コンジャラー",
-        "プリースト",
-        "マギテック",
-        "フェアリーテイマー",
-        "スカウト",
-        "レンジャー",
-        "セージ",
-        "エンハンサー",
-        "バード",
-        "ライダー",
-        "アルケミスト"
+        wxString::FromUTF8("ファイター"),
+        wxString::FromUTF8("グラップラー"),
+        wxString::FromUTF8("フェンサー"),
+        wxString::FromUTF8("シューター"),
+        wxString::FromUTF8("ソーサラー"),
+        wxString::FromUTF8("コンジャラー"),
+        wxString::FromUTF8("プリースト"),
+        wxString::FromUTF8("マギテック"),
+        wxString::FromUTF8("フェアリーテイマー"),
+        wxString::FromUTF8("スカウト"),
+        wxString::FromUTF8("レンジャー"),
+        wxString::FromUTF8("セージ"),
+        wxString::FromUTF8("エンハンサー"),
+        wxString::FromUTF8("バード"),
+        wxString::FromUTF8("ライダー"),
+        wxString::FromUTF8("アルケミスト")
     };
 
     for (const wxString& skillName : skillNames)
@@ -2428,92 +2428,92 @@ void Tab1Panel::RebuildSkillDetailUI(){
 
         int level = it->second;
 
-        if (skillName == "ファイター")
+        if (skillName == wxString::FromUTF8("ファイター"))
         {
             if (level >= 7)
-                AddExtraTalent("タフネス");
+                AddExtraTalent(wxString::FromUTF8("タフネス"));
         }
 
-        if (skillName == "グラップラー")
+        if (skillName == wxString::FromUTF8("グラップラー"))
         {
-            AddExtraTalent("追加攻撃");
+            AddExtraTalent(wxString::FromUTF8("追加攻撃"));
 
             if (level >= 7)
-                AddExtraTalent("カウンター");
+                AddExtraTalent(wxString::FromUTF8("カウンター"));
         }
 
-        if (skillName == "ファイター" || skillName == "グラップラー")
+        if (skillName == wxString::FromUTF8("ファイター") || skillName == wxString::FromUTF8("グラップラー"))
         {
             if (level >= 13)
-                AddExtraTalent("バトルマスター");
+                AddExtraTalent(wxString::FromUTF8("バトルマスター"));
         }
 
-        if (skillName == "ソーサラー" ||
-            skillName == "コンジャラー" ||
-            skillName == "プリースト" ||
-            skillName == "マギテック" ||
-            skillName == "フェアリーテイマー")
+        if (skillName == wxString::FromUTF8("ソーサラー") ||
+            skillName == wxString::FromUTF8("コンジャラー") ||
+            skillName == wxString::FromUTF8("プリースト") ||
+            skillName == wxString::FromUTF8("マギテック") ||
+            skillName == wxString::FromUTF8("フェアリーテイマー"))
         {
             if (level >= 11)
-                AddExtraTalent("ルーンマスター");
+                AddExtraTalent(wxString::FromUTF8("ルーンマスター"));
         }
 
-        if (skillName == "スカウト")
+        if (skillName == wxString::FromUTF8("スカウト"))
         {
             if (level >= 5)
-                AddExtraTalent("トレジャーハント");
+                AddExtraTalent(wxString::FromUTF8("トレジャーハント"));
 
             if (level >= 7)
-                AddExtraTalent("ファストアクション");
+                AddExtraTalent(wxString::FromUTF8("ファストアクション"));
 
             if (level >= 9)
-                AddExtraTalent("影走り");
+                AddExtraTalent(wxString::FromUTF8("影走り"));
 
             if (level >= 12)
-                AddExtraTalent("トレジャーマスター");
+                AddExtraTalent(wxString::FromUTF8("トレジャーマスター"));
 
             if (level >= 15)
-                AddExtraTalent("匠の技");
+                AddExtraTalent(wxString::FromUTF8("匠の技"));
         }
 
-        if (skillName == "レンジャー")
+        if (skillName == wxString::FromUTF8("レンジャー"))
         {
             if (level >= 5)
-                AddExtraTalent("サバイバビリティ");
+                AddExtraTalent(wxString::FromUTF8("サバイバビリティ"));
 
             if (level >= 7)
-                AddExtraTalent("不屈");
+                AddExtraTalent(wxString::FromUTF8("不屈"));
 
             if (level >= 9)
-                AddExtraTalent("ポーションマスター");
+                AddExtraTalent(wxString::FromUTF8("ポーションマスター"));
 
             if (level >= 12)
-                AddExtraTalent("縮地");
+                AddExtraTalent(wxString::FromUTF8("縮地"));
 
             if (level >= 15)
-                AddExtraTalent("ランアンドガン");
+                AddExtraTalent(wxString::FromUTF8("ランアンドガン"));
         }
 
-        if (skillName == "セージ")
+        if (skillName == wxString::FromUTF8("セージ"))
         {
             if (level >= 5)
-                AddExtraTalent("鋭い目");
+                AddExtraTalent(wxString::FromUTF8("鋭い目"));
 
             if (level >= 7)
-                AddExtraTalent("弱点看破");
+                AddExtraTalent(wxString::FromUTF8("弱点看破"));
 
             if (level >= 9)
-                AddExtraTalent("マナセーブ");
+                AddExtraTalent(wxString::FromUTF8("マナセーブ"));
 
             if (level >= 12)
-                AddExtraTalent("マナ耐性");
+                AddExtraTalent(wxString::FromUTF8("マナ耐性"));
 
             if (level >= 15)
-                AddExtraTalent("賢人の知恵");
+                AddExtraTalent(wxString::FromUTF8("賢人の知恵"));
         }
     
            
-        if (skillName == "エンハンサー")
+        if (skillName == wxString::FromUTF8("エンハンサー"))
         {
             wxStaticBoxSizer* enhancerSizer =
                 new wxStaticBoxSizer(
@@ -2528,7 +2528,7 @@ void Tab1Panel::RebuildSkillDetailUI(){
                     new wxTextCtrl(
                         skillWindow,
                         wxID_ANY,
-                        "",
+                        wxString::FromUTF8(""),
                         wxDefaultPosition,
                         wxSize(120, -1)
                     );
@@ -2551,7 +2551,7 @@ void Tab1Panel::RebuildSkillDetailUI(){
             );
         }
 
-        else if (skillName == "バード")
+        else if (skillName == wxString::FromUTF8("バード"))
         {
             wxStaticBoxSizer* bardSizer =
                 new wxStaticBoxSizer(
@@ -2566,7 +2566,7 @@ void Tab1Panel::RebuildSkillDetailUI(){
                     new wxTextCtrl(
                         skillWindow,
                         wxID_ANY,
-                        "",
+                        wxString::FromUTF8(""),
                         wxDefaultPosition,
                         wxSize(120, -1)
                     );
@@ -2589,7 +2589,7 @@ void Tab1Panel::RebuildSkillDetailUI(){
             );
         }
 
-        else if (skillName == "ライダー")
+        else if (skillName == wxString::FromUTF8("ライダー"))
         {
             wxStaticBoxSizer* riderSizer =
                 new wxStaticBoxSizer(
@@ -2604,7 +2604,7 @@ void Tab1Panel::RebuildSkillDetailUI(){
                     new wxTextCtrl(
                         skillWindow,
                         wxID_ANY,
-                        "",
+                        wxString::FromUTF8(""),
                         wxDefaultPosition,
                         wxSize(120, -1)
                     );
@@ -2627,7 +2627,7 @@ void Tab1Panel::RebuildSkillDetailUI(){
             );
         }
 
-        else if (skillName == "アルケミスト")
+        else if (skillName == wxString::FromUTF8("アルケミスト"))
         {
             wxStaticBoxSizer* alchemistSizer =
                 new wxStaticBoxSizer(
@@ -2642,7 +2642,7 @@ void Tab1Panel::RebuildSkillDetailUI(){
                     new wxTextCtrl(
                         skillWindow,
                         wxID_ANY,
-                        "",
+                        wxString::FromUTF8(""),
                         wxDefaultPosition,
                         wxSize(120, -1)
                     );
@@ -2697,7 +2697,7 @@ void Tab1Panel::AddExtraTalent(const wxString& talentName)
         new wxTextCtrl(
             skillWindow,
             wxID_ANY,
-            "",
+            wxString::FromUTF8(""),
             wxDefaultPosition,
             wxSize(120, -1)
         );
@@ -2963,31 +2963,38 @@ void Tab1Panel::OnCollapseAll(wxCommandEvent& event)
     FitInside();
 }
 
+
 // json rootの作成
 json Tab1Panel::CreateJsonFromGUI(){
 
     json root;
 
+    // wxString -> UTF-8 std::string 変換
+    auto toUTF8 = [](const wxString& value) -> std::string {
+        wxScopedCharBuffer buffer = value.ToUTF8();
+        return buffer.data() ? std::string(buffer.data()) : std::string();
+    };
+
     // 文字列データ
-    root["name"] = std::string(nameTextBox->GetValue().ToUTF8().data()); // 名前
-    root["PL"] = std::string(PLTextBox->GetValue().ToUTF8().data()); // PL名
-    root["species"] = std::string(speciesTextBox->GetValue().ToUTF8().data()); // 種族
+    root["name"] = toUTF8(nameTextBox->GetValue()); // 名前
+    root["PL"] = toUTF8(PLTextBox->GetValue()); // PL名
+    root["species"] = toUTF8(speciesTextBox->GetValue()); // 種族
     root["age"] = wxAtoi(ageTextBox->GetValue()); // 年齢
-    root["sex"] = std::string(sexTextBox->GetValue().ToUTF8().data()); // 性別
-    root["spfeature"] = std::string(spfeatureTextBox->GetValue().ToUTF8().data()); // 種族特性
+    root["sex"] = toUTF8(sexTextBox->GetValue()); // 性別
+    root["spfeature"] = toUTF8(spfeatureTextBox->GetValue()); // 種族特性
     root["impurity"] = wxAtoi(ImpurityTextBox->GetValue()); // 穢れ
-    root["birth"] = std::string(birthTextBox->GetValue().ToUTF8().data()); // 生まれ
-    root["faith"] = std::string(faithTextBox->GetValue().ToUTF8().data()); // 信仰
+    root["birth"] = toUTF8(birthTextBox->GetValue()); // 生まれ
+    root["faith"] = toUTF8(faithTextBox->GetValue()); // 信仰
     root["rankSelection"] = rankChoices->GetSelection();
 
     // 心、技、体
     for (int i = 0; i < 3; ++i) {
-        root["born"][i] = wxAtoi(bornTextBoxes[i]->GetValue());  // 数値として保存
+        root["born"][i] = wxAtoi(bornTextBoxes[i]->GetValue());
     }
 
     // A～F、成長、器用～精神、増強、ボーナス
     for (int i = 0; i < 6; ++i) {
-        root["ability"][i] = wxAtoi(abilityTextBoxes[i]->GetValue());  // 数値として保存
+        root["ability"][i] = wxAtoi(abilityTextBoxes[i]->GetValue());
         root["growth"][i] = growthSpinCtrl[i]->GetValue();
         root["attribute"][i] = wxAtoi(attributeTextBoxes[i]->GetValue());
         root["increase"][i] = increaseSpinCtrl[i]->GetValue();
@@ -2996,95 +3003,80 @@ json Tab1Panel::CreateJsonFromGUI(){
 
     // HP、MP、抵抗力、命中力
     for (int i = 0; i < 4; ++i) {
-        root["hp"][i] = wxAtoi(hpTextBoxes[i]->GetValue());  // 数値として保存
+        root["hp"][i] = wxAtoi(hpTextBoxes[i]->GetValue());
     }
 
-    root["move"] = wxAtoi(moveTextBox->GetValue()); // 移動力
-    root["fullmove"] = wxAtoi(fullmoveTextBox->GetValue()); // 全力移動
-    root["restmove"] = wxAtoi(restmoveTextBox->GetValue()); // 制限移動
+    root["move"] = wxAtoi(moveTextBox->GetValue());
+    root["fullmove"] = wxAtoi(fullmoveTextBox->GetValue());
+    root["restmove"] = wxAtoi(restmoveTextBox->GetValue());
 
     // 技能、技能テーブルA,B、技能レベル、使用経験値
     for (int i = 0; i < 6; ++i) {
-        root["tech"][i] = std::string(techTextBoxes[i]->GetValue().ToUTF8().data());
-        root["table"][i] = tableradioA[i]->GetValue() ? "A" : "B"; // trueならA、falseならBという文字で保存
+        root["tech"][i] = toUTF8(techTextBoxes[i]->GetValue());
+        root["table"][i] = tableradioA[i]->GetValue() ? "A" : "B";
         root["techlevel"][i] = techlevelSpinCtrl[i]->GetValue();
         root["exp"][i] = wxAtoi(expTextBoxes[i]->GetValue());
     }
 
-    root["level"] = wxAtoi(levelTextBox->GetValue()); // 冒険者レベル
-    root["getexp"] = getexpSpinCtrl->GetValue(); // 取得経験値
-    root["allexp"] = wxAtoi(allexpTextBox->GetValue()); // 合計使用経験値
+    root["level"] = wxAtoi(levelTextBox->GetValue());
+    root["getexp"] = getexpSpinCtrl->GetValue();
+    root["allexp"] = wxAtoi(allexpTextBox->GetValue());
 
-    for (wxTextCtrl* textBox : enhancerTextBoxes)
-    {
-        root["enhancer"].push_back(
-            textBox->GetValue().ToStdString()
-        );
+    // 技能関連入力欄
+    for (wxTextCtrl* textBox : enhancerTextBoxes) {
+        root["enhancer"].push_back(toUTF8(textBox->GetValue()));
     }
 
-    for (wxTextCtrl* textBox : bardTextBoxes)
-    {
-        root["bard"].push_back(
-            textBox->GetValue().ToStdString()
-        );
+    for (wxTextCtrl* textBox : bardTextBoxes) {
+        root["bard"].push_back(toUTF8(textBox->GetValue()));
     }
 
-    for (wxTextCtrl* textBox : riderTextBoxes)
-    {
-        root["rider"].push_back(
-            textBox->GetValue().ToStdString()
-        );
+    for (wxTextCtrl* textBox : riderTextBoxes) {
+        root["rider"].push_back(toUTF8(textBox->GetValue()));
     }
 
-    for (wxTextCtrl* textBox : alchemistTextBoxes)
-    {
-        root["alchemist"].push_back(
-            textBox->GetValue().ToStdString()
-        );
+    for (wxTextCtrl* textBox : alchemistTextBoxes) {
+        root["alchemist"].push_back(toUTF8(textBox->GetValue()));
     }
 
     // 戦闘特技、効果概要
     json talentArray = json::array();
 
-    for (size_t i = 0; i < talentTextBoxes.size(); ++i)
-    {
+    for (size_t i = 0; i < talentTextBoxes.size(); ++i) {
         json talent;
 
-        talent["name"] =
-            talentTextBoxes[i]->GetValue().ToStdString();
-
-        talent["description"] =
-            abstTextBoxes[i]->GetValue().ToStdString();
+        talent["name"] = toUTF8(talentTextBoxes[i]->GetValue());
+        talent["description"] = toUTF8(abstTextBoxes[i]->GetValue());
 
         talentArray.push_back(talent);
     }
 
     root["talents"] = talentArray;
 
-    root["freetalent"] = std::string(freetalentTextBox->GetValue().ToUTF8().data()); // 自動習得特技
-    root["freeabst"] = std::string(freeabstTextBox->GetValue().ToUTF8().data()); // 自動習得効果
-    root["magictalent"] = std::string(magictalentTextBox->GetValue().ToUTF8().data()); // よく使う魔法など
-    root["magicabst"] = std::string(magicabstTextBox->GetValue().ToUTF8().data()); // MP、効果概要
-    root["battle"] = std::string(battleTextBox->GetValue().ToUTF8().data()); // 戦闘効果メモ
-    root["other"] = std::string(otherTextBox->GetValue().ToUTF8().data()); // 経歴、その他メモ
-    root["chat"] = std::string(chatTextBox->GetValue().ToUTF8().data()); // チャットパレット
+    root["freetalent"] = toUTF8(freetalentTextBox->GetValue());
+    root["freeabst"] = toUTF8(freeabstTextBox->GetValue());
+    root["magictalent"] = toUTF8(magictalentTextBox->GetValue());
+    root["magicabst"] = toUTF8(magicabstTextBox->GetValue());
+    root["battle"] = toUTF8(battleTextBox->GetValue());
+    root["other"] = toUTF8(otherTextBox->GetValue());
+    root["chat"] = toUTF8(chatTextBox->GetValue());
 
     // 使用言語、会話、読文
     for (int i = 0; i < 10; ++i) {
-        root["lang"][i] = std::string(langTextBoxes[i]->GetValue().ToUTF8().data());
-        root["speak"][i] = speakcheckBoxes[i]->GetValue();  // true または false を保存
-        root["read"][i] = readcheckBoxes[i]->GetValue();    // true または false を保存
+        root["lang"][i] = toUTF8(langTextBoxes[i]->GetValue());
+        root["speak"][i] = speakcheckBoxes[i]->GetValue();
+        root["read"][i] = readcheckBoxes[i]->GetValue();
     }
 
     // 武器名
     for (int i = 0; i < 3; ++i) {
-        root["weaponname"][i] = std::string(weaponnameTextBoxes[i]->GetValue().ToUTF8().data());  // 数値として保存
+        root["weaponname"][i] = toUTF8(weaponnameTextBoxes[i]->GetValue());
     }
 
     // 用法、必筋、命中力、威力、C値、追加D
     for (int i = 0; i < 6; ++i) {
-        root["weaponuse"][i] = std::string(weaponuseTextBoxes[i]->GetValue().ToUTF8().data());
-        root["weaponstr"][i] = wxAtoi(weaponstrTextBoxes[i]->GetValue());// 数値として保存
+        root["weaponuse"][i] = toUTF8(weaponuseTextBoxes[i]->GetValue());
+        root["weaponstr"][i] = wxAtoi(weaponstrTextBoxes[i]->GetValue());
         root["weaponhit"][i] = wxAtoi(weaponhitTextBoxes[i]->GetValue());
         root["weapondm"][i] = wxAtoi(weapondmTextBoxes[i]->GetValue());
         root["weaponcrit"][i] = wxAtoi(weaponcritTextBoxes[i]->GetValue());
@@ -3093,28 +3085,31 @@ json Tab1Panel::CreateJsonFromGUI(){
 
     // 備考、防具名、必筋、回避修正、防護点、備考
     for (int i = 0; i < 3; ++i) {
-        root["weapomother"][i] = std::string(weaponotherTextBoxes[i]->GetValue().ToUTF8().data());
-        root["armorname"][i] = std::string(armornameTextBoxes[i]->GetValue().ToUTF8().data());
+        root["weapomother"][i] = toUTF8(weaponotherTextBoxes[i]->GetValue());
+        root["armorname"][i] = toUTF8(armornameTextBoxes[i]->GetValue());
         root["armorstr"][i] = wxAtoi(armorstrTextBoxes[i]->GetValue());
         root["armorevade"][i] = wxAtoi(armorevadeTextBoxes[i]->GetValue());
         root["armorblock"][i] = wxAtoi(armorblockTextBoxes[i]->GetValue());
-        root["armorother"][i] = std::string(armorotherTextBoxes[i]->GetValue().ToUTF8().data());
+        root["armorother"][i] = toUTF8(armorotherTextBoxes[i]->GetValue());
     }
 
-    root["poket"] = poketSpinCtrl->GetValue(); // 所持金
-    root["debt"] = wxAtoi(debtTextBox->GetValue()); // 預金/借金
-    root["glory"] = glorySpinCtrl->GetValue(); // 名誉点
+    root["poket"] = poketSpinCtrl->GetValue();
+    root["debt"] = wxAtoi(debtTextBox->GetValue());
+    root["glory"] = glorySpinCtrl->GetValue();
 
+    // 装飾品
     for (int i = 0; i < 12; ++i) {
-        root["aces"][i] = std::string(acesTextBoxes[i]->GetValue().ToUTF8().data()); // 装飾品
-        root["aces2"][i] = std::string(acesTextBoxes2[i]->GetValue().ToUTF8().data()); // 装飾品効果
+        root["aces"][i] = toUTF8(acesTextBoxes[i]->GetValue());
+        root["aces2"][i] = toUTF8(acesTextBoxes2[i]->GetValue());
     }
-    root["bag"] = std::string(bagTextBox->GetValue().ToUTF8().data()); // 所持アイテムなど
+
+    root["bag"] = toUTF8(bagTextBox->GetValue());
     root["armor"] = armorSpinCtrl->GetValue();
 
     // 選択式入力
     root["weaponType"] = json::array();
     root["armorType"] = json::array();
+
     for (int i = 0; i < 3; ++i) {
         root["weaponType"].push_back(weapontypeChoices[i]->GetSelection());
         root["armorType"].push_back(armortypeChoices[i]->GetSelection());
@@ -3122,26 +3117,47 @@ json Tab1Panel::CreateJsonFromGUI(){
 
     // マテリアルカード、ポーション、指輪・腕輪
     root["mateca"] = json::array();
+
     for (int row = 0; row < 5; ++row) {
         json values = json::array();
-        for (int col = 0; col < 4; ++col)
+
+        for (int col = 0; col < 4; ++col) {
             values.push_back(matecaSpinCtrl[row][col]->GetValue());
+        }
+
         root["mateca"].push_back(values);
     }
+
     root["potions"] = json::array();
     root["rings"] = json::array();
+
     for (int i = 0; i < 6; ++i) {
-        root["potions"].push_back({{"name", potionTextBoxes[i]->GetValue().ToStdString()}, {"count", potionSpinCtrl[i]->GetValue()}});
-        root["rings"].push_back({{"name", ringTextBoxes[i]->GetValue().ToStdString()}, {"count", ringSpinCtrl[i]->GetValue()}});
+        root["potions"].push_back({
+            {"name", toUTF8(potionTextBoxes[i]->GetValue())},
+            {"count", potionSpinCtrl[i]->GetValue()}
+        });
+
+        root["rings"].push_back({
+            {"name", toUTF8(ringTextBoxes[i]->GetValue())},
+            {"count", ringSpinCtrl[i]->GetValue()}
+        });
     }
 
     // 技能名・レベルに応じて動的に生成される入力欄
-    auto saveDynamicTextBoxes = [](const std::vector<wxTextCtrl*>& boxes) {
+    auto saveDynamicTextBoxes = [&toUTF8](
+        const std::vector<wxTextCtrl*>& boxes
+    ) {
         json values = json::array();
-        for (const wxTextCtrl* box : boxes)
-            values.push_back(box ? box->GetValue().ToStdString() : std::string());
+
+        for (const wxTextCtrl* box : boxes) {
+            values.push_back(
+                box ? toUTF8(box->GetValue()) : std::string()
+            );
+        }
+
         return values;
     };
+
     root["dynamicSkills"] = {
         {"enhancer", saveDynamicTextBoxes(enhancerTextBoxes)},
         {"bard", saveDynamicTextBoxes(bardTextBoxes)},
@@ -3371,11 +3387,18 @@ bool Tab1Panel::LoadFromJson(const wxString& filename) {
     return true;
 }
 
+
 bool Tab1Panel::CopyToCocofolia(){
-    
+
     json root = CreateJsonFromGUI();
 
     json cocofolia;
+
+    // wxString -> UTF-8 std::string 変換
+    auto toUTF8 = [](const wxString& value) -> std::string {
+        wxScopedCharBuffer buffer = value.ToUTF8();
+        return buffer.data() ? std::string(buffer.data()) : std::string();
+    };
 
     cocofolia["kind"] = "character";
 
@@ -3383,33 +3406,38 @@ bool Tab1Panel::CopyToCocofolia(){
 
     // プレイヤー名
     data["playerName"] = root["PL"];
+
     // キャラクター名
     data["name"] = root["name"];
 
     // ステータス
     data["status"] = json::array();
 
-    data["status"].push_back(
-        {{"label", "HP"},
+    data["status"].push_back({
+        {"label", "HP"},
         {"value", std::to_string(root["hp"][0].get<int>())},
-        {"max",   std::to_string(root["hp"][0].get<int>())}}
-    );
-    data["status"].push_back(
-        {{"label", "MP"},
+        {"max", std::to_string(root["hp"][0].get<int>())}
+    });
+
+    data["status"].push_back({
+        {"label", "MP"},
         {"value", std::to_string(root["hp"][1].get<int>())},
-        {"max",   std::to_string(root["hp"][1].get<int>())}}
-    );
-    data["status"].push_back(
-        {{"label", wxString::FromUTF8("防護点")},
+        {"max", std::to_string(root["hp"][1].get<int>())}
+    });
+
+    data["status"].push_back({
+        {"label", "防護点"},
         {"value", std::to_string(root["armor"].get<int>())},
-        {"max",   std::to_string(root["armor"].get<int>())}}
-    );
+        {"max", std::to_string(root["armor"].get<int>())}
+    });
+
     // root["tech"] に登録された技能を確認
     bool hasEnhancer = false;
     bool hasBard = false;
     bool hasAlchemist = false;
 
     for (const auto& tech : root["tech"]) {
+
         if (!tech.is_string()) {
             continue;
         }
@@ -3426,6 +3454,7 @@ bool Tab1Panel::CopyToCocofolia(){
             hasAlchemist = true;
         }
     }
+
     // エンハンサー：練技効果時間
     if (hasEnhancer) {
         data["status"].push_back({
@@ -3434,8 +3463,10 @@ bool Tab1Panel::CopyToCocofolia(){
             {"max", "0"}
         });
     }
+
     // バード：3項目
     if (hasBard) {
+
         data["status"].push_back({
             {"label", "⤴︎"},
             {"value", "0"},
@@ -3454,6 +3485,7 @@ bool Tab1Panel::CopyToCocofolia(){
             {"max", "0"}
         });
     }
+
     // アルケミスト：賦術効果時間
     if (hasAlchemist) {
         data["status"].push_back({
@@ -3468,24 +3500,33 @@ bool Tab1Panel::CopyToCocofolia(){
 
     // パラメータ
     data["params"] = json::array();
+
     // 冒険者レベル
     data["params"].push_back({
         {"label", "冒険者レベル"},
-        {"value", levelTextBox->GetValue().ToStdString()}
+        {"value", toUTF8(levelTextBox->GetValue())}
     });
+
     // 能力値ボーナス
     const char* bonusLabels[] = {
-        "器用度B", "敏捷度B", "筋力B",
-        "生命力B", "知力B", "精神力B"
+        "器用度B",
+        "敏捷度B",
+        "筋力B",
+        "生命力B",
+        "知力B",
+        "精神力B"
     };
+
     for (int i = 0; i < 6; ++i) {
         data["params"].push_back({
             {"label", bonusLabels[i]},
-            {"value", bonusTextBoxes[i]->GetValue().ToStdString()}
+            {"value", toUTF8(bonusTextBoxes[i]->GetValue())}
         });
     }
+
     // 技能名・技能レベル
     for (int i = 0; i < 6; ++i) {
+
         wxString techName = techTextBoxes[i]->GetValue().Trim();
 
         if (techName.IsEmpty()) {
@@ -3493,10 +3534,11 @@ bool Tab1Panel::CopyToCocofolia(){
         }
 
         data["params"].push_back({
-            {"label", techName.ToStdString()},
+            {"label", toUTF8(techName)},
             {"value", std::to_string(techlevelSpinCtrl[i]->GetValue())}
         });
     }
+
     // その他
     data["faces"] = json::array();
 
@@ -3523,18 +3565,27 @@ bool Tab1Panel::CopyToCocofolia(){
     if (!commands.empty()) {
         commands += "\n";
     }
+
     // 以下に判定コマンドを追加する
-    commands += std::string("2d") + " " + "平目\n";
+    commands += "2d 平目\n";
 
     const char* resistLabels[] = {
-        "生命", "精神"
+        "生命",
+        "精神"
     };
-    for (int i = 0; i < 2; ++i) {
-        int resistbonus = root["hp"][i+2].get<int>();
-        commands += std::string("2d+") + std::to_string(resistbonus) + " " + resistLabels[i] + "判定\n";
-    } 
 
+    for (int i = 0; i < 2; ++i) {
+
+        int resistbonus = root["hp"][i + 2].get<int>();
+
+        commands +=
+            "2d+" + std::to_string(resistbonus)
+            + " " + resistLabels[i] + "判定\n";
+    }
+
+    // 技能ごとの判定コマンド
     for (const auto& tech : root["tech"]) {
+
         if (!tech.is_string()) {
             continue;
         }
@@ -3542,52 +3593,70 @@ bool Tab1Panel::CopyToCocofolia(){
         const std::string name = tech.get<std::string>();
 
         if (name == "スカウト") {
-            commands += std::string("2d+{スカウト}+{器用度B}") + " " + name + "技巧判定\n";
-            commands += std::string("2d+{スカウト}+{敏捷度B}") + " " + name + "運動判定\n";
-            commands += std::string("2d+{スカウト}+{知力B}") + " " + name + "観察判定\n";
+
+            commands += "2d+{スカウト}+{器用度B} スカウト技巧判定\n";
+            commands += "2d+{スカウト}+{敏捷度B} スカウト運動判定\n";
+            commands += "2d+{スカウト}+{知力B} スカウト観察判定\n";
         }
         else if (name == "レンジャー") {
-            commands += std::string("2d+{レンジャー}+{器用度B}") + " " + name + "技巧判定\n";
-            commands += std::string("2d+{レンジャー}+{敏捷度B}") + " " + name + "運動判定\n";
-            commands += std::string("2d+{レンジャー}+{知力B}") + " " + name + "観察判定\n";
+
+            commands += "2d+{レンジャー}+{器用度B} レンジャー技巧判定\n";
+            commands += "2d+{レンジャー}+{敏捷度B} レンジャー運動判定\n";
+            commands += "2d+{レンジャー}+{知力B} レンジャー観察判定\n";
         }
         else if (name == "セージ") {
-            commands += std::string("2d+{セージ}+{知力B}") + " " + name +  "知識判定\n";
+
+            commands += "2d+{セージ}+{知力B} セージ知識判定\n";
         }
         else if (name == "バード") {
-            commands += std::string("2d+{バード}+{知力B}") + " " + name +  "知識判定\n";
-            commands += std::string("2d+{バード}+{精神力B}") + " " + name +  "演奏判定\n";
+
+            commands += "2d+{バード}+{知力B} バード知識判定\n";
+            commands += "2d+{バード}+{精神力B} バード演奏判定\n";
         }
         else if (name == "ライダー") {
-            commands += std::string("2d+{ライダー}+{敏捷度B}") + " " + name +  "運動判定\n";
-            commands += std::string("2d+{ライダー}+{知力B}") + " " + name +  "知識判定\n";
-            commands += std::string("2d+{ライダー}+{知力B}") + " " + name +  "観察判定\n";
+
+            commands += "2d+{ライダー}+{敏捷度B} ライダー運動判定\n";
+            commands += "2d+{ライダー}+{知力B} ライダー知識判定\n";
+            commands += "2d+{ライダー}+{知力B} ライダー観察判定\n";
         }
         else if (name == "アルケミスト") {
-            commands += std::string("2d+{アルケミスト}+{知力B}") + " " + name +  "知識判定\n";
-            commands += std::string("2d+{アルケミスト}+{知力B}") + " " + name +  "賦術判定\n";
-        }
 
-        else if (name == "ファイター" || name == "グラップラー" || name == "フェンサー") {
-            commands += std::string("2d+{") + name + "}+{器用度B}"+ " " + name +  "命中判定\n";
-            commands += std::string("2d+{") + name + "}+{敏捷度B}"+ " " + name +  "回避判定\n";
-            // commands += "K" + root["weapondm"] + "+{" + name + "}+{筋力B}" + " " + name +  "ダメージ判定/\n";
+            commands += "2d+{アルケミスト}+{知力B} アルケミスト知識判定\n";
+            commands += "2d+{アルケミスト}+{知力B} アルケミスト賦術判定\n";
+        }
+        else if (
+            name == "ファイター" ||
+            name == "グラップラー" ||
+            name == "フェンサー"
+        ) {
+
+            commands += "2d+{" + name + "}+{器用度B} " + name + "命中判定\n";
+            commands += "2d+{" + name + "}+{敏捷度B} " + name + "回避判定\n";
+
+            // commands += "K" + root["weapondm"] + "+{" + name + "}+{筋力B} " + name + "ダメージ判定\n";
         }
         else if (name == "シューター") {
-            commands += std::string("2d+{") + name + "}+{器用度B}"+ " " + name +  "命中判定\n";
-            commands += std::string("2d") + " " + name + "回避判定\n";
-            // commands += ;
+
+            commands += "2d+{" + name + "}+{器用度B} " + name + "命中判定\n";
+            commands += "2d " + name + "回避判定\n";
         }
-        else if (name == "ソーサラー"  || name == "コンジャラー" || name == "プリースト" || name == "マギテック" || name == "フェアリーテイマー") {
-            commands += std::string("2d+{") + name + "}+{知力B}"+ " " + name +  "魔法行使判定\n";
-            // commands += ;
+        else if (
+            name == "ソーサラー" ||
+            name == "コンジャラー" ||
+            name == "プリースト" ||
+            name == "マギテック" ||
+            name == "フェアリーテイマー"
+        ) {
+
+            commands += "2d+{" + name + "}+{知力B} " + name + "魔法行使判定\n";
         }
     }
+
     data["commands"] = commands;
 
     // キャラクター名
     data["speaking"] = true;
-    
+
     // メモ
     std::string memonote = "PL: " + root["PL"].get<std::string>() + "\n";
 
@@ -3617,13 +3686,18 @@ bool Tab1Panel::CopyToCocofolia(){
         return false;
     }
 
-    wxTheClipboard->SetData(
+    bool result = wxTheClipboard->SetData(
         new wxTextDataObject(
             wxString::FromUTF8(output.c_str())
         )
     );
 
     wxTheClipboard->Close();
+
+    if (!result) {
+        wxLogError("Failed to set clipboard data.");
+        return false;
+    }
 
     return true;
 }
