@@ -823,17 +823,32 @@ void Tab3Panel::OnCollapseAll(wxCommandEvent& event)
 nlohmann::json Tab3Panel::CreateJsonFromGUI() const
 {
     nlohmann::json root;
+
+    // wxString -> UTF-8 std::string 変換
+    auto toUTF8 = [](const wxString& value) -> std::string {
+        wxScopedCharBuffer buffer = value.ToUTF8();
+        return buffer.data()
+    ? std::string(buffer.data(), buffer.length())
+    : std::string();
+    };
+
     root["history"] = nlohmann::json::array();
 
     for (const auto& row : tableInputs)
     {
         nlohmann::json rowJson = nlohmann::json::array();
-        for (const wxTextCtrl* input : row)
-            rowJson.push_back(input ? input->GetValue().ToStdString() : std::string());
+
+        for (const wxTextCtrl* input : row) {
+            rowJson.push_back(
+                input ? toUTF8(input->GetValue()) : std::string()
+            );
+        }
+
         root["history"].push_back(std::move(rowJson));
     }
 
-    root["moneyHistory"] = moneyHistory ? moneyHistory->GetValue().ToStdString() : std::string();
+    root["moneyHistory"] =
+        moneyHistory ? toUTF8(moneyHistory->GetValue()) : std::string();
     root["initialMoney"] = initialMoney;
     return root;
 }
