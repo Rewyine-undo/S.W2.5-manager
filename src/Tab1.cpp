@@ -2986,7 +2986,7 @@ json Tab1Panel::CreateJsonFromGUI(){
     root["impurity"] = wxAtoi(ImpurityTextBox->GetValue()); // 穢れ
     root["birth"] = toUTF8(birthTextBox->GetValue()); // 生まれ
     root["faith"] = toUTF8(faithTextBox->GetValue()); // 信仰
-    root["rankSelection"] = rankChoices->GetSelection();
+    root["rankSelection"] = toUTF8(rankChoices->GetStringSelection()); // ランク
 
     // 心、技、体
     for (int i = 0; i < 3; ++i) {
@@ -3223,8 +3223,28 @@ bool Tab1Panel::LoadFromJson(const wxString& filename) {
     ImpurityTextBox->SetValue(wxString::Format(wxT("%d"), root["impurity"].get<int>()));
     birthTextBox->SetValue(wxString::FromUTF8(root["birth"].get<std::string>().c_str()));
     faithTextBox->SetValue(wxString::FromUTF8(root["faith"].get<std::string>().c_str()));
-    if (root.contains("rankSelection") && root["rankSelection"].is_number_integer())
-        rankChoices->SetSelection(std::clamp(root["rankSelection"].get<int>(), -1, static_cast<int>(rankChoices->GetCount()) - 1));
+    if (root.contains("rankSelection"))
+    {
+        if (root["rankSelection"].is_string())
+        {
+            // 新形式：ランク名で保存
+            std::string rankName = root["rankSelection"].get<std::string>();
+            rankChoices->SetStringSelection(wxString::FromUTF8(rankName));
+        }
+        else if (root["rankSelection"].is_number_integer())
+        {
+            // 旧形式：インデックスで保存
+            int selection = root["rankSelection"].get<int>();
+
+            rankChoices->SetSelection(
+                std::clamp(
+                    selection,
+                    -1,
+                    static_cast<int>(rankChoices->GetCount()) - 1
+                )
+            );
+        }
+    }
 
     // born[3] のセット（心、技、体）
     for (int i = 0; i < 3; ++i) {
@@ -3568,6 +3588,7 @@ bool Tab1Panel::CopyToCocofolia(){
     }
 
     // 以下に判定コマンドを追加する
+    commands += "\n";
     commands += "2d 平目\n";
 
     const char* resistLabels[] = {
@@ -3670,7 +3691,7 @@ bool Tab1Panel::CopyToCocofolia(){
     memonote += " 信仰: " + root["faith"].get<std::string>() + "\n";
 
     memonote += "ランク: ";
-    memonote += std::to_string(root["rankSelection"].get<int>()) + "\n";
+    memonote += root["rankSelection"].get<std::string>() + "\n";
 
     data["memo"] = memonote;
 
