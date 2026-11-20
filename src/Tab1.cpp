@@ -2368,6 +2368,25 @@ void Tab1Panel::RebuildSkillDetailUI(){
     if (talentTextBoxes.size() > 8) talentTextBoxes.resize(8);
     if (abstTextBoxes.size() > 8) abstTextBoxes.resize(8);
 
+    // 既存の動的入力欄の内容を退避
+    auto saveTextBoxValues = [](const std::vector<wxTextCtrl*>& boxes)
+    {
+        std::vector<wxString> values;
+        values.reserve(boxes.size());
+
+        for (const auto* box : boxes)
+        {
+            values.push_back(box ? box->GetValue() : wxString{});
+        }
+
+        return values;
+    };
+
+    std::vector<wxString> enhancerValues = saveTextBoxValues(enhancerTextBoxes);
+    std::vector<wxString> bardValues     = saveTextBoxValues(bardTextBoxes);
+    std::vector<wxString> riderValues    = saveTextBoxValues(riderTextBoxes);
+    std::vector<wxString> alchemistValues = saveTextBoxValues(alchemistTextBoxes);
+
     // 前回追加したSizerと、その中のコントロールを削除
     skillDetailSizer->Clear(true);
     if (extraTalentSizer != nullptr){
@@ -2523,13 +2542,17 @@ void Tab1Panel::RebuildSkillDetailUI(){
                     wxString::FromUTF8("練技")
                 );
 
-            for (int i = 0; i < level; ++i)
-            {
+            for (int i = 0; i < level; ++i){
+                wxString initialValue;
+
+                if (i < static_cast<int>(enhancerValues.size()))
+                    initialValue = enhancerValues[i];
+
                 wxTextCtrl* textBox =
                     new wxTextCtrl(
                         skillWindow,
                         wxID_ANY,
-                        wxString::FromUTF8(""),
+                        initialValue,
                         wxDefaultPosition,
                         wxSize(120, -1)
                     );
@@ -2543,7 +2566,6 @@ void Tab1Panel::RebuildSkillDetailUI(){
                     2
                 );
             }
-
             skillDetailSizer->Add(
                 enhancerSizer,
                 0,
@@ -2551,7 +2573,6 @@ void Tab1Panel::RebuildSkillDetailUI(){
                 5
             );
         }
-
         else if (skillName == wxString::FromUTF8("バード"))
         {
             wxStaticBoxSizer* bardSizer =
@@ -2561,13 +2582,17 @@ void Tab1Panel::RebuildSkillDetailUI(){
                     wxString::FromUTF8("呪歌・終律")
                 );
 
-            for (int i = 0; i < level; ++i)
-            {
+            for (int i = 0; i < level; ++i){
+                wxString initialValue;
+
+                if (i < static_cast<int>(bardValues.size()))
+                    initialValue = bardValues[i];
+
                 wxTextCtrl* textBox =
                     new wxTextCtrl(
                         skillWindow,
                         wxID_ANY,
-                        wxString::FromUTF8(""),
+                        initialValue,
                         wxDefaultPosition,
                         wxSize(120, -1)
                     );
@@ -2599,13 +2624,17 @@ void Tab1Panel::RebuildSkillDetailUI(){
                     wxString::FromUTF8("騎芸")
                 );
 
-            for (int i = 0; i < level; ++i)
-            {
+            for (int i = 0; i < level; ++i){
+                wxString initialValue;
+
+                if (i < static_cast<int>(riderValues.size()))
+                    initialValue = riderValues[i];
+                
                 wxTextCtrl* textBox =
                     new wxTextCtrl(
                         skillWindow,
                         wxID_ANY,
-                        wxString::FromUTF8(""),
+                        initialValue,
                         wxDefaultPosition,
                         wxSize(120, -1)
                     );
@@ -2637,13 +2666,17 @@ void Tab1Panel::RebuildSkillDetailUI(){
                     wxString::FromUTF8("賦術")
                 );
 
-            for (int i = 0; i < level; ++i)
-            {
+            for (int i = 0; i < level; ++i){
+                wxString initialValue;
+
+                if (i < static_cast<int>(alchemistValues.size()))
+                    initialValue = alchemistValues[i];
+
                 wxTextCtrl* textBox =
                     new wxTextCtrl(
                         skillWindow,
                         wxID_ANY,
-                        wxString::FromUTF8(""),
+                        initialValue,
                         wxDefaultPosition,
                         wxSize(120, -1)
                     );
